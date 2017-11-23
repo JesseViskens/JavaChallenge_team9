@@ -3,18 +3,18 @@ var router = express.Router();
 var bcrypt = require('bcryptjs');
 var jwt = require('jsonwebtoken');
 
-var User = require('../models/gebruikerModel');
+var Gebruiker = require('../models/gebruikerModel');
 
 router.post('/', function (req, res, next) {
-    var user = new User({
+    var gebruiker = new Gebruiker({
         voornaam: req.body.voornaam,
         achternaam: req.body.achternaam,
         password: bcrypt.hashSync(req.body.password,10),
         email: req.body.email,
         adres: req.body.adres,
-        woonplaats: req.body.woonsplaats
+        woonplaats: req.body.woonplaats
     });
-    user.save(function (err, result) {
+    gebruiker.save(function (err, result) {
         if (err) {
             return res.status(500).json({
                 title: 'An error occurred',
@@ -22,37 +22,37 @@ router.post('/', function (req, res, next) {
             });
         }
         res.status(201).json({
-            message: 'User created',
+            message: 'Gebruiker aangemaakt',
             obj: result
         });
     });
 });
 
 router.post('/signin', function (req, res, next) {
-    User.findOne({email: req.body.email}, function(err, user){
+    gebruiker.findOne({email: req.body.email}, function(err, gebruiker){
         if (err) {
             return res.status(500).json({
                 title: 'An error occurred',
                 error: err
             });
         }
-        if (!user){
+        if (!gebruiker){
             return res.status(401).json({
                 title: 'Login mislukt',
                 error: {message: 'Invalid login credentials'}
             });
         }
-        if (!bcrypt.compareSync(req.body.password, user.password)){
+        if (!bcrypt.compareSync(req.body.password, gebruiker.password)){
             return res.status(401).json({
                 title: 'Login mislukt',
                 error: {message: 'Invalid login credentials'}
             });
         }
-        var token = jwt.sign({user: user}, 'secret', {expiresIn:7200});
+        var token = jwt.sign({user: gebruiker}, 'secret', {expiresIn:7200});
         res.status(200).json({
             message: 'Successfully logged in',
             token: token,
-            userId: user._id
+            user: gebruiker
         })
     });
 });
