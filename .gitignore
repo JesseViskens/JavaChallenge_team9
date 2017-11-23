@@ -5,3 +5,5 @@ node_modules/
 .idea/jsLibraryMappings.xml
 package-lock.json
 .idea/workspace.xml
+.idea/workspace.xml
+.idea/
