@@ -4,8 +4,7 @@ var Schema = mongoose.Schema;
 var ZaalSchema = new Schema({
     naam: {type: String, required: true},
     beschrijving: {type: String, required: true},
-    breedte: {type: Number, required: true},
-    lengte: {type: Number, required: true},
+    oppervlakte: {type: Number, required: true},
     foto: {type: String},
     aanvang: {type: String},
     sluiting: {type: String},
