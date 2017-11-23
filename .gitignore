@@ -1,11 +1,4 @@
 
 node_modules/
-<<<<<<< HEAD
-package-lock.json
-package.json
-package.json
-=======
 
-\.idea/
->>>>>>> c11ab43baa3fccc1d1bd8e6fba5c1f8d8353d0ee
-.idea/workspace.xml
+\.idea/workspace\.xml
