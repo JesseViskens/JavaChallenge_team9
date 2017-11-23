@@ -42,7 +42,7 @@ router.post('/', function (req, res, next) {
         beginuur: req.body.beginuur,
         einduur: req.body.einduur,
         zaal: req.body.zaal,
-        gebruiker: gebruiker,
+        gebruiker: req.body.gebruiker,
         bevestigd: req.body.bevestigd,
         reden: req.body.reden
     });
@@ -80,7 +80,7 @@ router.patch('/:id', function (req, res, next) {
         reservatie.beginuur = req.body.beginuur;
         reservatie.einduur = req.body.einduur;
         reservatie.zaal = req.body.zaal;
-        reservatie.gebruiker = gebruiker;
+        reservatie.gebruiker = req.body.gebruiker;
         reservatie.bevestigd = req.body.bevestigd;
         reservatie.reden = req.body.reden;
         reservatie.save(function(err, result){
