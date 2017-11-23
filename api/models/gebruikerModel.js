@@ -8,7 +8,8 @@ var schema = new Schema({
     password: {type:String, required: true},
     email: {type: String, required: true, unique: true},
     adres: {type:String},
-    woonplaats: {type:String}
+    woonplaats: {type:String},
+    isAdmin: {type:Boolean, required:true}
 });
 
 module.exports = mongoose.model('Gebruiker', schema);
