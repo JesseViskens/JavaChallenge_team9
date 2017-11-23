@@ -14,6 +14,11 @@
   "author": "Team9",
   "license": "ISC",
   "dependencies": {
-    "mongoose": "^4.13.4"
+    "body-parser": "^1.18.2",
+    "cors": "^2.8.4",
+    "express": "^4.16.2",
+    "jsonwebtoken": "^8.1.0",
+    "mongoose": "^4.13.4",
+    "nodemon": "^1.12.1"
   }
 }
