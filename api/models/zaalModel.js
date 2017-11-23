@@ -8,7 +8,9 @@ var ZaalSchema = new Schema({
     foto: {type: String},
     aanvang: {type: String},
     sluiting: {type: String},
-    capaciteit: {type: Number, required: true}
+    capaciteit: {type: Number, required: true},
+    zalen: [{type: zaal, required:false}],
+    materialen: [{type: materiaal, required:false}]
 });
 
 module.exports = mongoose.model('Zaal', ZaalSchema);
