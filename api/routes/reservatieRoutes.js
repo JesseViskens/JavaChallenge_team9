@@ -1,7 +1,7 @@
-var express = require('express');
-var router = express.Router();
+const express = require('express');
+const router = express.Router();
 
-var Reservatie = require('../models/reservatieModel');
+const Reservatie = require('../models/reservatieModel');
 
 //get all reservaties
 router.get('/', function (req, res, next) {
@@ -37,7 +37,7 @@ router.get('/:id', function (req, res, next) {
 
 //add reservatie
 router.post('/', function (req, res, next) {
-    var reservatie = new Reservatie({
+    const reservatie = new Reservatie({
         naam: req.body.naam,
         beginuur: req.body.beginuur,
         einduur: req.body.einduur,

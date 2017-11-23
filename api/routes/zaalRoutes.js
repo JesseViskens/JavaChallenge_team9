@@ -1,7 +1,7 @@
-var express = require('express');
-var router = express.Router();
+const express = require('express');
+const router = express.Router();
 
-var Zaal = require('../models/zaalModel');
+const Zaal = require('../models/zaalModel');
 
 //get all zalen
 router.get('/', function (req, res, next) {
@@ -37,7 +37,7 @@ router.get('/:id', function (req, res, next) {
 
 //add zaal
 router.post('/', function (req, res, next) {
-    var zaal = new Zaal({
+    const zaal = new Zaal({
         naam: req.body.naam,
         beschrijving: req.body.beschrijving,
         oppervlakte: req.body.oppervlakte,
@@ -45,8 +45,6 @@ router.post('/', function (req, res, next) {
         aanvang: req.body.aanvang,
         sluiting: req.body.sluiting,
         capaciteit: req.body.capaciteit,
-        zalen: [req.body.zalen],
-        materialen: [req.body.materialen]
     });
 
     zaal.save(function (err, result) {
@@ -85,8 +83,6 @@ router.patch('/:id', function (req, res, next) {
         zaal.aanvang = req.body.aanvang;
         zaal.sluiting = req.body.sluiting;
         zaal.capaciteit = req.body.capaciteit;
-        zaal.zalen = [req.body.zalen];
-        zaal.materialen = [req.body.materialen];
         zaal.save(function(err, result){
             if (err){
                 return res.status(500).json({
