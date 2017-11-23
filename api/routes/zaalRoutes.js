@@ -40,8 +40,7 @@ router.post('/', function (req, res, next) {
     var zaal = new Zaal({
         naam: req.body.naam,
         beschrijving: req.body.beschrijving,
-        breedte: req.body.breedte,
-        lengte: req.body.lengte,
+        oppervlakte: req.body.oppervlakte,
         foto: req.body.foto,
         aanvang: req.body.aanvang,
         sluiting: req.body.sluiting,
@@ -79,8 +78,7 @@ router.patch('/:id', function (req, res, next) {
         }
         zaal.naam = req.body.naam;
         zaal.beschrijving = req.body.beschrijving;
-        zaal.breedte = req.body.breedte;
-        zaal.lengte = req.body.lengte;
+        zaal.oppervlakte = req.body.oppervlakte;
         zaal.foto = req.body.foto;
         zaal.aanvang = req.body.aanvang;
         zaal.sluiting = req.body.sluiting;
