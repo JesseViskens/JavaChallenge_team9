@@ -47,19 +47,42 @@ router.post('/', function (req, res, next) {
         reden: req.body.reden
     });
 
-    reservatie.save(function (err, result) {
-        if (err){
-            return res.status(500).json({
-                title: 'An error occurred',
-                error: err
+    if (checkAvailability(reservatie.beginuur, reservatie.einduur)) {
+        reservatie.save(function (err, result) {
+            if (err){
+                return res.status(500).json({
+                    title: 'An error occurred',
+                    error: err
+                });
+            }
+            res.status(201).json({
+                message: 'Reservatie is toegevoegd!',
+                obj: result
             });
-        }
-        res.status(201).json({
-            message: 'Reservatie is toegevoegd!',
-            obj: result
         });
-    });
+    } else {
+        //zoek een ander tijdstip
+        console.log('test');
+    }
+
 });
+
+function checkAvailability(beginuur, einduur, zaal) {
+    //find all reservations for this room
+    var reservaties = [];
+     Reservatie.find({zaal:zaal}).then(function (docs) {
+         reservaties = docs;
+    });
+    if(reservaties.length > 0) {
+        //check if there's an overlap between the time intervals
+        for(var i = 0; i < reservaties.length; i++) {
+            if(new Date(beginuur) <= new Date(reservaties[i].einduur) && new Date(einduur) >= new Date(reservaties[i].beginuur)) {
+                return false;
+            }
+        }
+    }
+    return true;
+}
 
 //update reservatie
 router.patch('/:id', function (req, res, next) {
