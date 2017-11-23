@@ -36,7 +36,7 @@ router.get('/:id', function (req, res, next) {
 });
 
 //add gebruikersRole
-GebruikersRole.post('/', function (req, res, next) {
+router.post('/', function (req, res, next) {
     var gebruikersRole = new GebruikersRole({
         naam: req.body.naam,
     });

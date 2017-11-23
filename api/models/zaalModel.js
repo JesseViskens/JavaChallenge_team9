@@ -9,8 +9,8 @@ var ZaalSchema = new Schema({
     aanvang: {type: String},
     sluiting: {type: String},
     capaciteit: {type: Number, required: true},
-    zalen: [{type: zaal, required:false}],
-    materialen: [{type: materiaal, required:false}]
+    zalen: [{type: Schema.Types.ObjectId, ref:"Zaal", required:false}],
+    materialen: [{type: Schema.Types.ObjectId, ref:"Materiaal", required:false}]
 });
 
 module.exports = mongoose.model('Zaal', ZaalSchema);

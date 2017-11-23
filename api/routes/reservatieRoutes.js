@@ -41,7 +41,7 @@ router.post('/', function (req, res, next) {
         naam: req.body.naam,
         beginuur: req.body.beginuur,
         einduur: req.body.einduur,
-        zaal: zaal,
+        zaal: req.body.zaal,
         gebruiker: gebruiker,
         bevestigd: req.body.bevestigd,
         reden: req.body.reden
@@ -79,7 +79,7 @@ router.patch('/:id', function (req, res, next) {
         reservatie.naam = req.body.naam;
         reservatie.beginuur = req.body.beginuur;
         reservatie.einduur = req.body.einduur;
-        reservatie.zaal = zaal;
+        reservatie.zaal = req.body.zaal;
         reservatie.gebruiker = gebruiker;
         reservatie.bevestigd = req.body.bevestigd;
         reservatie.reden = req.body.reden;
