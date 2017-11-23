@@ -56,9 +56,6 @@
   "defaults": {
     "styleExt": "css",
     "component": {},
-    "specs":{
-      "component": false,
-      "service": false
-    }
+    "specs": false
   }
 }
