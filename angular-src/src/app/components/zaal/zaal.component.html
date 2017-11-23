@@ -1,0 +1,29 @@
+<div class="zaal">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-3">
+        <img src="">
+      </div>
+        <div class="col-lg-6 info">
+          <h3>{{ zaal.naam }}</h3>
+          <p>{{ zaal.beschrijving }}</p>
+          <p>Grootte {{ zaal.oppervlakte }}m²</p>
+          <p>Maximum {{ zaal.capaciteit }} personen</p>
+        </div>
+        <div class="col-lg-3 materiaal">
+          <div class="row">
+            <p>Materialen aanwezig:</p>
+            <ul>
+              <li *ngFor="let materiaal of zaal.materiaal">
+                {{materiaal.naam}}
+              </li>
+            </ul>
+
+          </div>
+          <div class="row" routerLinkActive="active">
+            <a [routerLink]="['/zaal']" class="btn btn-primary col-12">Kalender bekijken</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
