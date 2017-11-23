@@ -44,7 +44,9 @@ router.post('/', function (req, res, next) {
         foto: req.body.foto,
         aanvang: req.body.aanvang,
         sluiting: req.body.sluiting,
-        capaciteit: req.body.capaciteit
+        capaciteit: req.body.capaciteit,
+        zalen: [zaal],
+        materialen: [materiaal]
     });
 
     zaal.save(function (err, result) {
@@ -83,6 +85,8 @@ router.patch('/:id', function (req, res, next) {
         zaal.aanvang = req.body.aanvang;
         zaal.sluiting = req.body.sluiting;
         zaal.capaciteit = req.body.capaciteit;
+        zaal.zalen = [zaal];
+        zaal.materialen = [materiaal];
         zaal.save(function(err, result){
             if (err){
                 return res.status(500).json({
