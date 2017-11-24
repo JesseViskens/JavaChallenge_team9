@@ -2,7 +2,7 @@ import {NgModule, Component, enableProdMode, Input, OnInit} from '@angular/core'
 import {BrowserModule} from '@angular/platform-browser';
 import {platformBrowserDynamic} from '@angular/platform-browser-dynamic';
 
-import {Priority, Resource, Appointment, Service} from './reservatieKalender.service';
+import {Priority, Resource, Appointment, Service} from '../../services/reservatieKalender.service';
 import {ActivatedRoute, Router} from "@angular/router";
 
 
