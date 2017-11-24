@@ -12,7 +12,7 @@ export class ZaalService {
   async deleteZaal(zaal:Zaal){
     try{
       let headers = new HttpHeaders().set('content-type', 'application/json');
-      return await this.http.delete(Config.host + `/zaal/` + zaal.id, headers).toPromise();
+      return await this.http.delete(Config.host + `/zalen/` + zaal.id, headers).toPromise();
     }catch(err){
       console.log(err);
     }

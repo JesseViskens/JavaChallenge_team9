@@ -10,7 +10,7 @@
         <p class="">Beschrijving: {{zaal.beschrijving}}</p>
       </div>
       <div routerLinkActive="active">
-        <a [routerLink]="['/zaalWijzigen/', zaal.id]" class="btn btn-primary col-12 align-bottom">Aanpassen</a>
+        <a (click) = "onEdit()"> class="btn btn-primary col-12 align-bottom">Aanpassen</a>
         <a [routerLink]="['/reservatieKalender/', zaal.id]" class="btn btn-primary col-12 align-bottom">Verwijderen</a>
       </div>
     </div>
