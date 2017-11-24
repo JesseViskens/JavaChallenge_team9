@@ -1,0 +1,38 @@
+.zaal {
+  margin: 0 auto;
+  padding: 0 0 0 0;
+  background-color: #2A2A2A;
+  border-bottom: solid #2A2A2A 1px;
+}
+
+.info{
+  background-color: #CEB64A;
+  color: #FFFFFF
+}
+.materiaal{
+  background-color: #F8F8F8;
+  color: #1E1E1E;
+}
+
+.btn-primary{
+  background-color: #2A2A2A;
+  color: #FFFFFF;
+  border-radius: 0;
+  border: hidden;
+  margin: 0;
+}
+
+.btn-primary:hover{
+  background-color: #5a5a5a;
+  color: #FFFFFF;
+  border-radius: 0;
+  margin: 0;
+}
+
+
+/*
+#F8F8F8
+#2A2A2A
+#CEB64A
+#1E1E1E
+*/
