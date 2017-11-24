@@ -6,8 +6,8 @@ import {FormGroup} from "@angular/forms";
 
 @Component({
   selector: 'app-reservatie',
-  templateUrl: './reservatie.component.html',
-  styleUrls:[ './reservatie.component.css']
+  templateUrl: './admin-reservaties.component.html',
+  styleUrls:[ './admin-reservaties.component.css']
 })
 
 export class ReservatieComponent implements OnInit {
