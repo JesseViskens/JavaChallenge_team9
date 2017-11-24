@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
+
 import { routes } from './app.routes';
 
 import { AppComponent } from './app.component';
@@ -9,6 +10,12 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { LoginComponent } from './components/login/login.component';
 import {ZaalComponent} from "./components/zaal/zaal.component";
 import {ZalenComponent} from "./components/zaal/zalen.component";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {AuthService} from "./services/auth.service";
+import {HttpClient, HttpClientModule} from "@angular/common/http";
+import {HttpModule} from "@angular/http";
+import {ReservatieComponent} from "./components/reservatie/reservatie.component";
+import { AdminZalenComponent } from './components/admin-zalen/admin-zalen.component';
 import {KalenderModule} from "./components/reservatieKalender/reservatieKalender.module";
 
 
@@ -18,14 +25,21 @@ import {KalenderModule} from "./components/reservatieKalender/reservatieKalender
     NavbarComponent,
     LoginComponent,
     ZaalComponent,
-    ZalenComponent
+    ZalenComponent,
+    ReservatieComponent,
+    AdminZalenComponent
   ],
   imports: [
     BrowserModule,
     KalenderModule,
     RouterModule.forRoot(routes)
+    RouterModule.forRoot(routes),
+    FormsModule,
+    ReactiveFormsModule,
+    HttpModule,
+    HttpClientModule
   ],
-  providers: [],
+  providers: [ AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
