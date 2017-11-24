@@ -32,7 +32,7 @@ import {HttpModule} from "@angular/http";
     HttpModule,
     HttpClientModule
   ],
-  providers: [TestService, AuthService],
+  providers: [ AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
