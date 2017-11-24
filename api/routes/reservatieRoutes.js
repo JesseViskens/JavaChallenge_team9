@@ -36,7 +36,7 @@ router.get('/:id', function (req, res, next) {
 });
 
 //add reservatie
-router.post('/', function (req, res, next) {
+router.post('/', async function (req, res, next) {
     const reservatie = new Reservatie({
         naam: req.body.naam,
         beginuur: req.body.beginuur,
@@ -47,41 +47,53 @@ router.post('/', function (req, res, next) {
         reden: req.body.reden
     });
 
-    if (checkAvailability(reservatie.beginuur, reservatie.einduur)) {
-        reservatie.save(function (err, result) {
-            if (err){
-                return res.status(500).json({
-                    title: 'An error occurred',
-                    error: err
-                });
-            }
-            res.status(201).json({
-                message: 'Reservatie is toegevoegd!',
-                obj: result
-            });
+    let result = await checkAvailability(reservatie.beginuur, reservatie.einduur, reservatie.zaal);
+    if(result) postAvailable(res, reservatie);
+    else {
+        return res.status(500).json({
+            title: 'Zaal niet beschikbaar',
         });
-    } else {
-        //zoek een ander tijdstip
-        console.log('test');
     }
-
 });
 
-function checkAvailability(beginuur, einduur, zaal) {
-    //find all reservations for this room
-    var reservaties = [];
-     Reservatie.find({zaal:zaal}).then(function (docs) {
-         reservaties = docs;
+function postAvailable(res, reservatie) {
+    console.log('deftrue');
+    reservatie.save(function (err, result) {
+        if (err) {
+            return res.status(500).json({
+                title: 'An error occurred',
+                error: err
+            });
+        }
+        res.status(201).json({
+            message: 'Reservatie is toegevoegd!',
+            obj: result
+        });
     });
-    if(reservaties.length > 0) {
-        //check if there's an overlap between the time intervals
-        for(var i = 0; i < reservaties.length; i++) {
-            if(new Date(beginuur) <= new Date(reservaties[i].einduur) && new Date(einduur) >= new Date(reservaties[i].beginuur)) {
-                return false;
+}
+
+async function checkAvailability(beginuur, einduur, zaal) {
+    //find all reservations for this room
+    try{
+        let docs = await Reservatie.find();
+        if (docs.length > 0) {
+            //check if there's an overlap between the time intervals
+            for (var i = 0; i < docs.length; i++) {
+                console.log(beginuur);
+                console.log(einduur);
+                if (new Date(beginuur) <= new Date(docs[i].einduur) && new Date(einduur) >= new Date(docs[i].beginuur)) {
+                    if (docs[i].zaal.equals(zaal)) {
+                        console.log('false?');
+                        return false;
+                    }
+                }
             }
         }
+         console.log('true?');
+         return true;
+    }catch(err){
+         console.log("Promise Rejected");
     }
-    return true;
 }
 
 //update reservatie
