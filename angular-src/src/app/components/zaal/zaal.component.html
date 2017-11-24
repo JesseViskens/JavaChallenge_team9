@@ -15,7 +15,7 @@
             <p class="col-12">{{zaal.beschrijving}}</p>
           </div>
           <div class="row" routerLinkActive="active">
-            <a [routerLink]="['/zaal']" class="btn btn-primary col-12 align-bottom">Kalender bekijken</a>
+            <a [routerLink]="['/reservatieKalender/', zaal.id]" class="btn btn-primary col-12 align-bottom">Kalender bekijken</a>
           </div>
         </div>
       </div>
