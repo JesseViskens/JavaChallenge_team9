@@ -7,6 +7,7 @@ import {HttpClient} from "@angular/common/http";
 @Injectable()
 export class ZaalService {
   zalen: Zaal[];
+  zaal: Zaal;
 
   constructor(private http: HttpClient) { }
 
@@ -26,6 +27,18 @@ export class ZaalService {
       this.zalen = result.obj;
       console.log(result);
       return this.zalen;
+    }catch(err){
+      console.log(err);
+    }
+  }
+
+  async getZaal(zaalId:string){
+    console.log("één zaal halen");
+    try{
+      let result: any = await this.http.get(Config.host + "/zalen/" + zaalId).toPromise();
+      this.zaal = result.obj;
+      console.log(result);
+      return this.zaal;
     }catch(err){
       console.log(err);
     }
