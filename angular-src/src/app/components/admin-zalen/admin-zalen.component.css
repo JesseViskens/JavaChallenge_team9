@@ -1,11 +1,11 @@
-.body{
-  min-height: 100%;
-  background-color: #CEB64A;
+.container-fluid{
+  background-color: #2A2A2A;
 }
 .zaal {
   margin: 0 auto;
   padding: 0 0 0 0;
   background-color: #2A2A2A;
+  border-bottom: solid #2A2A2A 1px;
 }
 
 .info{
@@ -35,7 +35,6 @@
 .card{
   border-radius: 0;
   border-color: #2A2A2A;
-  height: auto;
 }
 
 .list li{
@@ -43,13 +42,6 @@
 }
 .card-img{
   border-radius: 0;
-}
-
-.card-block{
-  height: 300px;
-}
-.center{
-  text-align: center;
 }
 
 /*

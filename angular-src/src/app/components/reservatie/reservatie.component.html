@@ -1,0 +1,52 @@
+<article class="panel panel-default" >
+    <div class="panel-body row">
+      <form class="col-6 offset-3" [formGroup]="myForm" (ngSubmit)="onSubmit()">
+        <h1>Reserveren</h1>
+        <div id="zaal">
+          <div id="image" class="offset-6"><img width="150px" height="150px" src="http://via.placeholder.com/150x150" /></div>
+          <div>
+            <label>Naam:</label>
+            <label>{{ zaal.naam }}</label>
+          </div>
+          <div>
+            <label>Oppervlakte:</label>
+            <label>{{ zaal.oppervlakte }}</label>
+          </div>
+          <div><label>Beschrijving:</label><label>{{ zaal.beschrijving }}</label></div>
+        </div>
+
+        <div id="reservering">
+          <div>
+            <label>Begindatum</label> <label class="offset-3">Einddatum</label></div>
+          <div>
+            <input type="datetime-local" /> tot <input type="datetime-local" /></div>
+
+          <div>
+            <label>Voornaam:</label>
+            <label>{{gebruiker.voornaam}}</label>
+          </div>
+          <div>
+            <label>Familienaam:</label>
+            <label>{{gebruiker.achternaam}}</label>
+          </div>
+          <div>
+            <label>Email:</label>
+            <label>{{gebruiker.email}}</label>
+          </div>
+          <div>
+            <label>Bedrijf:</label>
+            <input type="radio" name="bedrijf" value="ja"> ja
+            <input type="radio" name="bedrijf" value="nee"> nee
+          </div>
+          <div class="form-group">
+            <label class="control-label" for="reden">Reden:</label>
+            <input id="reden" class="form-control col-sm-2" type="text" />
+          </div>
+        </div>
+        <div>
+          <button type="submit" class="col-3 btn btn-primary">Vraag aan</button>
+          <button type="button" class="col-3 offset-3 btn btn-primary">Annuleer</button>
+        </div>
+      </form>
+    </div>
+</article>
