@@ -63,7 +63,6 @@ router.post('/', function (req, res, next) {
 });
 //add deelzaal aan zaal
 router.patch('/:id/zaal/:deelzaalId', function (req, res, next) {
-    console.log("test");
     Zaal.findById(req.params.id, function(err, zaal){
         if(err){
             return res.status(500).json({
@@ -77,11 +76,12 @@ router.patch('/:id/zaal/:deelzaalId', function (req, res, next) {
                 error: {message: 'Zaal niet gevonden'}
             });
         }
-        console.log("test");
-/*        if(zaal.zalen.length == 0) {
-            zaal.zalen =
-        }*/
-        zaal.zalen.push(req.params.deelzaalId);
+        if (zaal.zalen[0] === null) {
+            console.log('null');
+            zaal.zalen = req.params.deelzaalId;
+        } else {
+            zaal.zalen.push(req.params.deelzaalId);
+        }
         zaal.save(function(err, result){
             if (err){
                 return res.status(500).json({
