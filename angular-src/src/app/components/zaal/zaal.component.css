@@ -9,6 +9,10 @@
   background-color: #CEB64A;
   color: #FFFFFF
 }
+
+.foto{
+  max-height: 350px;
+}
 .materiaal{
   background-color: #F8F8F8;
   color: #1E1E1E;
