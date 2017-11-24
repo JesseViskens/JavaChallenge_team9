@@ -19,15 +19,15 @@ export class ZaalService {
     }
   }
 
-  /*async getZalen(){
+  async getZalen(){
     console.log("alle zalen halen!");
     try{
-      let headers = new HttpHeaders().set('content-type', 'application/json');
-      let result: any = await this.http.get(Config.host + "/zalen", {headers:headers}).toPromise();
+      let result: any = await this.http.get(Config.host + "/zalen").toPromise();
       this.zalen = result.obj;
-      this.onLogin.emit(this.zalen);
+      console.log(result);
+      return this.zalen;
     }catch(err){
       console.log(err);
     }
-  }*/
+  }
 }
