@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 
 const Reservatie = require('../models/reservatieModel');
+const Zaal = require('../models/zaalModel');
 
 //get all reservaties
 router.get('/', function (req, res, next) {
@@ -47,6 +48,7 @@ router.post('/', async function (req, res, next) {
         reden: req.body.reden
     });
 
+    //Wait for function that returns boolean if a reservation is possible
     let result = await checkAvailability(reservatie.beginuur, reservatie.einduur, reservatie.zaal);
     if(result) postAvailable(res, reservatie);
     else {
@@ -56,8 +58,8 @@ router.post('/', async function (req, res, next) {
     }
 });
 
+//The room is available, make reservation
 function postAvailable(res, reservatie) {
-    console.log('deftrue');
     reservatie.save(function (err, result) {
         if (err) {
             return res.status(500).json({
@@ -77,20 +79,26 @@ async function checkAvailability(beginuur, einduur, zaal) {
     try{
         let docs = await Reservatie.find();
         if (docs.length > 0) {
-            //check if there's an overlap between the time intervals
             for (var i = 0; i < docs.length; i++) {
-                console.log(beginuur);
-                console.log(einduur);
+                //check if there's an overlap between the time intervals
                 if (new Date(beginuur) <= new Date(docs[i].einduur) && new Date(einduur) >= new Date(docs[i].beginuur)) {
+                    //check if it's the same room
                     if (docs[i].zaal.equals(zaal)) {
-                        console.log('false?');
                         return false;
                     }
+                    //check recursive if part of the room is already reserved
+                    Zaal.findById(docs[i].zaal, function(err, zaal) {
+                        if(zaal.zalen.length > 0) {
+                            zaal.zalen.forEach(function (deelZaalId) {
+                                var available = checkAvailability(beginuur, einduur, deelZaalId);
+                                if (!available) return false;
+                            });
+                        }
+                    });
                 }
             }
         }
-         console.log('true?');
-         return true;
+        return true;
     }catch(err){
          console.log("Promise Rejected");
     }
