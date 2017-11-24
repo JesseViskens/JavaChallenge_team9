@@ -9,6 +9,7 @@ const ZaalSchema = new Schema({
     aanvang: {type: String},
     sluiting: {type: String},
     capaciteit: {type: Number, required: true},
+    zalen: [{type: Schema.Types.ObjectId, ref: "Zaal", required: false}]
 });
 
 module.exports = mongoose.model('Zaal', ZaalSchema);
