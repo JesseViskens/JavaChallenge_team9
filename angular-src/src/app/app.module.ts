@@ -14,6 +14,7 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {AuthService} from "./services/auth.service";
 import {HttpClient, HttpClientModule} from "@angular/common/http";
 import {HttpModule} from "@angular/http";
+import {ReservatieComponent} from "./components/reservatie/reservatie.component";
 
 
 @NgModule({
@@ -22,7 +23,8 @@ import {HttpModule} from "@angular/http";
     NavbarComponent,
     LoginComponent,
     ZaalComponent,
-    ZalenComponent
+    ZalenComponent,
+    ReservatieComponent
   ],
   imports: [
     BrowserModule,
