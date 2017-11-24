@@ -9,6 +9,7 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { LoginComponent } from './components/login/login.component';
 import {ZaalComponent} from "./components/zaal/zaal.component";
 import {ZalenComponent} from "./components/zaal/zalen.component";
+import {KalenderModule} from "./components/reservatieKalender/reservatieKalender.module";
 
 
 @NgModule({
@@ -21,6 +22,7 @@ import {ZalenComponent} from "./components/zaal/zalen.component";
   ],
   imports: [
     BrowserModule,
+    KalenderModule,
     RouterModule.forRoot(routes)
   ],
   providers: [],

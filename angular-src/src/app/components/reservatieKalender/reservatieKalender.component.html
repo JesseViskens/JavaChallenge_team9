@@ -1,0 +1,35 @@
+<link rel="stylesheet" type="text/css" href="https://cdn3.devexpress.com/jslib/17.2.3/css/dx.spa.css" />
+<link rel="stylesheet" type="text/css" href="https://cdn3.devexpress.com/jslib/17.2.3/css/dx.common.css" />
+<link rel="stylesheet" type="text/css" href="https://cdn3.devexpress.com/jslib/17.2.3/css/dx.light.css" />
+
+<div class="dx-viewport">
+  <div class="demo-container">
+    <dx-scheduler
+      [dataSource]="appointmentsData"
+      [views]='["timelineDay", "timelineWeek", "timelineWorkWeek", "timelineMonth"]'
+      currentView="timelineMonth"
+      [firstDayOfWeek]="0"
+      [startDayHour]="1"
+      [endDayHour]="23"
+      [cellDuration]="60"
+      [groups]="['priority']"
+      [currentDate]="currentDate"
+      [height]="580">
+      <dxi-resource
+        fieldExpr="ownerId"
+        [allowMultiple]="true"
+        [dataSource]="resourcesData"
+        label="Owner"
+        [useColorAsDefault]="true"
+      ></dxi-resource>
+      <dxi-resource
+        fieldExpr="priority"
+        [allowMultiple]="false"
+        [dataSource]="prioritiesData"
+        label="Priority"
+      ></dxi-resource>
+    </dx-scheduler>
+
+  </div>
+</div>
+
