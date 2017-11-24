@@ -15,6 +15,7 @@ import {AuthService} from "./services/auth.service";
 import {HttpClient, HttpClientModule} from "@angular/common/http";
 import {HttpModule} from "@angular/http";
 import {ReservatieComponent} from "./components/reservatie/reservatie.component";
+import { AdminZalenComponent } from './components/admin-zalen/admin-zalen.component';
 
 
 @NgModule({
@@ -24,7 +25,8 @@ import {ReservatieComponent} from "./components/reservatie/reservatie.component"
     LoginComponent,
     ZaalComponent,
     ZalenComponent,
-    ReservatieComponent
+    ReservatieComponent,
+    AdminZalenComponent
   ],
   imports: [
     BrowserModule,
