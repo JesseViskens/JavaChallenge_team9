@@ -5,12 +5,12 @@ import Gebruiker from "../../models/gebruiker.model";
 import {FormGroup} from "@angular/forms";
 
 @Component({
-  selector: 'app-reservatie',
+  selector: 'app-adminreservatie',
   templateUrl: './admin-reservaties.component.html',
   styleUrls:[ './admin-reservaties.component.css']
 })
 
-export class ReservatieComponent implements OnInit {
+export class AdminReservatiesComponent implements OnInit {
   zaal: Zaal;
   gebruiker: Gebruiker;
   myForm: FormGroup;

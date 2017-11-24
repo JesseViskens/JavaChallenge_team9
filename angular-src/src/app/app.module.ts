@@ -17,6 +17,7 @@ import {HttpModule} from "@angular/http";
 import {ReservatieComponent} from "./components/reservatie/reservatie.component";
 import { AdminZalenComponent } from './components/admin-zalen/admin-zalen.component';
 import {KalenderModule} from "./components/reservatieKalender/reservatieKalender.module";
+import {AdminReservatiesComponent} from "./components/admin-reservaties/admin-reservaties.component";
 
 
 @NgModule({
@@ -27,7 +28,8 @@ import {KalenderModule} from "./components/reservatieKalender/reservatieKalender
     ZaalComponent,
     ZalenComponent,
     ReservatieComponent,
-    AdminZalenComponent
+    AdminZalenComponent,
+    AdminReservatiesComponent
   ],
   imports: [
     BrowserModule,

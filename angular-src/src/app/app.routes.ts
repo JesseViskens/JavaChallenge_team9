@@ -5,11 +5,13 @@ import {KalenderComponent} from "./components/reservatieKalender/reservatieKalen
 
 import {ReservatieComponent} from "./components/reservatie/reservatie.component";
 import {AdminZalenComponent} from "./components/admin-zalen/admin-zalen.component";
+import {AdminReservatiesComponent} from "./components/admin-reservaties/admin-reservaties.component";
 
 export const routes: Routes = [
   {path: "", component: ZalenComponent},
   {path: "login", component: LoginComponent},
   {path: "reservatieKalender/:id", component:KalenderComponent},
   {path: "reservatie", component: ReservatieComponent},
-  {path: "adminzalen", component: AdminZalenComponent}
+  {path: "adminzalen", component: AdminZalenComponent},
+  {path: "adminreservaties", component: AdminReservatiesComponent},
 ];
