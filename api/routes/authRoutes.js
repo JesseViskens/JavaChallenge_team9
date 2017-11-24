@@ -1,9 +1,9 @@
-var express = require('express');
-var router = express.Router();
-var bcrypt = require('bcryptjs');
-var jwt = require('jsonwebtoken');
+const express = require('express');
+const router = express.Router();
+const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
 
-var Gebruiker = require('../models/gebruikerModel');
+const Gebruiker = require('../models/gebruikerModel');
 
 router.post('/', function(req, res) {
 
@@ -29,7 +29,7 @@ router.post('/', function(req, res) {
                 const payload = {
                     isAdmin: gebruiker.isAdmin
                 };
-                var token = jwt.sign(payload, 'team9');
+                const token = jwt.sign(payload, 'team9');
 
                 // return the information including token as JSON
                 res.json({

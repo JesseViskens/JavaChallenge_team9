@@ -1,7 +1,7 @@
-var express = require('express');
-var router = express.Router();
+const express = require('express');
+const router = express.Router();
 
-var Zaal = require('../models/zaalModel');
+const Zaal = require('../models/zaalModel');
 
 //get all zalen
 router.get('/', function (req, res, next) {
@@ -37,7 +37,7 @@ router.get('/:id', function (req, res, next) {
 
 //add zaal
 router.post('/', function (req, res, next) {
-    var zaal = new Zaal({
+    const zaal = new Zaal({
         naam: req.body.naam,
         beschrijving: req.body.beschrijving,
         oppervlakte: req.body.oppervlakte,
@@ -45,8 +45,7 @@ router.post('/', function (req, res, next) {
         aanvang: req.body.aanvang,
         sluiting: req.body.sluiting,
         capaciteit: req.body.capaciteit,
-        zalen: [req.body.zalen],
-        materialen: [req.body.materialen]
+        zalen: [req.body.zaal]
     });
 
     zaal.save(function (err, result) {
@@ -59,6 +58,41 @@ router.post('/', function (req, res, next) {
         res.status(201).json({
             message: 'Zaal is toegevoegd!',
             obj: result
+        });
+    });
+});
+//add deelzaal aan zaal
+router.patch('/:id/zaal/:deelzaalId', function (req, res, next) {
+    Zaal.findById(req.params.id, function(err, zaal){
+        if(err){
+            return res.status(500).json({
+                title: 'Er heeft zich een fout voorgedaan',
+                error: err
+            });
+        }
+        if(!zaal){
+            return res.status(500).json({
+                title: 'Zaal niet gevonden',
+                error: {message: 'Zaal niet gevonden'}
+            });
+        }
+        if (zaal.zalen[0] === null) {
+            console.log('null');
+            zaal.zalen = req.params.deelzaalId;
+        } else {
+            zaal.zalen.push(req.params.deelzaalId);
+        }
+        zaal.save(function(err, result){
+            if (err){
+                return res.status(500).json({
+                    title: 'Er heeft zich een fout voorgedaan',
+                    error: err
+                });
+            }
+            res.status(200).json({
+                message: 'Zaal is aangepast!',
+                obj: result
+            });
         });
     });
 });
@@ -86,7 +120,6 @@ router.patch('/:id', function (req, res, next) {
         zaal.sluiting = req.body.sluiting;
         zaal.capaciteit = req.body.capaciteit;
         zaal.zalen = [req.body.zalen];
-        zaal.materialen = [req.body.materialen];
         zaal.save(function(err, result){
             if (err){
                 return res.status(500).json({

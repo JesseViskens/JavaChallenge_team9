@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {Zaal} from "../../models/zaal.model";
+import {ZaalService} from "../../services/zaal.service";
 
 @Component({
   selector: 'app-admin-zalen',
@@ -9,7 +10,7 @@ import {Zaal} from "../../models/zaal.model";
 export class AdminZalenComponent implements OnInit {
   zalen:Zaal[];
 
-  constructor() { }
+  constructor(private zaalService:ZaalService) { }
 
   ngOnInit() {
     this.zalen = [
@@ -18,5 +19,9 @@ export class AdminZalenComponent implements OnInit {
       new Zaal(3, "FeestZaal", "tafels en stoelen aanwezig", 40, "http://via.placeholder.com/350x150", "0900", "2100", 20),
       new Zaal(4, "SuperZaal", "opdeelbaar in 3", 40, "http://via.placeholder.com/350x150.png", "0900", "2100", 20)
     ];
+  }
+
+  onDelete(id){
+    this.zaalService.deleteZaal(id);
   }
 }

@@ -10,10 +10,10 @@ export class ZaalService {
 
   constructor(private http: HttpClient) { }
 
-  async deleteZaal(zaal:Zaal){
+  async deleteZaal(zaalId:string){
     try{
       let headers = new HttpHeaders().set('content-type', 'application/json');
-      return await this.http.delete(Config.host + `/zalen/` + zaal.id, headers).toPromise();
+      return await this.http.delete(Config.host + `/zalen/` + zaalId, {headers:headers}).toPromise();
     }catch(err){
       console.log(err);
     }
