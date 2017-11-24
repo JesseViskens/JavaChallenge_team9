@@ -29,6 +29,35 @@ router.post('/', function (req, res, next) {
     });
 });
 
+router.post('/signin', function (req, res, next) {
+    gebruiker.findOne({email: req.body.email}, function(err, gebruiker){
+        if (err) {
+            return res.status(500).json({
+                title: 'An error occurred',
+                error: err
+            });
+        }
+        if (!gebruiker){
+            return res.status(401).json({
+                title: 'Login mislukt',
+                error: {message: 'Invalid login credentials'}
+            });
+        }
+        if (!bcrypt.compareSync(req.body.password, gebruiker.password)){
+            return res.status(401).json({
+                title: 'Login mislukt',
+                error: {message: 'Invalid login credentials'}
+            });
+        }
+        const token = jwt.sign({user: gebruiker}, 'secret', {expiresIn:7200});
+        res.status(200).json({
+            message: 'Successfully logged in',
+            token: token,
+            user: gebruiker
+        })
+    });
+});
+
 //get all gebruikers
 router.get('/', function (req, res, next) {
     Gebruiker.find().exec(function(err, gebruikers){

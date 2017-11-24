@@ -20,15 +20,12 @@ export class LoginComponent implements OnInit {
     })
   }
 
-  async onSubmit() {
-    let signedIn = await this.authService.login(
+  onSubmit() {
+    this.authService.login(
       this.myForm.value.email,
       this.myForm.value.password
     );
-
-    if (signedIn){
-      this.router.navigateByUrl('/');
-      this.myForm.reset();
-    }
+    this.router.navigateByUrl('/');
+    this.myForm.reset();
   }
 }

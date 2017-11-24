@@ -36,51 +36,6 @@ router.get('/:id', function (req, res, next) {
     })
 });
 
-//The room is available, make reservation
-function postAvailable(res, reservatie) {
-    reservatie.save(function (err, result) {
-        if (err) {
-            return res.status(500).json({
-                title: 'An error occurred',
-                error: err
-            });
-        }
-        res.status(201).json({
-            message: 'Reservatie is toegevoegd!',
-            obj: result
-        });
-    });
-}
-
-async function checkAvailability(beginuur, einduur, zaal){
-    //find all reservations for this room
-    try{
-        let docs = await Reservatie.find();
-        if (docs.length > 0) {
-            for (var i = 0; i < docs.length; i++) {
-                //check if there's an overlap between the time intervals
-                if (new Date(beginuur) <= new Date(docs[i].einduur) && new Date(einduur) >= new Date(docs[i].beginuur)) {
-                    //check if it's the same room
-                    if (docs[i].zaal.equals(zaal)) {
-                        return false;
-                    }
-                    //check recursive if part of the room is already reserved
-                    let zaal = await Zaal.findById(docs[i].zaal);
-                    if(zaal.zalen.length > 0) {
-                        for (let q in zaal.zalen){
-                            var available = checkAvailability(beginuur, einduur, zaal.zalen[q]);
-                            if (!available) return false;
-                        }
-                    }
-                }
-            }
-        }
-        return true;
-    }catch(err){
-        console.log("Promise Rejected");
-    }
-}
-
 //add reservatie
 router.post('/', async function(req, res, next) {
     const reservatie = new Reservatie({
@@ -102,6 +57,52 @@ router.post('/', async function(req, res, next) {
         });
     }
 });
+
+//The room is available, make reservation
+function postAvailable(res, reservatie) {
+    reservatie.save(function (err, result) {
+        if (err) {
+            return res.status(500).json({
+                title: 'An error occurred',
+                error: err
+            });
+        }
+        res.status(201).json({
+            message: 'Reservatie is toegevoegd!',
+            obj: result
+        });
+    });
+}
+
+async function checkAvailability(beginuur, einduur, zaal) {
+    //find all reservations for this room
+    try{
+        let docs = await Reservatie.find();
+        if (docs.length > 0) {
+            for (var i = 0; i < docs.length; i++) {
+                //check if there's an overlap between the time intervals
+                if (new Date(beginuur) <= new Date(docs[i].einduur) && new Date(einduur) >= new Date(docs[i].beginuur)) {
+                    //check if it's the same room
+                    if (docs[i].zaal.equals(zaal)) {
+                        return false;
+                    }
+                    //check recursive if part of the room is already reserved
+                    Zaal.findById(docs[i].zaal, function(err, zaal) {
+                        if(zaal.zalen.length > 0) {
+                            zaal.zalen.forEach(function (deelZaalId) {
+                                var available = checkAvailability(beginuur, einduur, deelZaalId);
+                                if (!available) return false;
+                            });
+                        }
+                    });
+                }
+            }
+        }
+        return true;
+    }catch(err){
+         console.log("Promise Rejected");
+    }
+}
 
 //update reservatie
 router.patch('/:id', function (req, res, next) {

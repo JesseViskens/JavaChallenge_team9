@@ -7,7 +7,7 @@ const express = require('express'),
 
 const jwt = require('jsonwebtoken');
 
-mongoose.connect('mongodb://localhost/javachallenge', {useMongoClient: true});
+mongoose.connect('mongodb://localhost/javachallenge');
 mongoose.Promise = global.Promise;
 
 app.use(cors());
@@ -45,7 +45,7 @@ app.use(express.static("public"));
 app.use("/zalen", zaalRoutes);
 app.use("/reservaties", reservatieRoutes);
 app.use("/gebruikers", gebruikerRoutes);
-app.use("/auth", authRoutes);
+app.use("/authenticate", authRoutes);
 
 app.listen(port);
 
