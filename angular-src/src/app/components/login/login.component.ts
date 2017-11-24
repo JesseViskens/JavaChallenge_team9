@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {AuthService} from "../../services/auth.service";
 import {Router} from "@angular/router";
@@ -10,24 +10,22 @@ import {Router} from "@angular/router";
 export class LoginComponent implements OnInit {
   myForm: FormGroup;
 
-  constructor(private authService: AuthService, private router: Router) { }
+  constructor(private authService: AuthService, private router: Router) {
+  }
 
   ngOnInit() {
     this.myForm = new FormGroup({
       email: new FormControl(null, Validators.required),
-      password:new FormControl(null, Validators.required)
+      password: new FormControl(null, Validators.required)
     })
   }
-    onSubmit(){
-      this.authService.login(
-        this.myForm.value.email,
-        this.myForm.value.password)
-        .subscribe(
-          data => {
-            this.router.navigateByUrl('/');
-          },
-          error => console.log(error)
-        );
-      this.myForm.reset();
-    }
+
+  onSubmit() {
+    this.authService.login(
+      this.myForm.value.email,
+      this.myForm.value.password
+    );
+    this.router.navigateByUrl('/');
+    this.myForm.reset();
+  }
 }
