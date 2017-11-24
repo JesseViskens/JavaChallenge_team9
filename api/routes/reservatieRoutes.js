@@ -37,7 +37,7 @@ router.get('/:id', function (req, res, next) {
 });
 
 //add reservatie
-router.post('/', async function (req, res, next) {
+router.post('/', async function(req, res, next) {
     const reservatie = new Reservatie({
         naam: req.body.naam,
         beginuur: req.body.beginuur,

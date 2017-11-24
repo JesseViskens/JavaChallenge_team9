@@ -21,6 +21,7 @@ export class ReservatieService {
       let headers = new HttpHeaders().set('content-type', 'application/json');
       let result: any = await this.http.post(Config.host + "/reservaties", {beginuur, einduur, zaal, gebruiker, reden},{headers:headers}).toPromise();
       this.reservatie = new Reservatie(result);
+      console.log(result);
     }catch(err){
       console.log(err);
     }

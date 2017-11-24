@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, Input} from '@angular/core';
+import {Zaal} from "../../models/zaal.model";
 
 @Component({
   selector: 'app-admin-zaalwijzigen',
@@ -8,6 +9,7 @@ import { Component, OnInit } from '@angular/core';
 export class AdminZaalwijzigenComponent implements OnInit {
 
   constructor() { }
+  @Input() zaal: Zaal;
 
   ngOnInit() {
   }
