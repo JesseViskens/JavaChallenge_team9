@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {Zaal} from "../../models/zaal.model";
 import {ZaalService} from "../../services/zaal.service";
-import {HttpClient} from "@angular/common/http";
+import { Router} from "@angular/router";
 
 @Component({
   selector: 'app-admin-zalen',
@@ -11,16 +11,19 @@ import {HttpClient} from "@angular/common/http";
 export class AdminZalenComponent implements OnInit {
   zalen: Zaal[];
 
-  constructor(private http: HttpClient, private zaalService: ZaalService) {
+  constructor( private zaalService: ZaalService,private router: Router) {
   }
 
   ngOnInit() {
     this.zaalService.getZalen().then(zalen=>this.zalen = zalen);
-    console.log(this.zalen);
-
   }
 
-  onDelete(id){
-    this.zaalService.deleteZaal(id);
+  async onDelete(id){
+    if(confirm('Bent u zeker dat u deze zaal wil verweideren?')){
+      await this.zaalService.deleteZaal(id);
+      this.router.navigateByUrl('/', false).then(()=>{
+        this.router.navigateByUrl('/adminzalen');1
+      });
+    }
   }
 }

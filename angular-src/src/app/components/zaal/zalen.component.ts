@@ -16,8 +16,9 @@ export class ZalenComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.zaalService.getZalen().then(zalen=>this.zalen = zalen);
-    console.log(this.zalen);
+    this.zaalService.getZalen().then(
+      zalen=>this.zalen = zalen
+    );
 
   }
 }

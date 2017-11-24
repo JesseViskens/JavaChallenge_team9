@@ -1,4 +1,4 @@
-<div class="">
+<div class="" *ngIf="!reload">
   <h1 class="zalenHeader text-center">Zalen beheren</h1>
   <div *ngFor="let zaal of zalen">
     <div class="card col-4 zaal float-left">
@@ -10,8 +10,8 @@
         <p class="">Beschrijving: {{zaal.beschrijving}}</p>
       </div>
       <div routerLinkActive="active">
-        <a [routerLink]="['/zaalWijzigen/', zaal.id]" class="btn btn-primary col-12 align-bottom">Aanpassen</a>
-        <a href="#" (click) = "onDelete(zaal.id)" class="btn btn-primary col-12 align-bottom">Verwijderen</a>
+        <button [routerLink]="['/zaalWijzigen/', zaal._id]" class="btn btn-primary col-12 align-bottom">Aanpassen</button>
+        <button  (click) = "onDelete(zaal._id)" class="btn btn-primary col-12 align-bottom">Verwijderen</button>
       </div>
     </div>
   </div>

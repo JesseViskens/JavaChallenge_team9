@@ -15,6 +15,7 @@ export class ZaalService {
   async deleteZaal(zaalId:string){
     try{
       let headers = new HttpHeaders().set('content-type', 'application/json');
+      console.log('delete');
       return await this.http.delete(Config.host + `/zalen/` + zaalId, {headers:headers}).toPromise();
     }catch(err){
       console.log(err);
@@ -26,7 +27,6 @@ export class ZaalService {
     try{
       let result: any = await this.http.get(Config.host + "/zalen").toPromise();
       this.zalen = result.obj;
-      console.log(result);
       return this.zalen;
     }catch(err){
       console.log(err);
