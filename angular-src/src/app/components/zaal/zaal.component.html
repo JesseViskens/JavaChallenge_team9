@@ -1,13 +1,16 @@
 <div class="card col-4 zaal float-left">
   <img class="card-img" src="{{zaal.foto}}" alt="Card image cap">
-  <div class="card-block info col-12">
-    <h4 class="card-title">{{zaal.naam}}</h4>
-    <p class="card-text">Grootte {{ zaal.oppervlakte }}m²</p>
-    <p class="card-text">Maximum {{ zaal.capaciteit }} personen</p>
-    <p class="">Beschrijving:</p>
-    <p class="">{{zaal.beschrijving}}</p>
+  <div class="card-block info container">
+    <div class="align-content-center">
+      <h4 class="card-title center">{{zaal.naam}}</h4>
+    </div>
+    <div>
+      <p class="card-text">Grootte {{ zaal.oppervlakte }}m²</p>
+      <p class="card-text">Maximum {{ zaal.capaciteit }} personen</p>
+      <p class="card-text">{{zaal.beschrijving}}</p>
+    </div>
   </div>
-  <div routerLinkActive="active">
+  <div class="" routerLinkActive="active">
     <a [routerLink]="['/reservatieKalender/', zaal.id]" class="btn btn-primary col-12 align-bottom">Kalender
       bekijken</a>
   </div>
