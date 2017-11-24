@@ -45,16 +45,19 @@ export class AuthService {
 
   async login(email: string, password: string){
     console.log("Logging in");
+    console.log(email);
     try{
       let headers = new HttpHeaders().set('content-type', 'application/json');
-      let result: any = await this.http.post(Config.host + "/auth/login", {email, password},{headers:headers}).toPromise();
+      let result: any = await this.http.post(Config.host + "/auth/signin", {email, password},{headers:headers}).toPromise();
       localStorage.setItem("authKey", result.token);
       localStorage.setItem("userId", result.id);
       localStorage.setItem("isAdmin", result.isAdmin);
       this.gebruiker = new Gebruiker(result);
       this.onLogin.emit(this.gebruiker);
+      return true;
     }catch(err){
       console.log(err);
+      return false;
     }
   }
 
