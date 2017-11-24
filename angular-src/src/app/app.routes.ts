@@ -9,7 +9,7 @@ import {AdminZalenComponent} from "./components/admin-zalen/admin-zalen.componen
 export const routes: Routes = [
   {path: "", component: ZalenComponent},
   {path: "login", component: LoginComponent},
-  {path: "reservatieKalender", componenet:KalenderComponent}
+  {path: "reservatieKalender", component:KalenderComponent},
   {path: "reservatie", component: ReservatieComponent},
   {path: "adminzalen", component: AdminZalenComponent}
 ];
