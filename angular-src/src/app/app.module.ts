@@ -9,6 +9,7 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { LoginComponent } from './components/login/login.component';
 import {ZaalComponent} from "./components/zaal/zaal.component";
 import {ZalenComponent} from "./components/zaal/zalen.component";
+import {AuthService} from "./services/auth.service";
 
 
 @NgModule({
@@ -23,7 +24,7 @@ import {ZalenComponent} from "./components/zaal/zalen.component";
     BrowserModule,
     RouterModule.forRoot(routes)
   ],
-  providers: [],
+  providers: [AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
