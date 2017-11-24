@@ -7,6 +7,7 @@ import {ReservatieComponent} from "./components/reservatie/reservatie.component"
 import {AdminZalenComponent} from "./components/admin-zalen/admin-zalen.component";
 import {AdminZaalwijzigenComponent} from "./components/admin-zaalwijzigen/admin-zaalwijzigen.component";
 import {AdminReservatiesComponent} from "./components/admin-reservaties/admin-reservaties.component";
+import {AdminKalenderComponent} from "./components/admin-reservatie-kalender/admin-reservatie-kalender.component";
 
 export const routes: Routes = [
   {path: "", component: ZalenComponent},
@@ -17,4 +18,5 @@ export const routes: Routes = [
   {path: "adminreservaties", component: AdminReservatiesComponent},
   {path: "adminzalen", component: AdminZalenComponent},
   {path: "zaalWijzigen/:id", component: AdminZaalwijzigenComponent}
+  {path: "adminreservatieKalender", component:AdminKalenderComponent}
 ];

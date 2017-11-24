@@ -1,0 +1,44 @@
+<link rel="stylesheet" type="text/css" href="https://cdn3.devexpress.com/jslib/17.2.3/css/dx.spa.css"/>
+<link rel="stylesheet" type="text/css" href="https://cdn3.devexpress.com/jslib/17.2.3/css/dx.common.css"/>
+<link rel="stylesheet" type="text/css" href="https://cdn3.devexpress.com/jslib/17.2.3/css/dx.light.css"/>
+<h1>ADMIN</h1>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-2">
+      <table border="1">
+        <tr><td><a>taak1</a></td></tr>
+        <tr><td><a>taak2</a></td></tr>
+        <tr><td><a>taak3</a></td></tr>
+        <tr><td><a>taak4</a></td></tr>
+        <tr><td><a>taak5</a></td></tr>
+      </table>
+    </div>
+    <div class="col-10">
+      <div class="dx-viewport">
+        <div class="demo-container">
+          <dx-scheduler
+            [dataSource]="appointmentsData"
+            [firstDayOfWeek]="1"
+            [startDayHour]="1"
+            [endDayHour]="24"
+            [cellDuration]="60"
+            [groups]="['priority']"
+            [currentDate]="currentDate"
+            [height]="600">
+            <dxi-resource
+              fieldExpr="ownerId"
+              [allowMultiple]="true"
+              [dataSource]="resourcesData"
+              label="Owner"
+              [useColorAsDefault]="true"
+            ></dxi-resource>
+            <dxo-editing [allowAdding]="false"></dxo-editing>
+
+          </dx-scheduler>
+
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

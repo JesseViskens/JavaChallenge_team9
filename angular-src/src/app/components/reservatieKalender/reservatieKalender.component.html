@@ -1,20 +1,19 @@
-<link rel="stylesheet" type="text/css" href="https://cdn3.devexpress.com/jslib/17.2.3/css/dx.spa.css" />
-<link rel="stylesheet" type="text/css" href="https://cdn3.devexpress.com/jslib/17.2.3/css/dx.common.css" />
-<link rel="stylesheet" type="text/css" href="https://cdn3.devexpress.com/jslib/17.2.3/css/dx.light.css" />
+<link rel="stylesheet" type="text/css" href="https://cdn3.devexpress.com/jslib/17.2.3/css/dx.spa.css"/>
+<link rel="stylesheet" type="text/css" href="https://cdn3.devexpress.com/jslib/17.2.3/css/dx.common.css"/>
+<link rel="stylesheet" type="text/css" href="https://cdn3.devexpress.com/jslib/17.2.3/css/dx.light.css"/>
+
 
 <div class="dx-viewport">
   <div class="demo-container">
     <dx-scheduler
       [dataSource]="appointmentsData"
-      [views]='["timelineDay", "timelineWeek", "timelineWorkWeek", "timelineMonth"]'
-      currentView="timelineMonth"
-      [firstDayOfWeek]="0"
+      [firstDayOfWeek]="1"
       [startDayHour]="1"
-      [endDayHour]="23"
+      [endDayHour]="24"
       [cellDuration]="60"
       [groups]="['priority']"
       [currentDate]="currentDate"
-      [height]="580">
+      [height]="600">
       <dxi-resource
         fieldExpr="ownerId"
         [allowMultiple]="true"
@@ -22,13 +21,12 @@
         label="Owner"
         [useColorAsDefault]="true"
       ></dxi-resource>
-      <dxi-resource
-        fieldExpr="priority"
-        [allowMultiple]="false"
-        [dataSource]="prioritiesData"
-        label="Priority"
-      ></dxi-resource>
+
+
     </dx-scheduler>
+    <div routerLinkActive="active">
+      <a class="btn btn-primary">detailpagina</a>
+    </div>
 
     <div class="" routerLinkActive="active">
       <a [routerLink]="['/reservatie/', id]" class="btn btn-primary">Naar reservatie pagina</a>
@@ -36,3 +34,4 @@
 
   </div>
 </div>
+

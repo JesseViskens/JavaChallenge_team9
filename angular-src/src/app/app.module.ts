@@ -16,11 +16,16 @@ import {HttpClient, HttpClientModule} from "@angular/common/http";
 import {HttpModule} from "@angular/http";
 import {ReservatieComponent} from "./components/reservatie/reservatie.component";
 import { AdminZalenComponent } from './components/admin-zalen/admin-zalen.component';
+
 import {KalenderModule} from "./components/reservatieKalender/reservatieKalender.module";
 import {ZaalService} from "./services/zaal.service";
 import {ReservatieService} from "./services/reservatie.service";
 import { AdminZaalwijzigenComponent } from './components/admin-zaalwijzigen/admin-zaalwijzigen.component';
 import {AdminReservatiesComponent} from "./components/admin-reservaties/admin-reservaties.component";
+import {AdminKalenderModule} from "./components/admin-reservatie-kalender/admin-reservatie-kalender.module";
+
+
+
 
 
 @NgModule({
@@ -38,6 +43,7 @@ import {AdminReservatiesComponent} from "./components/admin-reservaties/admin-re
   imports: [
     BrowserModule,
     KalenderModule,
+    AdminKalenderModule,
     RouterModule.forRoot(routes),
     FormsModule,
     ReactiveFormsModule,
