@@ -17,6 +17,9 @@ import {HttpModule} from "@angular/http";
 import {ReservatieComponent} from "./components/reservatie/reservatie.component";
 import { AdminZalenComponent } from './components/admin-zalen/admin-zalen.component';
 import {KalenderModule} from "./components/reservatieKalender/reservatieKalender.module";
+import {ZaalService} from "./services/zaal.service";
+import {ReservatieService} from "./services/reservatie.service";
+import { AdminZaalwijzigenComponent } from './components/admin-zaalwijzigen/admin-zaalwijzigen.component';
 
 
 @NgModule({
@@ -27,7 +30,8 @@ import {KalenderModule} from "./components/reservatieKalender/reservatieKalender
     ZaalComponent,
     ZalenComponent,
     ReservatieComponent,
-    AdminZalenComponent
+    AdminZalenComponent,
+    AdminZaalwijzigenComponent
   ],
   imports: [
     BrowserModule,
@@ -38,7 +42,11 @@ import {KalenderModule} from "./components/reservatieKalender/reservatieKalender
     HttpModule,
     HttpClientModule
   ],
-  providers: [ AuthService],
+  providers: [
+    AuthService,
+    ZaalService,
+    ReservatieService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
