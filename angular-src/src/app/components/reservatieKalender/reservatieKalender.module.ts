@@ -2,6 +2,7 @@ import {DxSchedulerModule} from 'devextreme-angular';
 import  {KalenderComponent } from './reservatieKalender.component'
 import {BrowserModule} from "@angular/platform-browser";
 import {NgModule} from "@angular/core";
+import {RouterModule} from "@angular/router";
 
 
 
@@ -9,6 +10,7 @@ import {NgModule} from "@angular/core";
   imports: [
     BrowserModule,
     DxSchedulerModule,
+    RouterModule
 
   ],
   declarations: [KalenderComponent],

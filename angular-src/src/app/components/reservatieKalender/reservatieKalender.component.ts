@@ -1,13 +1,12 @@
-import {NgModule, Component, enableProdMode, Input} from '@angular/core';
+import {NgModule, Component, enableProdMode, Input, OnInit} from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
 import {platformBrowserDynamic} from '@angular/platform-browser-dynamic';
 
 import {Priority, Resource, Appointment, Service} from './reservatieKalender.service';
+import {ActivatedRoute, Router} from "@angular/router";
 
 
-
-
-if(!/localhost/.test(document.location.host)) {
+if (!/localhost/.test(document.location.host)) {
   enableProdMode();
 }
 
@@ -24,12 +23,18 @@ export class KalenderComponent {
   @Input() appointmentsData: Appointment[];
   @Input() resourcesData: Resource[];
   @Input() prioritiesData: Priority[];
+  id: number;
 
   currentDate: Date = new Date();
 
-  constructor(service: Service) {
+  constructor(service: Service, private router: Router,
+              private route: ActivatedRoute,) {
     this.appointmentsData = service.getAppointments();
     this.resourcesData = service.getResources();
     this.prioritiesData = service.getPriorities();
+    this.route.params.subscribe(params => {
+      this.id = +params['id'];
+    });
+
   }
 }
