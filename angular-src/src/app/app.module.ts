@@ -32,7 +32,8 @@ import {AdminReservatiesComponent} from "./components/admin-reservaties/admin-re
     ZalenComponent,
     ReservatieComponent,
     AdminZalenComponent,
-    AdminZaalwijzigenComponent
+    AdminZaalwijzigenComponent,
+    AdminReservatiesComponent
   ],
   imports: [
     BrowserModule,
