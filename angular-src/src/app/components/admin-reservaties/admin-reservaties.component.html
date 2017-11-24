@@ -44,8 +44,26 @@
           </div>
         </div>
         <div>
-          <button type="button" class="col-3 offset-3 btn btn-primary">Annuleer</button>
-          <button type="submit" class="col-3 btn btn-primary">Vraag aan</button>
+          <button type="button" class="col-3 btn btn-primary" data-toggle="modal" data-target="#popup">Weiger</button>
+          <button type="button" class="col-3 btn btn-primary" data-toggle="modal" data-target="#popup">Bevestig</button>
+          <button type="button" class="col-3 btn btn-primary">Terug</button>
+        </div>
+        <div id="popup" class="modal fade" role="dialog">
+          <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+              <div class="modal-header">
+                <h4 class="modal-title">Reden:</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+              </div>
+              <div class="modal-body">
+                <input type="text" class="form-control" />
+              </div>
+              <div class="modal-footer">
+                <button type="submit" class="btn btn-default" data-dismiss="modal">Verstuur</button>
+              </div>
+            </div>
+          </div>
         </div>
       </form>
     </div>
