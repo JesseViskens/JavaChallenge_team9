@@ -1,7 +1,7 @@
-var mongoose = require('mongoose');
-var Schema = mongoose.Schema;
+const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
 
-var ZaalSchema = new Schema({
+const ZaalSchema = new Schema({
     naam: {type: String, required: true},
     beschrijving: {type: String, required: true},
     oppervlakte: {type: Number, required: true},
@@ -9,8 +9,7 @@ var ZaalSchema = new Schema({
     aanvang: {type: String},
     sluiting: {type: String},
     capaciteit: {type: Number, required: true},
-    zalen: [{type: Schema.Types.ObjectId, ref:"Zaal", required:false}],
-    materialen: [{type: Schema.Types.ObjectId, ref:"Materiaal", required:false}]
+    zalen: [{type: Schema.Types.ObjectId, ref: "Zaal", required: false}]
 });
 
 module.exports = mongoose.model('Zaal', ZaalSchema);

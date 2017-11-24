@@ -1,12 +1,12 @@
-var express = require('express');
-var router = express.Router();
-var bcrypt = require('bcryptjs');
-var jwt = require('jsonwebtoken');
+const express = require('express');
+const router = express.Router();
+const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
 
-var Gebruiker = require('../models/gebruikerModel');
+const Gebruiker = require('../models/gebruikerModel');
 
 router.post('/', function (req, res, next) {
-    var gebruiker = new Gebruiker({
+    const gebruiker = new Gebruiker({
         voornaam: req.body.voornaam,
         achternaam: req.body.achternaam,
         password: bcrypt.hashSync(req.body.password,10),
@@ -49,7 +49,7 @@ router.post('/signin', function (req, res, next) {
                 error: {message: 'Invalid login credentials'}
             });
         }
-        var token = jwt.sign({user: gebruiker}, 'secret', {expiresIn:7200});
+        const token = jwt.sign({user: gebruiker}, 'secret', {expiresIn:7200});
         res.status(200).json({
             message: 'Successfully logged in',
             token: token,
