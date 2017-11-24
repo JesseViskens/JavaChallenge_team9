@@ -7,8 +7,6 @@ import { routes } from './app.routes';
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { LoginComponent } from './components/login/login.component';
-import { TestComponent } from './components/test/test.component';
-import { TestService } from "./services/test.service";
 import {ZaalComponent} from "./components/zaal/zaal.component";
 import {ZalenComponent} from "./components/zaal/zalen.component";
 
@@ -18,7 +16,6 @@ import {ZalenComponent} from "./components/zaal/zalen.component";
     AppComponent,
     NavbarComponent,
     LoginComponent,
-    TestComponent,
     ZaalComponent,
     ZalenComponent
   ],
@@ -26,7 +23,7 @@ import {ZalenComponent} from "./components/zaal/zalen.component";
     BrowserModule,
     RouterModule.forRoot(routes)
   ],
-  providers: [TestService],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
