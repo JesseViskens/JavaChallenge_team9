@@ -12,7 +12,7 @@ if(!/localhost/.test(document.location.host)) {
 }
 
 @Component({
-  styleUrls: ['reservatieKalender.component.css'],
+
   selector: 'app-kalender',
   templateUrl: './reservatieKalender.component.html',
   providers: [Service]
