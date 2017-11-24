@@ -49,6 +49,8 @@ export class AuthService {
       let headers = new HttpHeaders().set('content-type', 'application/json');
       let result: any = await this.http.post(Config.host + "/auth/login", {email, password},{headers:headers}).toPromise();
       localStorage.setItem("authKey", result.token);
+      localStorage.setItem("userId", result.id);
+      localStorage.setItem("isAdmin", result.isAdmin);
       this.gebruiker = new Gebruiker(result);
       this.onLogin.emit(this.gebruiker);
     }catch(err){

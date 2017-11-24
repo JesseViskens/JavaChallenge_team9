@@ -1,10 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
-import Gebruiker from "../../models/gebruiker.model";
 import {AuthService} from "../../services/auth.service";
 import {Router} from "@angular/router";
-import { HttpClientModule } from '@angular/common/http';
-import { HttpModule } from '@angular/http';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -27,7 +24,6 @@ export class LoginComponent implements OnInit {
         this.myForm.value.password)
         .subscribe(
           data => {
-            localStorage.setItem('userId', data.userId);
             this.router.navigateByUrl('/');
           },
           error => console.log(error)
