@@ -23,6 +23,7 @@ import {ReservatieService} from "./services/reservatie.service";
 import { AdminZaalwijzigenComponent } from './components/admin-zaalwijzigen/admin-zaalwijzigen.component';
 import {AdminReservatiesComponent} from "./components/admin-reservaties/admin-reservaties.component";
 import {AdminKalenderModule} from "./components/admin-reservatie-kalender/admin-reservatie-kalender.module";
+import {AdminRegistratieKalenderService} from "./services/admin-reservatie-kalender.service";
 
 
 
@@ -53,7 +54,8 @@ import {AdminKalenderModule} from "./components/admin-reservatie-kalender/admin-
   providers: [
     AuthService,
     ZaalService,
-    ReservatieService
+    ReservatieService,
+    AdminRegistratieKalenderService
   ],
   bootstrap: [AppComponent]
 })
