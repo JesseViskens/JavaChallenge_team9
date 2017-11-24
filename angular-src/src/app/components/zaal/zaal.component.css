@@ -29,6 +29,9 @@
   margin: 0;
 }
 
+.list li{
+  list-style: none;
+}
 
 /*
 #F8F8F8

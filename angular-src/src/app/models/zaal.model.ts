@@ -1,5 +1,3 @@
-import {Materiaal} from "./materiaal.model";
-
 export class Zaal {
   id: number;
   naam: string;
@@ -9,7 +7,6 @@ export class Zaal {
   aanvang: string;
   sluiting: string;
   capaciteit: number;
-  materiaal: Materiaal[];
 
   constructor(id: number, naam: string,
               beschrijving: string,
@@ -17,8 +14,7 @@ export class Zaal {
               foto: string,
               aanvang: string,
               sluiting: string,
-              capaciteit: number,
-              materiaal: Materiaal[]) {
+              capaciteit: number) {
     this.id = id;
     this.naam = naam;
     this.beschrijving = beschrijving;
@@ -26,7 +22,5 @@ export class Zaal {
     this.foto = foto;
     this.aanvang = aanvang;
     this.sluiting = sluiting;
-    this.capaciteit = capaciteit;
-    this.materiaal = materiaal;
-  }
+    this.capaciteit = capaciteit;}
 }
