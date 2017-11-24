@@ -1,29 +1,18 @@
 <div class="">
-  <h1>Zalen beheren</h1>
+  <h1 class="zalenHeader text-center">Zalen beheren</h1>
   <div *ngFor="let zaal of zalen">
-  <div class="zaal">
-    <div class="container-fluid">
-      <div class="row">
-        <div class="col-3">
-          <img src="http://via.placeholder.com/350x150">
-        </div>
-        <div class="col-lg-6 info">
-          <h3>{{ zaal.naam }}</h3>
-          <p>Grootte {{ zaal.oppervlakte }}m²</p>
-          <p>Maximum {{ zaal.capaciteit }} personen</p>
-        </div>
-        <div class="col-lg-3 materiaal">
-          <div class="row">
-            <p class="col-12">Beschrijving:</p>
-            <p class="col-12">{{zaal.beschrijving}}</p>
-          </div>
-          <div class="row" routerLinkActive="active">
-            <a [routerLink]="['/zaalaanpassen']" class="btn btn-primary col-12">Aanpassen</a>
-            <a [routerLink]="['/zaaldelete']" class="btn btn-primary col-12">Verwijderen</a>
-          </div>
-        </div>
+    <div class="card col-4 zaal float-left">
+      <img class="card-img" src="{{zaal.foto}}" alt="Card image cap">
+      <div class="card-block info col-12">
+        <h4 class="card-title">{{zaal.naam}}</h4>
+        <p class="card-text">Grootte {{ zaal.oppervlakte }}m²</p>
+        <p class="card-text">Maximum {{ zaal.capaciteit }} personen</p>
+        <p class="">Beschrijving: {{zaal.beschrijving}}</p>
+      </div>
+      <div routerLinkActive="active">
+        <a [routerLink]="['/zaalWijzigen/', zaal.id]" class="btn btn-primary col-12 align-bottom">Aanpassen</a>
+        <a [routerLink]="['/reservatieKalender/', zaal.id]" class="btn btn-primary col-12 align-bottom">Verwijderen</a>
       </div>
     </div>
-  </div>
   </div>
 </div>
