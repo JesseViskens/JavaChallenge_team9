@@ -2,7 +2,8 @@ import {Component, Input, Output, EventEmitter, OnInit} from "@angular/core";
 import {Reservatie} from "../../models/reservatie.model";
 import {Zaal} from "../../models/zaal.model";
 import Gebruiker from "../../models/gebruiker.model";
-import {FormGroup} from "@angular/forms";
+import {FormControl, FormGroup} from "@angular/forms";
+import {ReservatieService} from "../../services/reservatie.service";
 
 @Component({
   selector: 'app-reservatie',
@@ -15,7 +16,7 @@ export class ReservatieComponent implements OnInit {
   gebruiker: Gebruiker;
   myForm: FormGroup;
 
-  constructor() {
+  constructor(private reservatieService: ReservatieService) {
     this.zaal = new Zaal(1, "Computerzaal 1", "beschrijving", 40, "img.png", "0900", "2100", 20);
     this.gebruiker = new Gebruiker({
       email: "robinvutrecht@gmail.com",
@@ -29,17 +30,19 @@ export class ReservatieComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.myForm = new FormGroup({})
+    this.myForm = new FormGroup({
+      reden: new FormControl(null)
+    })
   }
 
   onSubmit() {
-    /*this.reservatieService.reserveer(
+    this.reservatieService.reserveer(
       this.myForm.value.beginuur,
       this.myForm.value.einduur,
       this.zaal,
       this.gebruiker,
       this.myForm.value.reden
-    );*/
+    );
     this.myForm.reset();
   }
 }
