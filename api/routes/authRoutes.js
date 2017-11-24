@@ -44,29 +44,4 @@ router.post('/', function(req, res) {
     });
 });
 
-router.post('/signin', function (req, res, next) {
-    console.log(req.body);
-    Gebruiker.findOne({email: req.body.email}, function(err, gebruiker){
-        console.log(gebruiker);
-        if (err) {
-            return res.status(500).json({
-                title: 'An error occurred',
-                error: err
-            });
-        }
-        if (gebruiker == null){
-            return res.status(401).json({
-                title: 'Login mislukt',
-                error: {message: 'Invalid login credentials'}
-            });
-        }
-        const token = jwt.sign({user: gebruiker}, 'secret', {expiresIn:7200});
-        res.status(200).json({
-            message: 'Successfully logged in',
-            token: token,
-            user: gebruiker
-        })
-    });
-});
-
 module.exports = router;
