@@ -32,7 +32,6 @@ import {KalenderModule} from "./components/reservatieKalender/reservatieKalender
   imports: [
     BrowserModule,
     KalenderModule,
-    RouterModule.forRoot(routes)
     RouterModule.forRoot(routes),
     FormsModule,
     ReactiveFormsModule,
