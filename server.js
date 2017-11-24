@@ -1,4 +1,5 @@
 const express = require('express'),
+    cors = require('cors')
     app = express(),
     port = process.env.PORT || 3000,
     mongoose = require('mongoose'),
@@ -9,6 +10,7 @@ const jwt = require('jsonwebtoken');
 mongoose.connect('mongodb://localhost/javachallenge');
 mongoose.Promise = global.Promise;
 
+app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 
