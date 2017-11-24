@@ -20,6 +20,7 @@ import {KalenderModule} from "./components/reservatieKalender/reservatieKalender
 import {ZaalService} from "./services/zaal.service";
 import {ReservatieService} from "./services/reservatie.service";
 import { AdminZaalwijzigenComponent } from './components/admin-zaalwijzigen/admin-zaalwijzigen.component';
+import {AdminReservatiesComponent} from "./components/admin-reservaties/admin-reservaties.component";
 
 
 @NgModule({

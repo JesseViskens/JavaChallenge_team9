@@ -1,7 +1,7 @@
 <article class="panel panel-default" >
     <div class="panel-body row">
       <form class="col-6 offset-3" [formGroup]="myForm" (ngSubmit)="onSubmit()">
-        <h1>Reserveren</h1>
+        <h1>Reservatie beheren</h1>
         <div id="zaal">
           <div id="image" class="offset-6"><img width="150px" height="150px" src="http://via.placeholder.com/150x150" /></div>
           <div>
@@ -32,6 +32,11 @@
           <div>
             <label>Email:</label>
             <label>{{gebruiker.email}}</label>
+          </div>
+          <div>
+            <label>Bedrijf:</label>
+            <input type="radio" name="bedrijf" value="ja"> ja
+            <input type="radio" name="bedrijf" value="nee"> nee
           </div>
           <div class="form-group">
             <label class="control-label" for="reden">Reden:</label>
