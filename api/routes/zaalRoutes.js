@@ -37,16 +37,8 @@ router.get('/:id', function (req, res, next) {
 
 //add zaal
 router.post('/', function (req, res, next) {
-    const zaal = new Zaal({
-        naam: req.body.naam,
-        beschrijving: req.body.beschrijving,
-        oppervlakte: req.body.oppervlakte,
-        foto: req.body.foto,
-        aanvang: req.body.aanvang,
-        sluiting: req.body.sluiting,
-        capaciteit: req.body.capaciteit,
-        zalen: [req.body.zaal]
-    });
+    console.log(req.body);
+    const zaal = new Zaal(req.body);
 
     zaal.save(function (err, result) {
         if (err){

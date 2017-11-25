@@ -44,4 +44,14 @@ export class ZaalService {
       console.log(err);
     }
   }
+
+  async createZaal(zaal:Zaal){
+    console.log(zaal);
+    try{
+      let headers = new HttpHeaders().set('content-type', 'application/json');
+      return await this.http.post(Config.host + "/zalen", zaal, {headers}).toPromise();
+    }catch(err){
+      console.log(err);
+    }
+  }
 }
