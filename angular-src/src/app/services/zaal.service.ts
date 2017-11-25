@@ -46,11 +46,19 @@ export class ZaalService {
   }
 
   async createZaal(zaal:Zaal){
-    console.log(zaal);
     try{
-      console.log(localStorage.getItem("authKey"));
       let headers = new HttpHeaders().set('content-type', 'application/json').set("Authorization", localStorage.getItem("authKey"));
       return await this.http.post(Config.host + "/zalen", zaal, {headers}).toPromise();
+    }catch(err){
+      console.log(err);
+    }
+  }
+
+  async updateZaal(zaal:Zaal){
+    try{
+      console.log(zaal);
+      let headers = new HttpHeaders().set('content-type', 'application/json').set("Authorization", localStorage.getItem("authKey"));
+      return await this.http.patch(Config.host + "/zalen/" + zaal._id, zaal, {headers}).toPromise();
     }catch(err){
       console.log(err);
     }
