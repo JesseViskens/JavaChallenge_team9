@@ -27,8 +27,8 @@ export class LoginComponent implements OnInit {
     );
 
     if (signedIn){
-      this.router.navigateByUrl('/');
       this.myForm.reset();
+      this.router.navigate(['/']);
     }
   }
 }
