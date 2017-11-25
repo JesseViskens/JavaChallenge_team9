@@ -37,7 +37,6 @@ router.get('/:id', function (req, res, next) {
 
 //add zaal
 router.post('/', function (req, res, next) {
-    console.log(req.body);
     const zaal = new Zaal(req.body);
 
     zaal.save(function (err, result) {
