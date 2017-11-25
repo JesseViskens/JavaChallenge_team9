@@ -16,7 +16,7 @@ if(!/localhost/.test(document.location.host)) {
   selector: 'app-kalender',
   templateUrl: './admin-reservatie-kalender.component.html',
   providers: [Service],
-  styleUrls:[ './admin-reservatie-calender.component']
+  styleUrls:[ './admin-reservatie-calender.component.css']
 })
 
 
