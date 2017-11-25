@@ -35,7 +35,7 @@
       </div>
     </div>
     <div class="form-group">
-      <label for="inputZalen">Zalen die deel uitmaken van deze zaal: <span class="helpText">Om meerdere zalen te selecteren, moet men ctrl of shift indrukken terwijl men selecteerd. Let op, toegevoede zalen kunnen niet verwijderd worden.</span></label>
+      <label for="inputZalen">Zalen die deel uitmaken van deze zaal: <span class="helpText">Om meerdere zalen te selecteren, moet men ctrl of shift indrukken terwijl men selecteerd. <br/>Let op, toegevoegde zalen kunnen niet verwijderd worden.</span></label>
       <select multiple class="form-control" id="inputZalen" name="deelZalen" #select>
         <option *ngFor="let zaal of zalen" [value]="zaal._id">{{zaal.naam}}</option>
       </select>

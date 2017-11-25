@@ -36,6 +36,8 @@
 }
 .zalenHeader{
   color: #FFFFFF;
+  padding-top: 10px;
+  padding-bottom: 10px;
 }
 .light-button{
   background-color: #F8F8F8;
