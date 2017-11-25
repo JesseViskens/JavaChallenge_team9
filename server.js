@@ -16,25 +16,6 @@ app.use(bodyParser.urlencoded({extended: true}));
 
 const Gebruiker = require('./api/models/gebruikerModel');
 
-app.get('/setup', function (req,res) {
-    const admin = new Gebruiker({
-        'voornaam': 'Joske',
-        'achternaam': 'Vermeulen',
-        'password': 'abc123',
-        'email': 'joskevermeulen2@gmail.com',
-        'adres': 'rdtfyhijop',
-        'woonplaats': 'rdtfyguijkpl',
-        'isAdmin': true
-    });
-
-    admin.save(function (err) {
-        if (err) throw err;
-
-        console.log("User Succes");
-        res.json({success:true});
-    });
-});
-
 const zaalRoutes = require('./api/routes/zaalRoutes');
 const reservatieRoutes = require('./api/routes/reservatieRoutes');
 const gebruikerRoutes = require('./api/routes/gebruikerRoutes');
@@ -46,6 +27,42 @@ app.use("/zalen", zaalRoutes);
 app.use("/reservaties", reservatieRoutes);
 app.use("/gebruikers", gebruikerRoutes);
 app.use("/auth", authRoutes);
+
+app.get('/setup', function (req,res) {
+    const admin = new Gebruiker({
+        'voornaam': 'Joske',
+        'achternaam': 'Vermeulen',
+        'password': 'abc123',
+        'email': 'admin@lguzalen.be',
+        'adres': 'rdtfyhijop',
+        'woonplaats': 'rdtfyguijkpl',
+        'isAdmin': true
+    });
+
+    admin.save(function (err) {
+        if (err) throw err;
+
+        console.log("Admin Succes");
+        res.json({success:true});
+    });
+
+    const user = new Gebruiker({
+        'voornaam': 'Joske',
+        'achternaam': 'Vermeulen',
+        'password': 'abc123',
+        'email': 'user@lguzalen.be',
+        'adres': 'rdtfyhijop',
+        'woonplaats': 'rdtfyguijkpl',
+        'isAdmin': false
+    });
+
+    user.save(function (err) {
+        if (err) throw err;
+
+        console.log("User Succes");
+        res.json({success:true});
+    });
+});
 
 app.listen(port);
 

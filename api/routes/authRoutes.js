@@ -44,6 +44,7 @@ router.post('/', function(req, res) {
     });
 });
 
+//TODO we gebruiken nu deze login ipv die hierboven, is dit ok?
 router.post('/signin', function (req, res, next) {
     console.log(req.body);
     Gebruiker.findOne({email: req.body.email}, function(err, gebruiker){
