@@ -3,7 +3,7 @@ import Gebruiker from "./gebruiker.model";
 import autoBind from 'auto-bind';
 
 export class Reservatie{
-  private id:string;
+  id:string;
   naam: string;
   beginuur: Date;
   einduur: Date;

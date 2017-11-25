@@ -1,37 +1,37 @@
 <article class="panel panel-default" >
     <div class="panel-body row">
-      <form class="col-6 offset-3" [formGroup]="myForm" (ngSubmit)="onSubmit()">
+      <form class="col-6 offset-3" #reservatieForm="ngForm" (ngSubmit)="onSubmit()">
         <h1>Reservatie beheren</h1>
         <div id="zaal">
           <div id="image" class="offset-6"><img width="150px" height="150px" src="http://via.placeholder.com/150x150" /></div>
           <div>
             <label>Naam:</label>
-            <label>{{ zaal.naam }}</label>
+            <label>{{ reservatie.zaal.naam }}</label>
           </div>
           <div>
             <label>Oppervlakte:</label>
-            <label>{{ zaal.oppervlakte }}</label>
+            <label>{{ reservatie.zaal.oppervlakte }}</label>
           </div>
-          <div><label>Beschrijving:</label><label>{{ zaal.beschrijving }}</label></div>
+          <div><label>Beschrijving:</label><label>{{ reservatie.zaal.beschrijving }}</label></div>
         </div>
 
         <div id="reservering">
           <div>
             <label>Begindatum</label> <label class="offset-3">Einddatum</label></div>
           <div>
-            <input type="datetime-local" /> tot <input type="datetime-local" /></div>
+            <input type="datetime-local" value="{{ reservatie.beginuur.toLocaleString() }}"/> tot <input type="datetime-local" value="{{ reservatie.einduur }}"/></div>
 
           <div>
             <label>Voornaam:</label>
-            <label>{{gebruiker.voornaam}}</label>
+            <label>{{ reservatie.gebruiker.voornaam}}</label>
           </div>
           <div>
             <label>Familienaam:</label>
-            <label>{{gebruiker.achternaam}}</label>
+            <label>{{ reservatie.gebruiker.achternaam}}</label>
           </div>
           <div>
             <label>Email:</label>
-            <label>{{gebruiker.email}}</label>
+            <label>{{ reservatie.gebruiker.email}}</label>
           </div>
           <div>
             <label>Bedrijf:</label>
@@ -40,13 +40,13 @@
           </div>
           <div class="form-group">
             <label class="control-label" for="reden">Reden:</label>
-            <input id="reden" class="form-control col-sm-2" type="text" />
+            <input id="reden" class="form-control col-sm-6" type="text" value="{{reservatie.reden}}"/>
           </div>
         </div>
         <div>
           <button type="button" class="col-3 btn btn-primary" data-toggle="modal" data-target="#popup">Weiger</button>
-          <button type="button" class="col-3 btn btn-primary" data-toggle="modal" data-target="#popup">Bevestig</button>
-          <button type="button" class="col-3 btn btn-primary">Terug</button>
+          <button type="submit" class="col-3 btn btn-primary">Bevestig</button>
+          <button [routerLink]="['/adminreservatieKalender']" type="button" class="col-3 btn btn-primary">Terug</button>
         </div>
         <div id="popup" class="modal fade" role="dialog">
           <div class="modal-dialog">

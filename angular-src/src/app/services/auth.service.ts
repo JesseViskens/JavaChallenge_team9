@@ -14,6 +14,7 @@ export class AuthService {
   onUserFetched: EventEmitter<Gebruiker> = new EventEmitter();
 
   gebruiker:Gebruiker;
+  gebruikerId: string;
 
   constructor(private http: HttpClient) {
     autoBind(this);
@@ -38,7 +39,20 @@ export class AuthService {
     this.onLogout.emit();
   }
 
-  async getUser(gebruikerId:string){
+  async getCurrentUser(){
+    try{
+      console.log("Getting user");
+      this.gebruikerId = localStorage.getItem("userId");
+      let result: any = await this.http.get(Config.host + "/gebruikers/" + this.gebruikerId).toPromise();
+      this.gebruiker = result.obj;
+      console.log(result);
+      return this.gebruiker;
+    }catch(err){
+      console.log(err);
+    }
+  }
+
+  async getUser(gebruikerId: string){
     try{
       console.log("Getting user");
       let result: any = await this.http.get(Config.host + "/gebruikers/" + gebruikerId).toPromise();
