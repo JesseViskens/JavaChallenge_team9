@@ -2,17 +2,23 @@
   <h1 class="zalenHeader text-center">Zalen beheren</h1>
   <button [routerLink]="['/zaalToevoegen']" class="btn btn-primary col-12 align-bottom">Een zaal toevoegen</button>
   <div *ngFor="let zaal of zalen">
-    <div class="card col-4 zaal float-left">
-      <img class="card-img" src="{{zaal.foto}}" alt="Card image cap">
-      <div class="card-block info col-12">
-        <h4 class="card-title center">{{zaal.naam}}</h4>
-        <p class="card-text">Grootte: {{ zaal.oppervlakte }}m²</p>
-        <p class="card-text">Maximum {{ zaal.capaciteit }} personen</p>
-        <p class="card-text">Beschrijving: {{zaal.beschrijving}}</p>
-      </div>
-      <div routerLinkActive="active">
-        <button [routerLink]="['/zaalWijzigen/', zaal._id]" class="btn btn-primary col-12 align-bottom">Aanpassen</button>
-        <button  (click) = "onDelete(zaal._id)" class="btn btn-primary col-12 align-bottom">Verwijderen</button>
+    <div class="card card-block col-4 float-left">
+      <div class="container-fluid">
+        <img class="card-img" src="{{zaal.foto}}" alt="Card image cap">
+        <div class="info">
+          <div class="align-content-center">
+            <h4 class="card-title center">{{zaal.naam}}</h4>
+          </div>
+          <div class="card-text">
+            <p>Grootte: {{ zaal.oppervlakte }}m²</p>
+            <p>Maximum: {{ zaal.capaciteit }} personen</p>
+            <p>Beshrijving: {{zaal.beschrijving}}</p>
+          </div>
+        </div>
+        <div class="" routerLinkActive="active">
+          <button [routerLink]="['/zaalWijzigen/', zaal._id]" class="btn btn-primary col-12 align-bottom dark-button">Aanpassen</button>
+          <button  (click) = "onDelete(zaal._id)" class="btn btn-primary col-12 align-bottom dark-button">Verwijderen</button>
+        </div>
       </div>
     </div>
   </div>

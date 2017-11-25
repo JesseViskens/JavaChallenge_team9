@@ -1,7 +1,7 @@
 import autoBind from 'auto-bind';
 
 export class Zaal {
-  _id: number;
+  _id: string;
   naam: string;
   beschrijving: string;
   oppervlakte: number;

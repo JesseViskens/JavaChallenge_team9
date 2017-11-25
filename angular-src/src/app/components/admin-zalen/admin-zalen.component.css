@@ -1,60 +1,39 @@
-.body{
-  min-height: 100%;
-  background-color: #CEB64A;
-}
-.zaal {
-  margin: 0 auto;
-  padding: 0 0 0 0;
-  background-color: #2A2A2A;
-}
-
-.info{
-  background-color: #CEB64A;
-  color: #FFFFFF
-}
-
-.foto{
-  max-height: 350px;
-}
-
-.btn-primary{
-  background-color: #2A2A2A;
-  color: #FFFFFF;
-  border-radius: 0;
-  border: hidden;
-  margin: 0;
-}
-
-.btn-primary:hover{
-  background-color: #5a5a5a;
-  color: #FFFFFF;
-  border-radius: 0;
-  margin: 0;
-}
-
 .card{
+  background-color: #2A2A2A;
   border-radius: 0;
   border-color: #2A2A2A;
-  height: auto;
-}
-
-.list li{
-  list-style: none;
-}
-.card-img{
-  border-radius: 0;
-}
-
-.card-block{
-  height: 300px;
+  padding:0;
 }
 .center{
   text-align: center;
 }
-
-/*
-#F8F8F8
-#2A2A2A
-#CEB64A
-#1E1E1E
-*/
+.card-text{
+  padding: 1em;
+}
+.info{
+  background-color: #CEB64A;
+  color: #FFFFFF;
+}
+.back{
+  background-color: #2A2A2A;
+}
+.container-fluid{
+  margin: 0;
+  padding: 0;
+}
+.card-img{
+  border-radius: 0;
+}
+.dark-button{
+  background-color: #2A2A2A;
+  color: #FFFFFF;
+  border-radius: 0;
+  border-color: #2A2A2A;
+  height: 100%;
+}
+.dark-button:hover{
+  background-color: #5a5a5a;
+}
+.zalenHeader{
+  color: #FFFFFF;
+}

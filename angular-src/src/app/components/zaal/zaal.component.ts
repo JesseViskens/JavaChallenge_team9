@@ -11,6 +11,7 @@ export class ZaalComponent {
   @Input() zaal: Zaal;
 
   constructor() {
+
   }
 
 }

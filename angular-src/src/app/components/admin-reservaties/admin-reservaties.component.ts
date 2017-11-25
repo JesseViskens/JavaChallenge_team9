@@ -4,6 +4,7 @@ import {Zaal} from "../../models/zaal.model";
 import Gebruiker from "../../models/gebruiker.model";
 import {FormGroup} from "@angular/forms";
 import {ReservatieService} from "../../services/reservatie.service";
+import {ZaalService} from "../../services/zaal.service";
 
 @Component({
   selector: 'app-adminreservatie',
@@ -16,8 +17,8 @@ export class AdminReservatiesComponent implements OnInit {
   gebruiker: Gebruiker;
   myForm: FormGroup;
 
-  constructor(private reservatieService:ReservatieService) {
-    this.zaal = new Zaal(1, "Computerzaal 1", "beschrijving", 40, "img.png", "0900", "2100", 20);
+  constructor(private reservatieService:ReservatieService, private zaalService: ZaalService) {
+    //this.zaal = zaalService.getZaal("5a196c89428ecc0b643982e3");
     this.gebruiker = new Gebruiker({
       email: "robinvutrecht@gmail.com",
       voornaam: "Robin",
