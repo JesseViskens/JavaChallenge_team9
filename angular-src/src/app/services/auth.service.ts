@@ -26,6 +26,13 @@ export class AuthService {
     return false;
   }
 
+  isAdmin(){
+    if (localStorage.getItem("isAdmin")){
+      return true;
+    }
+    return false;
+  }
+
   logout(){
     localStorage.clear();
     this.onLogout.emit();
@@ -49,10 +56,13 @@ export class AuthService {
     try{
       let headers = new HttpHeaders().set('content-type', 'application/json');
       let result: any = await this.http.post(Config.host + "/auth/signin", {email, password},{headers:headers}).toPromise();
+      this.gebruiker = new Gebruiker(result.user);
+      console.log(this.gebruiker);
       localStorage.setItem("authKey", result.token);
-      localStorage.setItem("userId", result.id);
-      localStorage.setItem("isAdmin", result.isAdmin);
-      this.gebruiker = new Gebruiker(result);
+      localStorage.setItem("userId", result.user._id);
+      if(this.gebruiker.isAdmin){
+        localStorage.setItem("isAdmin", "yes");
+      }
       this.onLogin.emit(this.gebruiker);
       return true;
     }catch(err){

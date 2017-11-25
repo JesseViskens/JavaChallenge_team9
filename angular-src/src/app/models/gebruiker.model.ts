@@ -1,7 +1,7 @@
 import autoBind from 'auto-bind';
 
 export default class Gebruiker{
-  private id:string;
+  id:string;
   email:string;
   voornaam:string;
   achternaam:string;
