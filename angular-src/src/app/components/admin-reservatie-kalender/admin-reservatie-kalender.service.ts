@@ -83,10 +83,10 @@ let appointments: Appointment[] = [{
   "endDate": new Date(2017, 4, 3, 16, 45),
   "priority": 1
 }, {
-  "text": "Submit Questions Regarding New NDA",
+  "text": "testKalender",
   "ownerId": [1],
-  "startDate": new Date(2017, 4, 4, 8, 0),
-  "endDate": new Date(2017, 4, 4, 9, 30),
+  "startDate": new Date(),
+  "endDate": new Date(2017, 11, 25, 15, 30),
   "priority": 1
 }, {
   "text": "Recall Rebate Form",

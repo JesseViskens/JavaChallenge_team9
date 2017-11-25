@@ -3,10 +3,14 @@
 <link rel="stylesheet" type="text/css" href="https://cdn3.devexpress.com/jslib/17.2.3/css/dx.light.css"/>
 
 
+
+
 <div class="dx-viewport">
   <div class="demo-container">
     <dx-scheduler
       [dataSource]="appointmentsData"
+      [views]="['week']"
+      [currentView]="['week']"
       [firstDayOfWeek]="1"
       [startDayHour]="1"
       [endDayHour]="24"
@@ -17,16 +21,15 @@
       <dxi-resource
         fieldExpr="ownerId"
         [allowMultiple]="true"
-        [dataSource]="resourcesData"
-        label="Owner"
+        [dataSource]="reservaties"
+        label="reservatie"
         [useColorAsDefault]="true"
-      ></dxi-resource>
+      >
+
+      </dxi-resource>
 
 
     </dx-scheduler>
-    <div routerLinkActive="active">
-      <a class="btn btn-primary">detailpagina</a>
-    </div>
 
     <div class="" routerLinkActive="active">
       <a [routerLink]="['/reservatie/', id]" class="btn btn-primary">Naar reservatie pagina</a>

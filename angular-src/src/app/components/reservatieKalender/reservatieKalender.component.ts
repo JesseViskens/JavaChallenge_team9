@@ -4,6 +4,8 @@ import {platformBrowserDynamic} from '@angular/platform-browser-dynamic';
 
 import {Priority, Resource, Appointment, Service} from '../../services/reservatieKalender.service';
 import {ActivatedRoute, Router} from "@angular/router";
+import {reservatieKalenderService} from "../../services/reservatie-kalender.service";
+import {Reservatie} from "../../models/reservatie.model";
 
 
 if (!/localhost/.test(document.location.host)) {
@@ -18,23 +20,39 @@ if (!/localhost/.test(document.location.host)) {
 })
 
 
-export class KalenderComponent {
-
-  @Input() appointmentsData: Appointment[];
-  @Input() resourcesData: Resource[];
-  @Input() prioritiesData: Priority[];
+export class KalenderComponent implements OnInit{
   id: number;
-
+  reservaties: Reservatie[];
+  appointmentsData: Appointment[];
   currentDate: Date = new Date();
 
-  constructor(service: Service, private router: Router,
+  constructor(private service: reservatieKalenderService, private router: Router,
               private route: ActivatedRoute,) {
-    this.appointmentsData = service.getAppointments();
-    this.resourcesData = service.getResources();
-    this.prioritiesData = service.getPriorities();
+
     this.route.params.subscribe(params => {
       this.id = +params['id'];
     });
 
+  }
+  ngOnInit() {
+    this.service.getReservaties().then(
+      reservaties => {
+        this.reservaties = reservaties;
+        console.log(this.reservaties);
+        const appointments: Appointment[] = [];
+        for (const item of this.reservaties) {
+          let newAppointment = new Appointment();
+          newAppointment.endDate = item.einduur;
+          newAppointment.startDate = item.beginuur;
+          newAppointment.ownerId = item.gebruiker.id;
+          newAppointment.text = item.reden;
+          appointments.push(newAppointment);
+          console.log(newAppointment);
+        }
+        return appointments;
+      }
+
+    );
+    console.log(this.reservaties);
   }
 }

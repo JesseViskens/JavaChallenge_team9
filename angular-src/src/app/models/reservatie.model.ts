@@ -3,12 +3,12 @@ import Gebruiker from "./gebruiker.model";
 import autoBind from 'auto-bind';
 
 export class Reservatie{
-  private id:string;
+  id:string;
   naam: string;
-  beginuur: Date;
-  einduur: Date;
+  public beginuur: Date;
+  public einduur: Date;
   zaal: Zaal;
-  gebruiker: Gebruiker;
+  gebruikerId: string;
   bevestigd: boolean;
   reden: string;
 
@@ -17,9 +17,11 @@ export class Reservatie{
     this.beginuur = data.beginuur;
     this.einduur = data.einduur;
     this.zaal = data.zaal;
-    this.gebruiker = data.gebruiker;
+    this.gebruikerId = data.gebruikerId;
     this.bevestigd = false;
     this.reden = data.reden;
     autoBind(this);
   }
 }
+
+

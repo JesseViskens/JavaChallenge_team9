@@ -1,4 +1,8 @@
 import { Injectable } from "@angular/core";
+import Config from "../config";
+import {HttpHeaders} from "@angular/common/http";
+import {HttpClient} from "@angular/common/http";
+import {Reservatie} from "../models/reservatie.model";
 
 export class Priority {
   text: string;
@@ -52,49 +56,13 @@ let resourcesData: Resource[] = [
   }
 ]
 
-let appointments: Appointment[] = [{
-  "text": "Google AdWords Strategy",
-  "ownerId": [2],
-  "startDate": new Date(2017, 4, 1, 9, 0),
-  "endDate": new Date(2017, 4, 1, 10, 30),
-  "priority": 1
-}, {
-  "text": "New Brochures",
-  "ownerId": [1],
-  "startDate": new Date(2017, 4, 1, 11, 30),
-  "endDate": new Date(2017, 4, 1, 14, 15),
-  "priority": 2
-},  {
-  "text": "Approve Hiring of John Jeffers",
-  "ownerId": [2],
-  "startDate": new Date(2017, 4, 3, 10, 0),
-  "endDate": new Date(2017, 4, 3, 11, 15),
-  "priority": 2
-}, {
-  "text": "Update NDA Agreement",
+let appointments: Appointment[] = [ {
+  "text": "Testje",
   "ownerId": [1],
   "startDate": new Date(2017, 4, 3, 11, 45),
   "endDate": new Date(2017, 4, 3, 13, 45),
   "priority": 2
-}, {
-  "text": "Update Employee Files with New NDA",
-  "ownerId": [2],
-  "startDate": new Date(2017, 4, 3, 14, 0),
-  "endDate": new Date(2017, 4, 3, 16, 45),
-  "priority": 1
-}, {
-  "text": "Submit Questions Regarding New NDA",
-  "ownerId": [1],
-  "startDate": new Date(2017, 4, 4, 8, 0),
-  "endDate": new Date(2017, 4, 4, 9, 30),
-  "priority": 1
-}, {
-  "text": "Recall Rebate Form",
-  "ownerId": [1],
-  "startDate": new Date(2017, 4, 8, 12, 45),
-  "endDate": new Date(2017, 4, 8, 13, 15),
-  "priority": 1
-},  {
+},   {
   "text": "Prepare Shipping Cost Analysis Report",
   "ownerId": [4],
   "startDate": new Date(2017, 4, 10, 12, 30),
@@ -103,7 +71,22 @@ let appointments: Appointment[] = [{
 }];
 
 @Injectable()
-export class Service {
+export class reservatieKalenderService {
+  reservaties : Reservatie[];
+  constructor(private http: HttpClient) { }
+
+  async getReservaties(){
+    console.log("alle reservaties halen!");
+    try{
+      console.log(Config.host);
+      let result: any = await this.http.get(Config.host + "/reservaties").toPromise();
+      this.reservaties = result.obj;
+      console.log(this.reservaties);
+      return this.reservaties;
+    }catch(err){
+      console.log(err);
+    }
+  }
   getAppointments(){
     return appointments;
   }
