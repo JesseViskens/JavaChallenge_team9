@@ -34,6 +34,9 @@
 .dark-button:hover{
   background-color: #5a5a5a;
 }
+.panel{
+  background-color: #2A2A2A;
+}
 
 /*
 #F8F8F8

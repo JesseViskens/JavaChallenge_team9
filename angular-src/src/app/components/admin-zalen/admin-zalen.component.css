@@ -37,3 +37,12 @@
 .zalenHeader{
   color: #FFFFFF;
 }
+.light-button{
+  background-color: #F8F8F8;
+  color: #2A2A2A;
+  border-color: #F8F8F8;
+  border-radius: 0;
+}
+.light-button:hover{
+  background-color: #c2c2c2;
+}
