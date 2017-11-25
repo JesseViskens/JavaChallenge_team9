@@ -1,10 +1,22 @@
 <div class="container">
-  <div class="row">
+  <div class="row logincontainer">
     <div class="col-lg-6">
       <h1>Welkom op de Let's go Urban Reservatie systeem!</h1>
       <p>Op deze website kan je een zaal reserveren.</p>
+      <br/>
+      <h5>Admin account:</h5>
+      <p>
+        login: admin@lguzalen.be<br/>
+        paswoord: abc123
+      </p>
+      <br/>
+      <h5>Gebruiker account:</h5>
+      <p>
+        login: user@lguzalen.be<br/>
+        paswoord: abc123
+      </p>
     </div>
-    <div class="col-lg-6 align-content-center">
+    <div class="col-lg-6 align-content-center loginform">
       <form [formGroup]="myForm" (ngSubmit)="onSubmit()">
         <div class="form-group">
           <label for="email">Mail</label>
