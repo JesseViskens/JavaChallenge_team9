@@ -1,6 +1,5 @@
 const express = require('express');
 const router = express.Router();
-const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 
 const Gebruiker = require('../models/gebruikerModel');
@@ -9,7 +8,7 @@ router.post('/', function (req, res, next) {
     const gebruiker = new Gebruiker({
         voornaam: req.body.voornaam,
         achternaam: req.body.achternaam,
-        password: bcrypt.hashSync(req.body.password,10),
+        password: req.body.password,
         email: req.body.email,
         adres: req.body.adres,
         woonplaats: req.body.woonplaats,

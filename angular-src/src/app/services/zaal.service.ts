@@ -14,7 +14,7 @@ export class ZaalService {
 
   async deleteZaal(zaalId:string){
     try{
-      let headers = new HttpHeaders().set('content-type', 'application/json');
+      let headers = new HttpHeaders().set('content-type', 'application/json').set("Authorization", localStorage.getItem("authKey"));
       console.log('delete');
       return await this.http.delete(Config.host + `/zalen/` + zaalId, {headers:headers}).toPromise();
     }catch(err){
@@ -48,7 +48,8 @@ export class ZaalService {
   async createZaal(zaal:Zaal){
     console.log(zaal);
     try{
-      let headers = new HttpHeaders().set('content-type', 'application/json');
+      console.log(localStorage.getItem("authKey"));
+      let headers = new HttpHeaders().set('content-type', 'application/json').set("Authorization", localStorage.getItem("authKey"));
       return await this.http.post(Config.host + "/zalen", zaal, {headers}).toPromise();
     }catch(err){
       console.log(err);

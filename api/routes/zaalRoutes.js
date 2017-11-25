@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+const mAuth = require('../middlewares/auth');
 
 const Zaal = require('../models/zaalModel');
 
@@ -36,7 +37,7 @@ router.get('/:id', function (req, res, next) {
 });
 
 //add zaal
-router.post('/', function (req, res, next) {
+router.post('/', mAuth.authAdmin, function (req, res, next) {
     const zaal = new Zaal(req.body);
 
     zaal.save(function (err, result) {
@@ -53,7 +54,7 @@ router.post('/', function (req, res, next) {
     });
 });
 //add deelzaal aan zaal
-router.patch('/:id/zaal/:deelzaalId', function (req, res, next) {
+router.patch('/:id/zaal/:deelzaalId', mAuth.authAdmin, function (req, res, next) {
     Zaal.findById(req.params.id, function(err, zaal){
         if(err){
             return res.status(500).json({
@@ -89,7 +90,7 @@ router.patch('/:id/zaal/:deelzaalId', function (req, res, next) {
 });
 
 //update zaal
-router.patch('/:id', function (req, res, next) {
+router.patch('/:id', mAuth.authAdmin, function (req, res, next) {
     Zaal.findById(req.params.id, function(err, zaal){
         if(err){
             return res.status(500).json({
@@ -127,7 +128,7 @@ router.patch('/:id', function (req, res, next) {
 });
 
 //delete zaal
-router.delete('/:id', function(req, res, next){
+router.delete('/:id', mAuth.authAdmin, function(req, res, next){
     Zaal.findById(req.params.id, function(err, zaal){
         if(err){
             return res.status(500).json({

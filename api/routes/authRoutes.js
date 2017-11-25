@@ -1,6 +1,5 @@
 const express = require('express');
 const router = express.Router();
-const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 
 const Gebruiker = require('../models/gebruikerModel');
@@ -15,19 +14,19 @@ router.post('/', function(req, res) {
         if (err) throw err;
 
         if (!gebruiker) {
-            res.json({ success: false, message: 'Authentication failed. User not found.' });
+            res.json({ success: false, message: 'Authentication failed' });
         } else if (gebruiker) {
 
             // check if password matches
             if (gebruiker.password != req.body.password) {
-                res.json({ success: false, message: 'Authentication failed. Wrong password.' });
+                res.json({ success: false, message: 'Authentication failed' });
             } else {
 
                 // if gebruiker is found and password is right
                 // create a token with only our given payload
                 // we don't want to pass in the entire gebruiker since that has the password
                 const payload = {
-                    isAdmin: gebruiker.isAdmin
+                    user: gebruiker
                 };
                 const token = jwt.sign(payload, 'team9');
 
@@ -35,7 +34,8 @@ router.post('/', function(req, res) {
                 res.json({
                     success: true,
                     message: 'Enjoy your token!',
-                    token: token
+                    token: token,
+                    user: gebruiker
                 });
             }
 
@@ -60,7 +60,7 @@ router.post('/signin', function (req, res, next) {
                 error: {message: 'Invalid login credentials'}
             });
         }
-        const token = jwt.sign({user: gebruiker}, 'secret', {expiresIn:7200});
+        const token = jwt.sign({user: gebruiker}, 'team9', {expiresIn:7200});
         res.status(200).json({
             message: 'Successfully logged in',
             token: token,

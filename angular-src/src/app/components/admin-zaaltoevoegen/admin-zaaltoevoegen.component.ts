@@ -20,14 +20,6 @@ export class AdminZaaltoevoegenComponent implements OnInit {
   }
 
   onSubmit() {
-    /*this.zaal.naam = this.myForm.value.inputNaam;
-    this.zaal.beschrijving = this.myForm.value.inputBeschrijving;
-    this.zaal.oppervlakte = this.myForm.value.inputOppervlakte;
-    this.zaal.capaciteit = this.myForm.value.inputCapaciteit;
-    this.zaal.foto = this.myForm.value.inputFoto;
-    this.zaal.aanvang = this.myForm.value.inputAanvang;
-    this.zaal.sluiting = this.myForm.value.inputSluiting;*/
-
     this.zaalService.createZaal(this.zaal);
     this.zaal = new Zaal();
   }

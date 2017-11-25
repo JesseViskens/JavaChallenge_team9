@@ -1,10 +1,12 @@
 const express = require('express');
 const router = express.Router();
+const mAuth = require('../middlewares/auth');
 
 const Reservatie = require('../models/reservatieModel');
 const Zaal = require('../models/zaalModel');
 
 //get all reservaties
+//TODO add mAuth.auth if only user can to this action
 router.get('/', function (req, res, next) {
     Reservatie.find().exec(function(err, reservaties){
         if (err){
@@ -21,6 +23,7 @@ router.get('/', function (req, res, next) {
 });
 
 //get one reservatie
+//TODO add mAuth.auth if only user can to this action
 router.get('/:id', function (req, res, next) {
     Reservatie.findById(req.params.id, function(err, reservatie){
         if (err){
@@ -82,7 +85,7 @@ async function checkAvailability(beginuur, einduur, zaal){
 }
 
 //add reservatie
-router.post('/', async function(req, res, next) {
+router.post('/', mAuth.auth, async function(req, res, next) {
     const reservatie = new Reservatie({
         naam: req.body.naam,
         beginuur: req.body.beginuur,
@@ -104,7 +107,7 @@ router.post('/', async function(req, res, next) {
 });
 
 //update reservatie
-router.patch('/:id', function (req, res, next) {
+router.patch('/:id', mAuth.auth, function (req, res, next) {
     Reservatie.findById(req.params.id, function(err, reservatie){
         if(err){
             return res.status(500).json({
@@ -125,6 +128,14 @@ router.patch('/:id', function (req, res, next) {
         reservatie.gebruiker = req.body.gebruiker;
         reservatie.bevestigd = req.body.bevestigd;
         reservatie.reden = req.body.reden;
+
+        if (reservatie.bevestigd && !req.user.isAdmin){
+            return res.status(401).json({
+                title: 'Ongeldige actie',
+                error: {message: 'Een bevestigde reservatie kan niet bewerkt worden'}
+            });
+        }
+
         reservatie.save(function(err, result){
             if (err){
                 return res.status(500).json({
@@ -141,7 +152,7 @@ router.patch('/:id', function (req, res, next) {
 });
 
 //delete reservatie
-router.delete('/:id', function(req, res, next){
+router.delete('/:id', mAuth.authAdmin, function(req, res, next){
     Reservatie.findById(req.params.id, function(err, reservatie){
         if(err){
             return res.status(500).json({
