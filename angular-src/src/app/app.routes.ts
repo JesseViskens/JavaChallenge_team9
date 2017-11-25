@@ -16,7 +16,7 @@ export const routes: Routes = [
   {path: "reservatieKalender/:id", component: KalenderComponent},
   {path: "adminzalen", component: AdminZalenComponent},
   {path: "reservatie/:id", component: ReservatieComponent},
-  /*{path: "adminreservaties", component: AdminReservatiesComponent},*/
+  {path: "adminreservatie/:id", component: AdminReservatiesComponent},
   {path: "adminzalen", component: AdminZalenComponent},
   {path: "zaalWijzigen/:id", component: AdminZaalwijzigenComponent},
   {path: "adminreservatieKalender", component:AdminKalenderComponent},

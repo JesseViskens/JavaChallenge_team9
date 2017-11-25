@@ -15,6 +15,7 @@ export class ReservatieService {
     autoBind(this);
   }
 
+  //Gebruiker// nieuwe reservatie aanvragen
   async reserveer(reservatie:Reservatie){
     console.log("Reserveren..." + reservatie);
     try{
@@ -25,5 +26,26 @@ export class ReservatieService {
       console.log(err);
     }
   }
+  //Admin// reservatie ophalen
+  async getReservatie(reservatieId:string){
+    console.log("reservatie ophalen");
+    try{
+      let result: any = await this.http.get(Config.host + "/reservaties/" + reservatieId).toPromise();
+      this.reservatie = result.obj;
+      console.log(result);
+      return this.reservatie;
+    }catch(err){
+      console.log(err);
+    }
+  }
 
+  //Admin// reservatie accepteren
+  async acceptReservatie(reservatie:Reservatie){
+    try{
+      let headers = new HttpHeaders().set('content-type', 'application/json').set("Authorization", localStorage.getItem("authKey"));
+      return await this.http.patch(Config.host + "/reservaties/" + reservatie.id, {headers}).toPromise();
+    }catch(err){
+      console.log(err);
+    }
+  }
 }

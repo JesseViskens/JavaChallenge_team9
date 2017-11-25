@@ -40,12 +40,12 @@
           </div>
           <div class="form-group">
             <label class="control-label" for="reden">Reden:</label>
-            <input id="reden" name="reden" class="form-control col-sm-2" type="text" [(ngModel)]="reservatie.reden" required/>
+            <input id="reden" name="reden" class="form-control col-sm-6" type="text" [(ngModel)]="reservatie.reden" required/>
           </div>
         </div>
         <div>
-          <button type="submit" class="col-3 btn btn-primary" [disabled]="!myForm.valid">Vraag aan</button>
-          <button type="button" class="col-3 offset-3 btn btn-primary">Annuleer</button>
+          <button name="submit" type="submit" class="col-3 btn btn-primary" [disabled]="!myForm.valid">Vraag aan</button>
+          <button name="annuleren" [routerLink]="['/zalen']" type="button" class="col-3 offset-3 btn btn-primary">Annuleer</button>
         </div>
       </form>
     </div>
