@@ -9,6 +9,7 @@ export class Zaal {
   aanvang: string;
   sluiting: string;
   capaciteit: number;
+  deelZalen: string[];
 
   constructor(data:any ={}) {
     this._id = data._id;
@@ -19,5 +20,6 @@ export class Zaal {
     this.aanvang = data.aanvang;
     this.sluiting = data.sluiting;
     this.capaciteit = data.capaciteit;
+    this.deelZalen = data.deelZalen;
   autoBind(this);}
 }
