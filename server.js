@@ -1,5 +1,5 @@
 const express = require('express'),
-    cors = require('cors')
+    cors = require('cors'),
     app = express(),
     port = process.env.PORT || 3000,
     mongoose = require('mongoose'),
@@ -20,6 +20,7 @@ const zaalRoutes = require('./api/routes/zaalRoutes');
 const reservatieRoutes = require('./api/routes/reservatieRoutes');
 const gebruikerRoutes = require('./api/routes/gebruikerRoutes');
 const authRoutes = require('./api/routes/authRoutes');
+const mailRoutes = require('./api/routes/mailRoutes');
 
 app.use(express.static("public"));
 
@@ -27,6 +28,7 @@ app.use("/zalen", zaalRoutes);
 app.use("/reservaties", reservatieRoutes);
 app.use("/gebruikers", gebruikerRoutes);
 app.use("/auth", authRoutes);
+app.use('/mail', mailRoutes);
 
 app.get('/setup', function (req,res) {
     const admin = new Gebruiker({
