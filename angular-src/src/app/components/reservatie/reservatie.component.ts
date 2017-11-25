@@ -4,6 +4,8 @@ import {Zaal} from "../../models/zaal.model";
 import Gebruiker from "../../models/gebruiker.model";
 import {FormControl, FormGroup} from "@angular/forms";
 import {ReservatieService} from "../../services/reservatie.service";
+import {ZaalService} from "../../services/zaal.service";
+import {AuthService} from "../../services/auth.service";
 
 @Component({
   selector: 'app-reservatie',
@@ -12,13 +14,25 @@ import {ReservatieService} from "../../services/reservatie.service";
 })
 
 export class ReservatieComponent implements OnInit {
+  zalen: Zaal[];
   zaal: Zaal;
   gebruiker: Gebruiker;
-  myForm: FormGroup;
+  reservatie: Reservatie;
 
-  constructor(private reservatieService: ReservatieService) {
-    //this.zaal = new Zaal(1, "Computerzaal 1", "beschrijving", 40, "img.png", "0900", "2100", 20);
-    this.gebruiker = new Gebruiker({
+  constructor(private reservatieService: ReservatieService, private zaalService: ZaalService, private authService: AuthService) {
+    this.reservatie = new Reservatie();
+    this.reservatie.naam = "Reservatie 1";
+    /*this.reservatie.zaal = new Zaal({
+      _id: 1,
+      naam: "testzaal",
+      beschrijving: "test",
+      oppervlakte: 5,
+      foto: "foto",
+      aanvang: "aanvang",
+      sluiting: "sluit",
+      capaciteit: 200
+    });
+    this.reservatie.gebruiker = new Gebruiker({
       email: "robinvutrecht@gmail.com",
       voornaam: "Robin",
       achternaam: "van Utrecht",
@@ -26,23 +40,23 @@ export class ReservatieComponent implements OnInit {
       adres: "Thomas More",
       woonplaats: "Geel"
     });
-
+    this.reservatie.beginuur = new Date();
+    this.reservatie.einduur = new Date();
+    this.reservatie.reden = "Test";*/
   }
 
   ngOnInit() {
-    this.myForm = new FormGroup({
-      reden: new FormControl(null)
-    })
+    this.zaalService.getZaal("5a1986f0f2f49126307a5220").then(
+      zaal=>this.reservatie.zaal = zaal
+    );
+    this.authService.getUser("5a198d59694d77375031a179").then(
+      gebruiker=>this.reservatie.gebruiker = gebruiker
+    );
   }
 
   onSubmit() {
     this.reservatieService.reserveer(
-      this.myForm.value.beginuur,
-      this.myForm.value.einduur,
-      this.zaal,
-      this.gebruiker,
-      this.myForm.value.reden
+      this.reservatie
     );
-    this.myForm.reset();
   }
 }

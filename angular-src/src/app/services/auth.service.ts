@@ -31,13 +31,13 @@ export class AuthService {
     this.onLogout.emit();
   }
 
-  async getUser(){
+  async getUser(gebruikerId:string){
     try{
       console.log("Getting user");
-      let headers = new HttpHeaders().set('content-type', 'application/json').set("Authorization", localStorage.getItem("authKey"));
-      let result:any= await this.http.get(Config.host + "/auth", {headers:headers}).toPromise();
-      this.gebruiker = new Gebruiker(result);
-      this.onUserFetched.emit(this.gebruiker);
+      let result: any = await this.http.get(Config.host + "/gebruikers/" + gebruikerId).toPromise();
+      this.gebruiker = result.obj;
+      console.log(result);
+      return this.gebruiker;
     }catch(err){
       console.log(err);
     }

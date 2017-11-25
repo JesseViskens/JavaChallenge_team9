@@ -17,16 +17,7 @@ export class AdminReservatiesComponent implements OnInit {
     gebruiker: Gebruiker;
     myForm: FormGroup;
 
-    constructor(private reservatieService:ReservatieService, private zaalService: ZaalService) {
-        //this.zaal = zaalService.getZaal("5a196c89428ecc0b643982e3");
-        this.gebruiker = new Gebruiker({
-            email: "robinvutrecht@gmail.com",
-            voornaam: "Robin",
-            achternaam: "van Utrecht",
-            password: "test",
-            adres: "Thomas More",
-            woonplaats: "Geel"
-        });
+  constructor(private reservatieService:ReservatieService) {
 
     }
 

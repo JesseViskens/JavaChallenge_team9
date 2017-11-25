@@ -44,4 +44,20 @@ router.get('/', function (req, res, next) {
     })
 });
 
+//get one zaal
+router.get('/:id', function (req, res, next) {
+    Gebruiker.findById(req.params.id, function(err, gebruiker){
+        if (err){
+            return res.status(500).json({
+                title: 'Er heeft zich een fout voorgedaan',
+                error: err
+            });
+        }
+        res.status(200).json({
+            message: 'Gelukt!',
+            obj: gebruiker
+        });
+    })
+});
+
 module.exports = router;

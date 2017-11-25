@@ -15,13 +15,12 @@ export class ReservatieService {
     autoBind(this);
   }
 
-  async reserveer(beginuur: String, einduur: String, zaal: Zaal, gebruiker: Gebruiker, reden: String){
-    console.log("Reserveren..." + reden);
+  async reserveer(reservatie:Reservatie){
+    console.log("Reserveren..." + reservatie);
     try{
-      let headers = new HttpHeaders().set('content-type', 'application/json');
-      let result: any = await this.http.post(Config.host + "/reservaties", {beginuur, einduur, zaal, gebruiker, reden},{headers:headers}).toPromise();
-      this.reservatie = new Reservatie(result);
-      console.log(result);
+      console.log(localStorage.getItem("authKey"));
+      let headers = new HttpHeaders().set('content-type', 'application/json').set("Authorization", localStorage.getItem("authKey"));
+      return await this.http.post(Config.host + "/reservaties", reservatie, {headers}).toPromise();
     }catch(err){
       console.log(err);
     }

@@ -5,8 +5,8 @@ import autoBind from 'auto-bind';
 export class Reservatie{
   private id:string;
   naam: string;
-  beginuur: string;
-  einduur: string;
+  beginuur: Date;
+  einduur: Date;
   zaal: Zaal;
   gebruiker: Gebruiker;
   bevestigd: boolean;
