@@ -1,8 +1,10 @@
 const express = require('express');
 const router = express.Router();
 const mAuth = require('../middlewares/auth');
+var mailer = require('nodemailer');
 
 const Reservatie = require('../models/reservatieModel');
+const Gebruiker = require('../models/gebruikerModel');
 const Zaal = require('../models/zaalModel');
 
 //get all reservaties
@@ -39,6 +41,34 @@ router.get('/:id', function (req, res, next) {
     })
 });
 
+async function sendMail(receiver, subject, message) {
+    const user = await Gebruiker.findById(receiver);
+    console.log(user.email);
+    const useremail = user.email;
+    const transporter = mailer.createTransport({
+        service: 'gmail',
+        auth: {
+            user: 'javateamnegen@gmail.com',
+            pass: 'javateam9'
+        }
+    });
+    const mailOptions = {
+        from: 'no-reply@gmail.com',
+        to: useremail,
+        subject: subject,
+        text: message
+    };
+    transporter.sendMail(mailOptions, function (error, info) {
+        if (error) {
+            console.log(error);
+            res.json({yo: 'error'});
+        } else {
+            console.log('Message sent: ' + info.response);
+            res.json({yo: info.response});
+        }
+    });
+}
+
 //The room is available, make reservation
 function postAvailable(res, reservatie) {
     reservatie.save(function (err, result) {
@@ -52,6 +82,7 @@ function postAvailable(res, reservatie) {
             message: 'Reservatie is toegevoegd!',
             obj: result
         });
+        sendMail(reservatie.gebruiker,'Uw reservatie is toegevoegd', '...Maar moet nog bevestigd worden.');
     });
 }
 
