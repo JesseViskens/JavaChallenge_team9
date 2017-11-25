@@ -12,6 +12,7 @@ export class ZaalService {
 
   constructor(private http: HttpClient) { }
 
+  // delete a zaal from the list
   async deleteZaal(zaalId:string){
     try{
       let headers = new HttpHeaders().set('content-type', 'application/json').set("Authorization", localStorage.getItem("authKey"));
@@ -22,6 +23,7 @@ export class ZaalService {
     }
   }
 
+  // get all the zalen that are in the database
   async getZalen(){
     console.log("alle zalen halen!");
     try{
@@ -33,6 +35,7 @@ export class ZaalService {
     }
   }
 
+  // get one perticular zaal
   async getZaal(zaalId:string){
     console.log("één zaal halen");
     try{
@@ -45,6 +48,7 @@ export class ZaalService {
     }
   }
 
+  // create a new zaal
   async createZaal(zaal:Zaal){
     try{
       let headers = new HttpHeaders().set('content-type', 'application/json').set("Authorization", localStorage.getItem("authKey"));
@@ -54,13 +58,24 @@ export class ZaalService {
     }
   }
 
+  // update an existing zaal object
   async updateZaal(zaal:Zaal){
     try{
-      console.log(zaal);
       let headers = new HttpHeaders().set('content-type', 'application/json').set("Authorization", localStorage.getItem("authKey"));
       return await this.http.patch(Config.host + "/zalen/" + zaal._id, zaal, {headers}).toPromise();
     }catch(err){
       console.log(err);
     }
   }
+
+  // add a deelzaal to the list of deelzalen van zaal
+  async updateDeelzalen(zaal:Zaal, deelZaal:Zaal){
+    try{
+      let headers = new HttpHeaders().set('content-type', 'application/json').set("Authorization", localStorage.getItem("authKey"));
+      return await this.http.patch(Config.host + "/zalen/" + zaal._id + "/zaal/" + deelZaal._id, deelZaal, {headers}).toPromise();
+    }catch(err){
+      console.log(err);
+    }
+  }
+
 }

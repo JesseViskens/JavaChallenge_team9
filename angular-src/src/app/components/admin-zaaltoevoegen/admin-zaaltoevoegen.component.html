@@ -39,19 +39,19 @@
           <input type="time" class="form-control" id="inputSluiting" [(ngModel)]="zaal.sluiting" name="sluiting">
         </div>
       </div>
-      <div class="form-group">
+      <!--<div class="form-group">
         <label for="inputZalen">Zalen die deel uitmaken van deze zaal: <span class="helpText">Om meerdere zalen te selecteren, moet men ctrl of shift indrukken terwijl men selecteerd.</span></label>
-        <select multiple class="form-control" id="inputZalen" name="zalen">
-          <option *ngFor="let zaal of zalen" value="{{zaal.id}}">{{zaal.naam}}</option>
+        <select multiple class="form-control" id="inputZalen" name="deelZalen" (change)="onChange()" #select>
+          <option *ngFor="let zaal of zalen" [value]="zaal._id">{{zaal.naam}}</option>
         </select>
-      </div>
+      </div>-->
       <div class="form-row">
         <div class="form-group col-md-6">
-          <button [routerLink]="['/adminzalen']" type="button" class="col-md-12 btn btn-outline-primary">Annuleer
+          <button [routerLink]="['/adminzalen']" type="button" class="col-md-12 btn btn-outline-dark">Annuleer
           </button>
         </div>
         <div class="form-group col-md-6">
-          <button type="submit" class="col-md-12 btn btn-primary">Toevoegen</button>
+          <button type="submit" class="col-md-12 btn btn-outline-dark">Toevoegen</button>
         </div>
       </div>
     </form>

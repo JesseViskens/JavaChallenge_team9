@@ -7,7 +7,6 @@
     <div *ngFor="let zaal of zalen">
       <div class="card card-block col-4 float-left">
         <div class="container-fluid">
-          <img class="card-img" src="{{zaal.foto}}" alt="Card image cap">
           <div class="info">
             <div class="align-content-center">
               <h4 class="card-title center">{{zaal.naam}}</h4>
@@ -15,7 +14,7 @@
             <div class="card-text">
               <p>Grootte: {{ zaal.oppervlakte }}m²</p>
               <p>Maximum: {{ zaal.capaciteit }} personen</p>
-              <p>Beshrijving: {{zaal.beschrijving}}</p>
+              <p>Beschrijving: {{zaal.beschrijving}}</p>
             </div>
           </div>
           <div class="" routerLinkActive="active">

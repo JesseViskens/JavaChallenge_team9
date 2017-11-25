@@ -1,7 +1,7 @@
-import {Component, OnInit, Input, OnDestroy} from '@angular/core';
+import {Component, OnInit, Input, OnDestroy, ViewChild} from '@angular/core';
 import {Zaal} from "../../models/zaal.model";
 import {ZaalService} from "../../services/zaal.service";
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import 'rxjs/add/operator/switchMap';
 
 @Component({
@@ -11,11 +11,13 @@ import 'rxjs/add/operator/switchMap';
 })
 export class AdminZaalwijzigenComponent implements OnInit, OnDestroy {
 
-  constructor(private zaalService: ZaalService, private route: ActivatedRoute) { }
+  constructor(private zaalService: ZaalService, private route: ActivatedRoute, private router:Router) { }
   zaalId: string;
   zaal: Zaal;
+  deelzaal: Zaal;
   zalen: Zaal[];
   private sub: any;
+  @ViewChild('select') zalenElement;
 
   async ngOnInit() {
     this.zaal = new Zaal();
@@ -34,4 +36,18 @@ export class AdminZaalwijzigenComponent implements OnInit, OnDestroy {
     this.sub.unsubscribe();
   }
 
+  async onSubmit() {
+    for (var i = 0; i < this.zalenElement.nativeElement.length; i++) {
+      if (this.zalenElement.nativeElement.options[i].selected){
+        let deelZaalId = this.zalenElement.nativeElement.options[i].value;
+        this.deelzaal = await this.zaalService.getZaal(deelZaalId);
+
+        this.zaalService.updateDeelzalen(this.zaal, this.deelzaal);
+      }
+    }
+
+    this.zaalService.updateZaal(this.zaal);
+    this.zaal = new Zaal();
+    this.router.navigate(['/adminzalen']);
+  }
 }

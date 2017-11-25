@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {ZaalService} from "../../services/zaal.service";
 import {Router} from "@angular/router";
 import {Zaal} from "../../models/zaal.model";
 import {FormGroup} from "@angular/forms";
+import {forEach} from "@angular/router/src/utils/collection";
 
 @Component({
   selector: 'app-admin-zaaltoevoegen',
@@ -23,5 +24,4 @@ export class AdminZaaltoevoegenComponent implements OnInit {
     this.zaalService.createZaal(this.zaal);
     this.zaal = new Zaal();
   }
-
 }
