@@ -1,5 +1,6 @@
 import {Component, OnInit, Input} from '@angular/core';
 import {Zaal} from "../../models/zaal.model";
+import {ZaalService} from "../../services/zaal.service";
 
 @Component({
   selector: 'app-admin-zaalwijzigen',
@@ -8,10 +9,12 @@ import {Zaal} from "../../models/zaal.model";
 })
 export class AdminZaalwijzigenComponent implements OnInit {
 
-  constructor() { }
-  @Input() zaal: Zaal;
+  constructor(private zaalService: ZaalService) { }
+  //@Input zaalId: string;
+  zaal: Zaal;
 
   ngOnInit() {
+    //this.zaalService.getZaal(zaalId).then(zaal=>this.zaal = zaal);
   }
 
 }
