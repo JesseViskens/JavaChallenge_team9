@@ -1,11 +1,12 @@
 <div class="" *ngIf="!reload">
   <h1 class="zalenHeader text-center">Zalen beheren</h1>
+  <button [routerLink]="['/zaalToevoegen']" class="btn btn-primary col-12 align-bottom">Een zaal toevoegen</button>
   <div *ngFor="let zaal of zalen">
     <div class="card col-4 zaal float-left">
       <img class="card-img" src="{{zaal.foto}}" alt="Card image cap">
       <div class="card-block info col-12">
         <h4 class="card-title center">{{zaal.naam}}</h4>
-        <p class="card-text">Grootte {{ zaal.oppervlakte }}m²</p>
+        <p class="card-text">Grootte: {{ zaal.oppervlakte }}m²</p>
         <p class="card-text">Maximum {{ zaal.capaciteit }} personen</p>
         <p class="">Beschrijving: {{zaal.beschrijving}}</p>
       </div>

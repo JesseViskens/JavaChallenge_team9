@@ -19,10 +19,10 @@ export class AdminZalenComponent implements OnInit {
   }
 
   async onDelete(id){
-    if(confirm('Bent u zeker dat u deze zaal wil verweideren?')){
+    if(confirm('Bent u zeker dat u deze zaal wil verwijderen?')){
       await this.zaalService.deleteZaal(id);
-      this.router.navigateByUrl('/', false).then(()=>{
-        this.router.navigateByUrl('/adminzalen');1
+      this.router.navigateByUrl('/').then(()=>{
+        this.router.navigateByUrl('/adminzalen');
       });
     }
   }

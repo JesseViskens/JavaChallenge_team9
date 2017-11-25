@@ -24,6 +24,7 @@ import { AdminZaalwijzigenComponent } from './components/admin-zaalwijzigen/admi
 import {AdminReservatiesComponent} from "./components/admin-reservaties/admin-reservaties.component";
 import {AdminKalenderModule} from "./components/admin-reservatie-kalender/admin-reservatie-kalender.module";
 import {AdminRegistratieKalenderService} from "./services/admin-reservatie-kalender.service";
+import { AdminZaaltoevoegenComponent } from './components/admin-zaaltoevoegen/admin-zaaltoevoegen.component';
 
 
 
@@ -39,7 +40,8 @@ import {AdminRegistratieKalenderService} from "./services/admin-reservatie-kalen
     ReservatieComponent,
     AdminZalenComponent,
     AdminZaalwijzigenComponent,
-    AdminReservatiesComponent
+    AdminReservatiesComponent,
+    AdminZaaltoevoegenComponent
   ],
   imports: [
     BrowserModule,
