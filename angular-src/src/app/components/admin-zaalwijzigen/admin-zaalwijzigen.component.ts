@@ -14,15 +14,20 @@ export class AdminZaalwijzigenComponent implements OnInit, OnDestroy {
   constructor(private zaalService: ZaalService, private route: ActivatedRoute) { }
   zaalId: string;
   zaal: Zaal;
+  zalen: Zaal[];
   private sub: any;
 
   async ngOnInit() {
+    this.zaal = new Zaal();
+
     this.sub = this.route.params.subscribe(params => {this.zaalId = params['id'];});
     this.zaal = await this.zaalService.getZaal(this.zaalId);
 
     if (this.zaal == null){
       console.log("De zaal is null");
     }
+
+    this.zaalService.getZalen().then(zalen=>this.zalen = zalen);
   }
 
   ngOnDestroy() {
