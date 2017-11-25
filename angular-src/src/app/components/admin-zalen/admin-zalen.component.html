@@ -8,7 +8,7 @@
         <h4 class="card-title center">{{zaal.naam}}</h4>
         <p class="card-text">Grootte: {{ zaal.oppervlakte }}m²</p>
         <p class="card-text">Maximum {{ zaal.capaciteit }} personen</p>
-        <p class="">Beschrijving: {{zaal.beschrijving}}</p>
+        <p class="card-text">Beschrijving: {{zaal.beschrijving}}</p>
       </div>
       <div routerLinkActive="active">
         <button [routerLink]="['/zaalWijzigen/', zaal._id]" class="btn btn-primary col-12 align-bottom">Aanpassen</button>
