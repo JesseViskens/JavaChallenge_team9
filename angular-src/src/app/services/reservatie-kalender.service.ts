@@ -3,6 +3,7 @@ import Config from "../config";
 import {HttpHeaders} from "@angular/common/http";
 import {HttpClient} from "@angular/common/http";
 import {Reservatie} from "../models/reservatie.model";
+import {ReservatieComponent} from "../components/reservatie/reservatie.component";
 
 export class Priority {
   text: string;
@@ -18,10 +19,12 @@ export class Resource {
 
 export class Appointment {
   text: string;
-  ownerId: number[];
+  ownerId: string;
   priority: number;
   startDate: Date;
   endDate: Date;
+  reden: string;
+  confirmed: boolean;
 }
 
 let prioritiesData: Priority[] = [
@@ -58,13 +61,13 @@ let resourcesData: Resource[] = [
 
 let appointments: Appointment[] = [ {
   "text": "Testje",
-  "ownerId": [1],
+  "ownerId": "1",
   "startDate": new Date(2017, 4, 3, 11, 45),
   "endDate": new Date(2017, 4, 3, 13, 45),
   "priority": 2
 },   {
   "text": "Prepare Shipping Cost Analysis Report",
-  "ownerId": [4],
+  "ownerId": "4",
   "startDate": new Date(2017, 4, 10, 12, 30),
   "endDate": new Date(2017, 4, 10, 13, 30),
   "priority": 1
@@ -87,6 +90,7 @@ export class reservatieKalenderService {
       console.log(err);
     }
   }
+
   getAppointments(){
     return appointments;
   }

@@ -8,7 +8,7 @@ export class Reservatie{
   public beginuur: Date;
   public einduur: Date;
   zaal: Zaal;
-  gebruikerId: string;
+  gebruiker: string;
   bevestigd: boolean;
   reden: string;
 
@@ -17,7 +17,7 @@ export class Reservatie{
     this.beginuur = data.beginuur;
     this.einduur = data.einduur;
     this.zaal = data.zaal;
-    this.gebruikerId = data.gebruikerId;
+    this.gebruiker = data.gebruiker;
     this.bevestigd = false;
     this.reden = data.reden;
     autoBind(this);

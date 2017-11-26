@@ -2,9 +2,8 @@ import {NgModule, Component, enableProdMode, Input, OnInit} from '@angular/core'
 import {BrowserModule} from '@angular/platform-browser';
 import {platformBrowserDynamic} from '@angular/platform-browser-dynamic';
 
-import {Priority, Resource, Appointment, Service} from '../../services/reservatieKalender.service';
 import {ActivatedRoute, Router} from "@angular/router";
-import {reservatieKalenderService} from "../../services/reservatie-kalender.service";
+import {Priority, Resource, Appointment,reservatieKalenderService} from "../../services/reservatie-kalender.service";
 import {Reservatie} from "../../models/reservatie.model";
 
 
@@ -16,7 +15,7 @@ if (!/localhost/.test(document.location.host)) {
 
   selector: 'app-kalender',
   templateUrl: './reservatieKalender.component.html',
-  providers: [Service]
+  providers: [reservatieKalenderService]
 })
 
 
@@ -30,7 +29,8 @@ export class KalenderComponent implements OnInit{
               private route: ActivatedRoute,) {
 
     this.route.params.subscribe(params => {
-      this.id = +params['id'];
+      this.id = params['id'];
+
     });
 
   }
@@ -38,21 +38,30 @@ export class KalenderComponent implements OnInit{
     this.service.getReservaties().then(
       reservaties => {
         this.reservaties = reservaties;
-        console.log(this.reservaties);
+          /*create a new appointment*/
         const appointments: Appointment[] = [];
+        /*look for every appointment*/
         for (const item of this.reservaties) {
-          let newAppointment = new Appointment();
-          newAppointment.endDate = item.einduur;
-          newAppointment.startDate = item.beginuur;
-          newAppointment.ownerId = item.gebruiker.id;
-          newAppointment.text = item.reden;
-          appointments.push(newAppointment);
-          console.log(newAppointment);
+          /*if the id of the reservation equals the id of the room, we add the reservation to the calendar*/
+          if(this.id+"" == item.zaal) {
+            console.log("loggen van binnenkomende id");
+            console.log(this.id);
+            let newAppointment = new Appointment();
+            newAppointment.endDate = item.einduur;
+            newAppointment.startDate = item.beginuur;
+            newAppointment.ownerId = item.gebruiker+"";
+            newAppointment.text = item.naam;
+            newAppointment.reden = item.reden;
+            newAppointment.confirmed = item.bevestigd;
+            newAppointment.priority = 2;
+            appointments.push(newAppointment);
+          }
         }
-        return appointments;
+        /*send the appointment to the calendar*/
+        this.appointmentsData = appointments;
+        console.log(this.appointmentsData);
       }
 
     );
-    console.log(this.reservaties);
   }
 }
