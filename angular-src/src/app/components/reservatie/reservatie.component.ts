@@ -38,7 +38,7 @@ export class ReservatieComponent implements OnInit {
     );
     //Ingelogde gebruiker ophalen
     this.authService.getCurrentUser().then(gebruiker => {
-        this.gebruiker = gebruiker;
+        this.gebruiker = new Gebruiker(gebruiker);
         console.log(this.gebruiker);
       }
     );
@@ -50,8 +50,9 @@ export class ReservatieComponent implements OnInit {
   }
 
   async onSubmit() {
-    this.reservatie.gebruiker = this.gebruiker;
-    this.reservatie.zaal = this.zaal;
+    console.log(this.gebruiker);
+    this.reservatie.gebruikerId = this.gebruiker.id;
+    this.reservatie.zaalId = this.id;
     this.reservatie.beginuur = this.myForm.value.beginuur;
     this.reservatie.einduur = this.myForm.value.einduur;
     this.reservatie.reden = this.myForm.value.reden;

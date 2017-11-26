@@ -43,7 +43,17 @@ export class ReservatieService {
   async acceptReservatie(reservatie:Reservatie){
     try{
       let headers = new HttpHeaders().set('content-type', 'application/json').set("Authorization", localStorage.getItem("authKey"));
-      return await this.http.patch(Config.host + "/reservaties/" + reservatie.id, {headers}).toPromise();
+      return await this.http.patch(Config.host + "/reservaties/" + reservatie.id, reservatie, {headers}).toPromise();
+    }catch(err){
+      console.log(err);
+    }
+  }
+
+  async weigerReservatie(id: string, reden: string){
+    try{
+      let headers = new HttpHeaders().set('content-type', 'application/json').set("Authorization", localStorage.getItem("authKey"));
+      console.log('delete');
+      return await this.http.delete(Config.host + `/reservaties/` + id, {headers:headers}).toPromise();
     }catch(err){
       console.log(err);
     }

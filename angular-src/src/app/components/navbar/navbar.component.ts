@@ -11,6 +11,8 @@ export class NavbarComponent implements OnInit {
   isAdmin: boolean;
   isLoggedin: boolean;
   constructor(private service: AuthService, private router: Router) {
+    this.isLoggedin = service.isLoggedIn();
+    this.isAdmin = service.isAdmin();
     service.onLogin.subscribe(loggedIn => this.isLoggedin = true);
     service.onLogout.subscribe(loggedIn => this.isLoggedin = false);
     service.onLogin.subscribe(loggedIn => this.isAdmin = service.isAdmin());
