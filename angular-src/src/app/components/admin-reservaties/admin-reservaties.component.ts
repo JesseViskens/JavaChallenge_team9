@@ -52,8 +52,9 @@ export class AdminReservatiesComponent implements OnInit {
     this.reservatie.einduur = this.ngForm.value.einduur;
     this.reservatie.reden = this.ngForm.value.reden;
     this.reservatie.naam = "Bevestigd";
+    console.log(this.reservatie);
     await this.reservatieService.acceptReservatie(this.reservatie);
-    this.router.navigate(['/adminreservatieKalender']);
+    this.router.navigate(['/adminreservatieKalender/', this.reservatie.zaal[0]]);
   }
 
   //get reservation from url's ID
@@ -84,6 +85,6 @@ export class AdminReservatiesComponent implements OnInit {
     await this.reservatieService.weigerReservatie(this.id, this.myForm.value.reden);
     this.myForm.reset();
     this.ngForm.reset();
-    this.router.navigate(['/']);
+    this.router.navigate(['/adminreservatieKalender/', this.reservatie.zaal[0]]);
   }
 }

@@ -41,7 +41,7 @@ export class ReservatieService {
   async acceptReservatie(reservatie:Reservatie){
     try{
       let headers = new HttpHeaders().set('content-type', 'application/json').set("Authorization", localStorage.getItem("authKey"));
-      return await this.http.patch(Config.host + "/reservaties/" + reservatie.id, reservatie, {headers}).toPromise();
+      return await this.http.patch(Config.host + "/reservaties/" + reservatie._id, reservatie, {headers}).toPromise();
     }catch(err){
       console.log(err);
     }

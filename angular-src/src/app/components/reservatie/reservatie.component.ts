@@ -54,11 +54,13 @@ export class ReservatieComponent implements OnInit {
   //when onSubmit is pressed get everything from the form in a "reservatie" object
   //then send objest to api and reset form, finally redirect to index page
   async onSubmit() {
+    this.reservatie.bevestigd = false;
     this.reservatie.gebruiker = this.gebruiker.id;
     this.reservatie.zaal = [this.id];
     this.reservatie.beginuur = this.myForm.value.beginuur;
     this.reservatie.einduur = this.myForm.value.einduur;
     this.reservatie.reden = this.myForm.value.reden;
+    console.log(this.reservatie);
     await this.reservatieService.reserveer(this.reservatie);
     this.myForm.reset();
     this.router.navigate(['/']);
