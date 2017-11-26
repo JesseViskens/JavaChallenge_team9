@@ -1,7 +1,9 @@
 import {DxSchedulerModule} from 'devextreme-angular';
-import  {AdminKalenderComponent } from './admin-reservatie-kalender.component'
+import  {AdminReservatieKalenderComponent } from './admin-reservatie-kalender.component'
 import {BrowserModule} from "@angular/platform-browser";
 import {NgModule} from "@angular/core";
+import {AdminReservatieKalenderService} from "../../services/admin-reservatie-kalender.service";
+import {RouterModule} from "@angular/router";
 
 
 
@@ -9,9 +11,12 @@ import {NgModule} from "@angular/core";
   imports: [
     BrowserModule,
     DxSchedulerModule,
+    RouterModule
 
   ],
-  declarations: [AdminKalenderComponent],
-  bootstrap: []
+  declarations: [AdminReservatieKalenderComponent],
+  bootstrap: [],
+  providers:[AdminReservatieKalenderService
+    ]
 })
-export class  AdminKalenderModule {}
+export class  AdminReservatieKalenderModule {}
