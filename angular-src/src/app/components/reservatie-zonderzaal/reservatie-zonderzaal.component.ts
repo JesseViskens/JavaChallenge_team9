@@ -24,7 +24,7 @@ export class ReservatieZonderZaalComponent implements OnInit {
 
   constructor(private route: ActivatedRoute,private reservatieService: ReservatieService, private zaalService: ZaalService, private authService: AuthService, private router: Router) {
     this.reservatie = new Reservatie();
-    this.reservatie.naam = "Reservatie 1";
+    this.reservatie.naam = "Nieuwe reservatie";
     this.route.params.subscribe(params => {
       this.id = params['id'];
     });
