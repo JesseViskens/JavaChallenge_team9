@@ -25,7 +25,6 @@ import {AdminReservatiesComponent} from "./components/admin-reservaties/admin-re
 import {AdminReservatieKalenderModule} from "./components/admin-reservatie-kalender/admin-reservatie-kalender.module";
 import { AdminZaaltoevoegenComponent } from './components/admin-zaaltoevoegen/admin-zaaltoevoegen.component';
 import { AdminDeelzaalwijzigenComponent } from './components/admin-deelzaalwijzigen/admin-deelzaalwijzigen.component';
-import {ReservatieZonderZaalComponent} from "./components/reservatie-zonderzaal/reservatie-zonderzaal.component";
 
 
 @NgModule({
@@ -36,7 +35,6 @@ import {ReservatieZonderZaalComponent} from "./components/reservatie-zonderzaal/
     ZaalComponent,
     ZalenComponent,
     ReservatieComponent,
-    ReservatieZonderZaalComponent,
     AdminZalenComponent,
     AdminZaalwijzigenComponent,
     AdminReservatiesComponent,

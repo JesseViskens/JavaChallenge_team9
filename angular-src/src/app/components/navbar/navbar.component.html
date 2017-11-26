@@ -12,9 +12,6 @@
         <li class="nav-item">
           <a class="nav-link" [routerLink]="['/adminzalen']" *ngIf="isAdmin">Admin Zalen lijst</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" [routerLink]="['/reservatie']">Reservatie</a>
-        </li>
         <li class="nav-item" *ngIf="!isLoggedin">
           <a class="nav-link" [routerLink]="['/login']" >Login</a>
         </li>
