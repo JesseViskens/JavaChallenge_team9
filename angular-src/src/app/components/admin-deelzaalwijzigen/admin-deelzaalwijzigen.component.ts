@@ -70,10 +70,14 @@ export class AdminDeelzaalwijzigenComponent implements OnInit, OnDestroy {
     }
   }
 
+  removeDeelzaal(id: string) {
+    this.deelZalen = this.deelZalen.filter(item => item._id !== id);
+  }
+
   async onDeleteDeelZaal(deelZaalId){
     if(confirm('Bent u zeker dat u deze deelzaal wilt verwijderen?')){
       this.deelZaal = await this.zaalService.getZaal(deelZaalId);
-      await this.deelZalen.splice(this.deelZalen.indexOf(this.deelZaal), 1);
+      await this.removeDeelzaal(deelZaalId);
       this.zaal.zalen = [];
 
       for (let nieuwZaal of this.deelZalen) {
