@@ -35,7 +35,7 @@ export class AdminReservatiesComponent implements OnInit {
       );
       //Gebruiker ophalen die de reservatie maakte
       this.authService.getUser("5a19e00475bd2524749c52b4").then(
-        gebruiker=>this.reservatie.gebruiker = gebruiker
+        //gebruiker=>this.reservatie.gebruiker = gebruiker
       );
         this.myForm = new FormGroup({})
     }

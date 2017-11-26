@@ -20,7 +20,7 @@ if (!/localhost/.test(document.location.host)) {
 
 
 export class KalenderComponent implements OnInit{
-  id: number;
+  id: string;
   reservaties: Reservatie[];
   appointmentsData: Appointment[];
   currentDate: Date = new Date();

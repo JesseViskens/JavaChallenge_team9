@@ -7,7 +7,7 @@ const express = require('express'),
 
 const jwt = require('jsonwebtoken');
 
-mongoose.connect('mongodb://teamnegen:Teamnegen9@ds121716.mlab.com:21716/javachallenge');
+mongoose.connect('mongodb://teamnegen:Teamnegen9@ds121716.mlab.com:21716/javachallenge', {useMongoClient: true});
 
 mongoose.Promise = global.Promise;
 

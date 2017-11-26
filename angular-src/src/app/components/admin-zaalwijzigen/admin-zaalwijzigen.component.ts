@@ -16,6 +16,7 @@ export class AdminZaalwijzigenComponent implements OnInit, OnDestroy {
   zaal: Zaal;
   deelzaal: Zaal;
   zalen: Zaal[];
+  deelZalen: Zaal[];
   private sub: any;
   @ViewChild('select') zalenElement;
 
@@ -30,6 +31,7 @@ export class AdminZaalwijzigenComponent implements OnInit, OnDestroy {
     }
 
     this.zaalService.getZalen().then(zalen=>this.zalen = zalen);
+    this.zaalService.getDeelZalen(this.zaal._id).then(deelzalen=>this.deelZalen = deelzalen);
   }
 
   ngOnDestroy() {
