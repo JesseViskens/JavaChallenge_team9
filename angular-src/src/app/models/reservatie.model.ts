@@ -7,7 +7,7 @@ export class Reservatie{
   naam: string;
   public beginuur: Date;
   public einduur: Date;
-  zaal: string[];
+  zaal: string[] = [];
   gebruiker: string;
   bevestigd: boolean;
   reden: string;
@@ -17,6 +17,9 @@ export class Reservatie{
     this.beginuur = data.beginuur;
     this.einduur = data.einduur;
     this.zaal = data.zaal;
+    if (this.zaal == null){
+      this.zaal = [];
+    }
     this.gebruiker = data.gebruiker;
     this.bevestigd = false;
     this.reden = data.reden;

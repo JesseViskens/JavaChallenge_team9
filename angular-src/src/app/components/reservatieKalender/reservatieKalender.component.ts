@@ -43,10 +43,10 @@ export class KalenderComponent implements OnInit{
         /*look for every appointment*/
         for (const item of this.reservaties) {
           /*if the id of the reservation equals the id of the room, we add the reservation to the calendar*/
-          if(this.id+"" == item.zaal) {
+          if(item.zaal.indexOf(this.id) != -1) {
             console.log("loggen van binnenkomende id");
             console.log(this.id);
-            let newAppointment = new Appointment();
+            let newAppointment = new Appointment({});
             newAppointment.endDate = item.einduur;
             newAppointment.startDate = item.beginuur;
             newAppointment.ownerId = item.gebruiker+"";

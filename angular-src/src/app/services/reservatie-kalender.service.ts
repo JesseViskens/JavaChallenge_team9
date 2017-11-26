@@ -25,6 +25,16 @@ export class Appointment {
   endDate: Date;
   reden: string;
   confirmed: boolean;
+
+  constructor(data:any){
+    this.text = data.text;
+    this.ownerId = data.ownerId;
+    this.priority = data.priority;
+    this.startDate = data.startDate;
+    this.endDate = data.endDate;
+    this.reden = data.reden;
+    this.confirmed = data.confirmed;
+  }
 }
 
 let prioritiesData: Priority[] = [
@@ -59,19 +69,19 @@ let resourcesData: Resource[] = [
   }
 ]
 
-let appointments: Appointment[] = [ {
+let appointments: Appointment[] = [ new Appointment({
   "text": "Testje",
   "ownerId": "1",
   "startDate": new Date(2017, 4, 3, 11, 45),
   "endDate": new Date(2017, 4, 3, 13, 45),
   "priority": 2
-},   {
+}), new Appointment({
   "text": "Prepare Shipping Cost Analysis Report",
   "ownerId": "4",
   "startDate": new Date(2017, 4, 10, 12, 30),
   "endDate": new Date(2017, 4, 10, 13, 30),
   "priority": 1
-}];
+})];
 
 @Injectable()
 export class reservatieKalenderService {
