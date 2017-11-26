@@ -1,4 +1,6 @@
-import {Component, Input, Output, EventEmitter, OnInit} from "@angular/core";
+import {Component, OnInit} from "@angular/core";
+import {Location} from "@angular/common";
+
 import {Reservatie} from "../../models/reservatie.model";
 import {Zaal} from "../../models/zaal.model";
 import Gebruiker from "../../models/gebruiker.model";
@@ -22,7 +24,7 @@ export class ReservatieComponent implements OnInit {
   id:string;
   myForm: FormGroup;
 
-  constructor(private route: ActivatedRoute,private reservatieService: ReservatieService, private zaalService: ZaalService, private authService: AuthService, private router: Router) {
+  constructor(private _location:Location ,private route: ActivatedRoute,private reservatieService: ReservatieService, private zaalService: ZaalService, private authService: AuthService, private router: Router) {
     //initialize "gebruiker" with dummy name
     this.reservatie = new Reservatie();
     this.reservatie.naam = "Nieuwe reservatie";
@@ -64,5 +66,9 @@ export class ReservatieComponent implements OnInit {
     await this.reservatieService.reserveer(this.reservatie);
     this.myForm.reset();
     this.router.navigate(['/']);
+  }
+
+  backClick(){
+    this._location.back();
   }
 }

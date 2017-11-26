@@ -1,4 +1,5 @@
-import {Component, Input, Output, EventEmitter, OnInit} from "@angular/core";
+import {Component,OnInit} from "@angular/core";
+import {Location} from "@angular/common";
 import {Reservatie} from "../../models/reservatie.model";
 import {Zaal} from "../../models/zaal.model";
 import Gebruiker from "../../models/gebruiker.model";
@@ -23,7 +24,7 @@ export class AdminReservatiesComponent implements OnInit {
   id: string;
 
 
-  constructor(private reservatieService: ReservatieService, private zaalService: ZaalService, private authService: AuthService, private router: Router, private route: ActivatedRoute) {
+  constructor(private _location:Location,private reservatieService: ReservatieService, private zaalService: ZaalService, private authService: AuthService, private router: Router, private route: ActivatedRoute) {
     this.reservatie = new Reservatie();
     //get if from url
     this.route.params.subscribe(params => {
@@ -35,10 +36,10 @@ export class AdminReservatiesComponent implements OnInit {
     this.gegevensOphalen();
 
     this.ngForm = new FormGroup({
-      beginuur: new FormControl(null),
-      einduur: new FormControl(null),
-      reden: new FormControl(null)
-    })
+      beginuur: new FormControl(this.ngForm.value.beginuur),
+      einduur: new FormControl(this.ngForm.value.einduur),
+      reden: new FormControl(this.ngForm.value.reden)
+    });
     this.myForm = new FormGroup({
       reden: new FormControl(null)
     })
@@ -86,5 +87,8 @@ export class AdminReservatiesComponent implements OnInit {
     this.myForm.reset();
     this.ngForm.reset();
     this.router.navigate(['/adminreservatieKalender/', this.reservatie.zaal[0]]);
+  }
+  backClick(){
+    this._location.back();
   }
 }
