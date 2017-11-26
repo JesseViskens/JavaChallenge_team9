@@ -105,6 +105,37 @@ router.patch('/:id/zaal/:deelzaalId', mAuth.authAdmin, function (req, res, next)
     });
 });
 
+//remove alle deelzalen van zaal
+router.patch('/:id/deletedeelzalen', mAuth.authAdmin, function (req, res, next) {
+    Zaal.findById(req.params.id, function(err, zaal){
+        if(err){
+            return res.status(500).json({
+                title: 'Er heeft zich een fout voorgedaan',
+                error: err
+            });
+        }
+        if(!zaal){
+            return res.status(500).json({
+                title: 'Zaal niet gevonden',
+                error: {message: 'Zaal niet gevonden'}
+            });
+        }
+        zaal.zalen = [];
+        zaal.save(function(err, result){
+            if (err){
+                return res.status(500).json({
+                    title: 'Er heeft zich een fout voorgedaan',
+                    error: err
+                });
+            }
+            res.status(200).json({
+                message: 'Zaal is aangepast!',
+                obj: result
+            });
+        });
+    });
+});
+
 //update zaal
 router.patch('/:id', mAuth.authAdmin, function (req, res, next) {
     Zaal.findById(req.params.id, function(err, zaal){

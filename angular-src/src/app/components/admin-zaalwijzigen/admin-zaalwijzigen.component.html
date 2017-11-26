@@ -17,6 +17,10 @@
       </div>
     </div>
     <!--<div class="form-group">
+      <label for="inputFoto">Foto van de zaal: <span class="helpText">Enkel gehoste links mogelijk</span></label>
+      <input type="text" class="form-control" id="inputFoto" [(ngModel)]="zaal.foto" name="foto" required>
+    </div>-->
+    <!--<div class="form-group">
       <label for="inputFoto">Foto toevoegen: <span class="helpText">Gelieve enkel .jpg, .jpeg of .png toe te voegen</span></label>
       <input type="file" class="form-control-file" id="inputFoto" accept=".jpg,.jpeg,.png" [(ngModel)]="zaal.foto" name="foto">
     </div>-->
@@ -37,7 +41,7 @@
     <div class="form-group">
       <label for="inputZalen">Zalen die deel uitmaken van deze zaal: <span class="helpText">Om meerdere zalen te selecteren, moet men ctrl of shift indrukken terwijl men selecteerd. <br/>Let op, toegevoegde zalen kunnen niet verwijderd worden.</span></label>
       <select multiple class="form-control" id="inputZalen" name="deelZalen" #select>
-        <option *ngFor="let zaal of zalen" [value]="zaal._id">{{zaal.naam}}</option>
+        <option *ngFor="let zaallijst of zalen" [value]="zaallijst._id">{{zaallijst.naam}}</option>
       </select>
     </div>
     <div class="form-row">

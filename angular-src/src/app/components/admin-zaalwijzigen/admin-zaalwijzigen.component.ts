@@ -16,12 +16,13 @@ export class AdminZaalwijzigenComponent implements OnInit, OnDestroy {
   zaal: Zaal;
   deelzaal: Zaal;
   zalen: Zaal[];
-  deelZalen: Zaal[];
+  deelZalen: Zaal[] = [];
   private sub: any;
   @ViewChild('select') zalenElement;
 
   async ngOnInit() {
     this.zaal = new Zaal();
+    this.zaal.deelZalen = [];
 
     this.sub = this.route.params.subscribe(params => {this.zaalId = params['id'];});
     this.zaal = await this.zaalService.getZaal(this.zaalId);

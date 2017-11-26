@@ -16,9 +16,13 @@ export class ZalenComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.zaalService.getZalen().then(
-      zalen=>this.zalen = zalen
-    );
+    this.zaalService.getZalen().then(zalen=>this.zalen = zalen).then(function () {
+      this.zalen = this.zalen.sort((a, b) => {
+        if (a.naam < b.naam) return -1;
+        else if (a.naam > b.naam) return 1;
+        else return 0;
+      })
+    }.bind(this));
 
   }
 }

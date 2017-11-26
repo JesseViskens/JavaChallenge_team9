@@ -13,6 +13,7 @@
 .info{
   background-color: #CEB64A;
   color: #FFFFFF;
+  height: 280px;
 }
 .back{
   background-color: #2A2A2A;
@@ -44,3 +45,23 @@
 #CEB64A
 #1E1E1E
 */
+@media screen and (min-width:400px)
+{
+  .info{
+    height: 250px;
+  }
+}
+
+@media screen and (min-width:550px)
+{
+  .info{
+    height: 270px;
+  }
+}
+
+@media screen and (min-width:650px)
+{
+  .info{
+    height: 250px;
+  }
+}

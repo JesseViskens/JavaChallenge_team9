@@ -5,7 +5,7 @@
       Een zaal toevoegen
     </button>
     <div *ngFor="let zaal of zalen">
-      <div class="card card-block col-4 float-left">
+      <div class="card card-block col-lg-4 col-md-6 col-sm-6 col-12 float-left">
         <div class="container-fluid">
           <div class="info">
             <div class="align-content-center">
@@ -15,11 +15,6 @@
               <p>Grootte: {{ zaal.oppervlakte }}m²</p>
               <p>Maximum: {{ zaal.capaciteit }} personen</p>
               <p>Beschrijving: {{zaal.beschrijving}}</p>
-              <!--<ul *ngFor="let deelzaal of zaal.deelZalen">
-                <li>
-                  {{deelzaal}}
-                </li>
-              </ul>-->
             </div>
           </div>
           <div class="" routerLinkActive="active">

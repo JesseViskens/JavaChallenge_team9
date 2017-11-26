@@ -92,4 +92,14 @@ export class ZaalService {
     }
   }
 
+  // delete deelzalen van zaal
+  async deleteDeelzalen(zaal:Zaal){
+    try{
+      let headers = new HttpHeaders().set('content-type', 'application/json').set("Authorization", localStorage.getItem("authKey"));
+      return await this.http.patch(Config.host + "/zalen/" + zaal._id + "/deletedeelzalen", zaal, {headers}).toPromise();
+    }catch(err){
+      console.log(err);
+    }
+  }
+
 }
