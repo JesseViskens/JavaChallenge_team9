@@ -17,9 +17,9 @@ export class ReservatieService {
 
   //Gebruiker// nieuwe reservatie aanvragen
   async reserveer(reservatie:Reservatie){
-    console.log("Reserveren..." + reservatie);
+    console.log("Reserveren...");
+    console.log(reservatie);
     try{
-      console.log(localStorage.getItem("authKey"));
       let headers = new HttpHeaders().set('content-type', 'application/json').set("Authorization", localStorage.getItem("authKey"));
       return await this.http.post(Config.host + "/reservaties", reservatie, {headers}).toPromise();
     }catch(err){
@@ -32,7 +32,6 @@ export class ReservatieService {
     try{
       let result: any = await this.http.get(Config.host + "/reservaties/" + reservatieId).toPromise();
       this.reservatie = result.obj;
-      console.log(result);
       return this.reservatie;
     }catch(err){
       console.log(err);

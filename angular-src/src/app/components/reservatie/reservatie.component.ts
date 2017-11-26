@@ -33,13 +33,12 @@ export class ReservatieComponent implements OnInit {
   ngOnInit() {
     //Gekozen zaal ophalen
     this.zaalService.getZaal(this.id).then(zaal => {
-        this.zaal = zaal;
+        this.zaal = new Zaal(zaal);
       }
     );
     //Ingelogde gebruiker ophalen
     this.authService.getCurrentUser().then(gebruiker => {
         this.gebruiker = new Gebruiker(gebruiker);
-        console.log(this.gebruiker);
       }
     );
     this.myForm = new FormGroup({
@@ -50,9 +49,8 @@ export class ReservatieComponent implements OnInit {
   }
 
   async onSubmit() {
-    console.log(this.gebruiker);
-    this.reservatie.gebruikerId = this.gebruiker.id;
-    this.reservatie.zaalId = this.id;
+    this.reservatie.gebruiker = this.gebruiker.id;
+    this.reservatie.zaal = [this.id];
     this.reservatie.beginuur = this.myForm.value.beginuur;
     this.reservatie.einduur = this.myForm.value.einduur;
     this.reservatie.reden = this.myForm.value.reden;

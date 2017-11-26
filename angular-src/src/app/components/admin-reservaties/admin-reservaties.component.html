@@ -1,6 +1,6 @@
 <article class="panel panel-default">
   <div class="panel-body row">
-    <form class="col-6 offset-3" #reservatieForm="ngForm" (ngSubmit)="onSubmit()">
+    <form class="col-6 offset-3" [formGroup]="ngForm" (ngSubmit)="onSubmit()">
       <h1>Reservatie beheren</h1>
       <div id="zaal">
         <div id="image" class="offset-6"><img width="150px" height="150px" src="http://via.placeholder.com/150x150"/>
@@ -25,8 +25,8 @@
         <div>
           <label>Begindatum</label> <label class="offset-3">Einddatum</label></div>
         <div>
-          <input id="beginuur" formControlName="beginuur" type="datetime-local" value="{{ reservatie.beginuur}}"/> tot
-          <input id="einduur" formControlName="einduur" type="datetime-local" value="{{reservatie.einduur}}"/>
+          <input id="beginuur" formControlName="beginuur" type="datetime-local" value="{{ reservatie.beginuur | date:'yyyy-MM-ddTHH:mm:ss'}}"/> tot
+          <input id="einduur" formControlName="einduur" type="datetime-local" value="{{reservatie.einduur | date:'yyyy-MM-ddTHH:mm:ss' }}"/>
         </div>
 
         <div>

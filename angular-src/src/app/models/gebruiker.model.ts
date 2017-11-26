@@ -11,7 +11,7 @@ export default class Gebruiker{
   woonplaats:string;
 
   constructor(data:any = {}){
-    this.id = data.id;
+    this.id = data._id;
     this.email = data.email;
 
     this.voornaam = data.voornaam;

@@ -22,6 +22,8 @@ export class AdminReservatiesComponent implements OnInit {
   ngForm: FormGroup;
   reservatie: Reservatie;
   id: string;
+  beginuur:string;
+  einduur:string;
 
   constructor(private reservatieService: ReservatieService, private zaalService: ZaalService, private authService: AuthService, private router: Router, private route: ActivatedRoute) {
     this.reservatie = new Reservatie();
@@ -32,6 +34,8 @@ export class AdminReservatiesComponent implements OnInit {
 
   ngOnInit() {
     this.gegevensOphalen();
+
+
     this.ngForm = new FormGroup({
       beginuur: new FormControl(null),
       einduur: new FormControl(null),
@@ -55,17 +59,22 @@ export class AdminReservatiesComponent implements OnInit {
     await this.reservatieService.getReservatie(this.id).then(
       reservatie => {
         this.reservatie = new Reservatie(reservatie);
-        console.log(this.reservatie);
       }
     );
     //Gereserveerde zaal ophalen
-    await this.zaalService.getZaal(this.reservatie.zaalId).then(
-      zaal => this.zaal = new Zaal(zaal)
+    await this.zaalService.getZaal(this.reservatie.zaal[0]).then(
+      zaal => {
+        this.zaal = new Zaal(zaal);
+      }
     );
     //Gebruiker ophalen die de reservatie maakte
-    await this.authService.getUser(this.reservatie.gebruikerId).then(
-      gebruiker => this.gebruiker = new Gebruiker(gebruiker)
+    await this.authService.getUser(this.reservatie.gebruiker).then(
+      gebruiker => {
+        this.gebruiker = new Gebruiker(gebruiker);
+      }
     );
+
+
   }
 
   async onWeiger() {
