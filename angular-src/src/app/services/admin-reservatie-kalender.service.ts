@@ -24,6 +24,16 @@ export class Appointment {
   endDate: Date;
   reden: string;
   confirmed: boolean;
+
+  constructor(data:any){
+    this.text = data.text;
+    this.ownerId = data.ownerId;
+    this.priority = data.priority;
+    this.startDate = data.startDate;
+    this.endDate = data.endDate;
+    this.reden = data.reden;
+    this.confirmed = data.confirmed;
+  }
 }
 
 let prioritiesData: Priority[] = [
@@ -42,13 +52,13 @@ let resourcesData: Resource[] = [
   }
 ];
 
-let appointments: Appointment[] = [{
+let appointments: Appointment[] = [new Appointment({
   "text": "Google AdWords Strategy",
   "ownerId": [2],
   "startDate": new Date(2017, 4, 1, 9, 0),
   "endDate": new Date(2017, 4, 1, 10, 30),
   "priority": 1
-}];
+})];
 
 @Injectable()
 export class AdminReservatieKalenderService {
