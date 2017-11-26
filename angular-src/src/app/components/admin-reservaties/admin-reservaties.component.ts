@@ -24,6 +24,7 @@ export class AdminReservatiesComponent implements OnInit {
   id: string;
 
 
+
   constructor(private _location:Location,private reservatieService: ReservatieService, private zaalService: ZaalService, private authService: AuthService, private router: Router, private route: ActivatedRoute) {
     this.reservatie = new Reservatie();
     //get if from url
@@ -37,6 +38,7 @@ export class AdminReservatiesComponent implements OnInit {
     this.zaal = new Zaal;
     this.gebruiker = new Gebruiker;
     this.gegevensOphalen();
+
 
     /*this.ngForm = new FormGroup({
       beginuur: new FormControl(this.ngForm.value.beginuur),
@@ -56,6 +58,7 @@ export class AdminReservatiesComponent implements OnInit {
     this.reservatie.einduur = this.ngForm.value.einduur;
     this.reservatie.reden = this.ngForm.value.reden;*/
     this.reservatie.naam = "Bevestigd";
+
     console.log(this.reservatie);
     await this.reservatieService.acceptReservatie(this.reservatie);
     this.router.navigate(['/adminreservatieKalender/', this.reservatie.zaal[0]]);
@@ -72,6 +75,7 @@ export class AdminReservatiesComponent implements OnInit {
 
     //Gebruiker ophalen die de reservatie maakte
     this.gebruiker = await this.authService.getUser(this.reservatie.gebruiker);
+
   }
 
   //delete reservation, with reason for deletion from "myForm", reset froms and go to index
