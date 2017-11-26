@@ -7,7 +7,6 @@ import {ReservatieService} from "../../services/reservatie.service";
 import {ZaalService} from "../../services/zaal.service";
 import {AuthService} from "../../services/auth.service";
 import {ActivatedRoute, Router} from "@angular/router";
-import {reservatieKalenderService} from "../../services/reservatie-kalender.service";
 
 @Component({
   selector: 'app-adminreservatie',
@@ -52,6 +51,7 @@ export class AdminReservatiesComponent implements OnInit {
     this.reservatie.beginuur = this.ngForm.value.beginuur;
     this.reservatie.einduur = this.ngForm.value.einduur;
     this.reservatie.reden = this.ngForm.value.reden;
+    this.reservatie.naam = "Bevestigd";
     await this.reservatieService.acceptReservatie(this.reservatie);
     this.router.navigate(['/adminreservatieKalender']);
   }
