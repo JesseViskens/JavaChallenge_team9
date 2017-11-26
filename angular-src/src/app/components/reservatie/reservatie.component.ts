@@ -50,7 +50,7 @@ export class ReservatieComponent implements OnInit {
   }
 
   async onSubmit() {
-    this.reservatie.gebruikerId = this.gebruiker.id;
+    this.reservatie.gebruiker = this.gebruiker;
     this.reservatie.zaal = this.zaal;
     this.reservatie.beginuur = this.myForm.value.beginuur;
     this.reservatie.einduur = this.myForm.value.einduur;

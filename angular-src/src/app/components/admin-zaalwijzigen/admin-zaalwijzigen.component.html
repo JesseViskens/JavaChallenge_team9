@@ -38,14 +38,23 @@
         <input type="time" class="form-control" id="inputSluiting" [(ngModel)]="zaal.sluiting" name="sluiting">
       </div>
     </div>
-    <div class="form-group">
+    <!--<div class="form-group">
       <label for="inputZalen">Zalen die deel uitmaken van deze zaal: <span class="helpText">Om meerdere zalen te selecteren, moet men ctrl of shift indrukken terwijl men selecteerd. <br/>Let op, toegevoegde zalen kunnen niet verwijderd worden.</span></label>
       <select multiple class="form-control" id="inputZalen" name="deelZalen" #select>
         <option *ngFor="let zaallijst of zalen" [value]="zaallijst._id">{{zaallijst.naam}}</option>
       </select>
+    </div>-->
+    <div class="form-group">
+      <label for="inputZalen">Zalen die deel uitmaken van deze zaal:</label>
+      <select multiple class="form-control" id="inputZalen" readonly>
+        <option *ngFor="let dzaal of deelZalen" [value]="dzaal._id">{{dzaal.naam}}</option>
+      </select>
     </div>
     <div class="form-row">
-      <div class="form-group col-md-6">
+      <div class="form-group col-md-3">
+        <button [routerLink]="['/adminzalen']" type="button" class="col-md-12 btn btn-outline-dark">Deelzalen aanpassen</button>
+      </div>
+      <div class="form-group col-md-3">
         <button [routerLink]="['/adminzalen']" type="button" class="col-md-12 btn btn-outline-dark">Annuleer</button>
       </div>
       <div class="form-group col-md-6">

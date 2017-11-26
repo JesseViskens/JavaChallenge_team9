@@ -22,7 +22,6 @@ export class AdminZaalwijzigenComponent implements OnInit, OnDestroy {
 
   async ngOnInit() {
     this.zaal = new Zaal();
-    this.zaal.deelZalen = [];
 
     this.sub = this.route.params.subscribe(params => {this.zaalId = params['id'];});
     this.zaal = await this.zaalService.getZaal(this.zaalId);
@@ -40,16 +39,16 @@ export class AdminZaalwijzigenComponent implements OnInit, OnDestroy {
   }
 
   async onSubmit() {
-    for (var i = 0; i < this.zalenElement.nativeElement.length; i++) {
+    /*for (var i = 0; i < this.zalenElement.nativeElement.length; i++) {
       if (this.zalenElement.nativeElement.options[i].selected){
         let deelZaalId = this.zalenElement.nativeElement.options[i].value;
         this.deelzaal = await this.zaalService.getZaal(deelZaalId);
 
         this.zaalService.updateDeelzalen(this.zaal, this.deelzaal);
       }
-    }
+    }*/
 
-    this.zaalService.updateZaal(this.zaal);
+    await this.zaalService.updateZaal(this.zaal);
     this.zaal = new Zaal();
     this.router.navigate(['/adminzalen']);
   }
