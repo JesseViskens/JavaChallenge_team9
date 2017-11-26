@@ -158,7 +158,7 @@ router.patch('/:id', mAuth.authAdmin, function (req, res, next) {
         zaal.aanvang = req.body.aanvang;
         zaal.sluiting = req.body.sluiting;
         zaal.capaciteit = req.body.capaciteit;
-        zaal.zalen = [req.body.zalen];
+        zaal.zalen = req.body.zalen;
         zaal.save(function(err, result){
             if (err){
                 return res.status(500).json({
