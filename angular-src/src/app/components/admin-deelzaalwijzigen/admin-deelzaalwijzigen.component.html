@@ -1,5 +1,39 @@
 <div class="panel">
 <div class="container">
-  <h1 class="header">Deelzalen van .... wijzigen</h1>
+  <form class="col-12" #zaalForm="ngForm" (ngSubmit)="onSubmit()">
+    <h1 class="header row col-12">Deelzalen van {{zaal.naam}} wijzigen</h1>
+    <div class="form-row">
+      <div class="col-md-6">
+        <h3>Zalen toevoegen</h3>
+        <p>
+          Duid de zalen aan die u wilt toevoegen aan {{zaal.naam}}.
+        </p>
+        <div *ngFor="let zaalcheck of zalen">
+            <input type="checkbox" [value]="zaalcheck._id"
+                   [checked]="zaal.zalen.indexOf(zaalcheck._id) != -1" (change)="onChange(zaalcheck._id, $event.target.checked)">
+            {{zaalcheck.naam}}<br/>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <h3>Bestaande deelzalen verwijderen</h3>
+        <div *ngFor="let deelzaal of deelZalen">
+        <button (click)="onDeleteDeelZaal(deelzaal._id)" type="button" class="col-md-12 btn btn-outline-dark deleteKnop">
+          {{deelzaal.naam}} verwijderen uit deze lijst
+        </button>
+        </div>
+      </div>
+    </div>
+    <div class="form-row knoppen">
+      <div class="form-group col-md-4">
+        <button type="submit" class="col-md-12 btn btn-outline-dark">Deelzalen Wijzigen</button>
+      </div>
+      <div class="form-group col-md-4">
+        <button (click)="onDelete(zaal._id)" type="button" class="col-md-12 btn btn-outline-dark">Verwijder alle deelzalen</button>
+      </div>
+      <div class="form-group col-md-4">
+        <button [routerLink]="['/zaalWijzigen/', zaal._id]" type="button" class="col-md-12 btn btn-outline-dark">Annuleer</button>
+      </div>
+    </div>
+  </form>
 </div>
 </div>

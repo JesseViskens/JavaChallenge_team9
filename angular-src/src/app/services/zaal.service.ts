@@ -25,7 +25,6 @@ export class ZaalService {
 
   // get all the zalen that are in the database
   async getZalen(){
-    console.log("alle zalen halen!");
     try{
       let result: any = await this.http.get(Config.host + "/zalen").toPromise();
       this.zalen = result.obj;
@@ -37,7 +36,6 @@ export class ZaalService {
 
   // get one perticular zaal
   async getZaal(zaalId:string){
-    console.log("één zaal halen");
     try{
       let result: any = await this.http.get(Config.host + "/zalen/" + zaalId).toPromise();
       this.zaal = result.obj;
@@ -49,7 +47,6 @@ export class ZaalService {
 
   // get all deelzalen of one perticular zaal
   async getDeelZalen(zaalId:string){
-    console.log("deelzalen van één zaal ophalen");
     try{
       let result: any = await this.http.get(Config.host + "/zalen/" + zaalId + "/deelzalen").toPromise();
       this.deelzalen = result.obj;
@@ -99,4 +96,13 @@ export class ZaalService {
     }
   }
 
+  // delete één deelzaal van zaal
+  async deleteDeelzaal(zaal:Zaal){
+    try{
+      let headers = new HttpHeaders().set('content-type', 'application/json').set("Authorization", localStorage.getItem("authKey"));
+      return await this.http.patch(Config.host + "/zalen/" + zaal._id + "/deletedeelzaal", zaal, {headers}).toPromise();
+    }catch(err){
+      console.log(err);
+    }
+  }
 }

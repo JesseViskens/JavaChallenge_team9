@@ -30,8 +30,13 @@ export class AdminZaalwijzigenComponent implements OnInit, OnDestroy {
       console.log("De zaal is null");
     }
 
-    this.zaalService.getZalen().then(zalen=>this.zalen = zalen);
-    this.zaalService.getDeelZalen(this.zaal._id).then(deelzalen=>this.deelZalen = deelzalen);
+    this.zaalService.getDeelZalen(this.zaal._id).then(deelzalen=>this.deelZalen = deelzalen).then(function () {
+      this.deelZalen = this.deelZalen.sort((a, b) => {
+        if (a.naam < b.naam) return -1;
+        else if (a.naam > b.naam) return 1;
+        else return 0;
+      })
+    }.bind(this));
   }
 
   ngOnDestroy() {
