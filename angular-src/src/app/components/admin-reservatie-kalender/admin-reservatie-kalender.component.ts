@@ -42,6 +42,7 @@ export class AdminReservatieKalenderComponent implements OnInit{
         this.reservaties = reservaties;
         /*create a new appointment*/
         const appointments: Appointment[] = [];
+        let tempRes: Reservatie[] = [];
         /*look for every appointment*/
         for (const item of this.reservaties) {
           /*if the id of the reservation equals the id of the room, we add the reservation to the calendar*/
@@ -56,12 +57,14 @@ export class AdminReservatieKalenderComponent implements OnInit{
             newAppointment.confirmed = item.bevestigd;
             newAppointment.priority = 2;
             appointments.push(newAppointment);
+            tempRes.push(item);
 
           }
+          this.reservaties = tempRes;
+          this.appointmentsData = appointments;
+
         }
         /*send the appointment to the calendar*/
-        this.appointmentsData = appointments;
-        console.log(this.appointmentsData);
       }
 
     );
