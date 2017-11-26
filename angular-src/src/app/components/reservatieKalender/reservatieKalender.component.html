@@ -4,33 +4,39 @@
 <link rel="stylesheet" type="text/css" href="https://cdn3.devexpress.com/jslib/17.2.3/css/dx.light.css"/>
 
 
-
-<!--give the calender a nice look-->
-<div class="dx-viewport">
-  <div class="demo-container">
-    <!--filling in the required data for the calender. the dataSource will be our reservations. vieuws will define what kind of layout our calendar will have.(we limited it on
-    only the week-layout, the rest wasn't that useful. Firsrtdayoftheweek = 1 will set the first day of the week on monday, the array starts with sunday.
-    startdayhour and enddayhour will limit the openinghours of each room.-->
-    <dx-scheduler
-      [dataSource]="appointmentsData"
-      [views]="['week']"
-      [currentView]="['week']"
-      [firstDayOfWeek]="1"
-      [startDayHour]="1"
-      [endDayHour]="24"
-      [cellDuration]="60"
-      [groups]="['priority']"
-      [currentDate]="currentDate"
-      [timeZone]="Brussels"
-      >
-
-    </dx-scheduler>
-
-  <!--link to the reservationspage. we give the id of our reservation so they can use it.-->
-    <div class="" routerLinkActive="active">
-      <a [routerLink]="['/reservatie/', id]" class="btn btn-primary">Naar reservatie pagina</a>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-2">
+      <table border="1">
+        <tr>
+          <H1>Maak een reservatie:</H1>
+          <div class="" routerLinkActive="active">
+            <button class="btn btn-primary" [routerLink]="['/reservatie/',id]">Nieuwe reservatie</button>
+            <hr/>
+          </div>
+        </tr>
+      </table>
     </div>
-
+    <div class="col-10">
+      <!--give the calender a nice look-->
+      <div class="dx-viewport">
+        <div class="demo-container">
+          <!--filling in the required data for the calender. the dataSource will be our reservations. vieuws will define what kind of layout our calendar will have.(we limited it on
+          only the week-layout, the rest wasn't that useful. Firsrtdayoftheweek = 1 will set the first day of the week on monday, the array starts with sunday.
+          startdayhour and enddayhour will limit the openinghours of each room.-->
+          <dx-scheduler
+            [dataSource]="appointmentsData"
+            [views]="['week']"
+            [currentView]="['week']"
+            [firstDayOfWeek]="1"
+            [startDayHour]="1"
+            [endDayHour]="24"
+            [cellDuration]="60"
+            [currentDate]="currentDate">
+            <dxo-editing [allowAdding]="false"></dxo-editing>
+          </dx-scheduler>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
-

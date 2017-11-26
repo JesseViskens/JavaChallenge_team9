@@ -7,7 +7,7 @@ import {ReservatieComponent} from "./components/reservatie/reservatie.component"
 import {AdminZalenComponent} from "./components/admin-zalen/admin-zalen.component";
 import {AdminZaalwijzigenComponent} from "./components/admin-zaalwijzigen/admin-zaalwijzigen.component";
 import {AdminReservatiesComponent} from "./components/admin-reservaties/admin-reservaties.component";
-import {AdminKalenderComponent} from "./components/admin-reservatie-kalender/admin-reservatie-kalender.component";
+import {AdminReservatieKalenderComponent} from "./components/admin-reservatie-kalender/admin-reservatie-kalender.component";
 import {AdminZaaltoevoegenComponent} from "./components/admin-zaaltoevoegen/admin-zaaltoevoegen.component";
 import {AdminDeelzaalwijzigenComponent} from "./components/admin-deelzaalwijzigen/admin-deelzaalwijzigen.component";
 

@@ -22,8 +22,7 @@ import {ZaalService} from "./services/zaal.service";
 import {ReservatieService} from "./services/reservatie.service";
 import { AdminZaalwijzigenComponent } from './components/admin-zaalwijzigen/admin-zaalwijzigen.component';
 import {AdminReservatiesComponent} from "./components/admin-reservaties/admin-reservaties.component";
-import {AdminKalenderModule} from "./components/admin-reservatie-kalender/admin-reservatie-kalender.module";
-import {AdminRegistratieKalenderService} from "./services/admin-reservatie-kalender.service";
+import {AdminReservatieKalenderModule} from "./components/admin-reservatie-kalender/admin-reservatie-kalender.module";
 import { AdminZaaltoevoegenComponent } from './components/admin-zaaltoevoegen/admin-zaaltoevoegen.component';
 import { AdminDeelzaalwijzigenComponent } from './components/admin-deelzaalwijzigen/admin-deelzaalwijzigen.component';
 
@@ -48,7 +47,7 @@ import { AdminDeelzaalwijzigenComponent } from './components/admin-deelzaalwijzi
   imports: [
     BrowserModule,
     KalenderModule,
-    AdminKalenderModule,
+    AdminReservatieKalenderModule,
     RouterModule.forRoot(routes),
     FormsModule,
     ReactiveFormsModule,
@@ -59,7 +58,7 @@ import { AdminDeelzaalwijzigenComponent } from './components/admin-deelzaalwijzi
     AuthService,
     ZaalService,
     ReservatieService,
-    AdminRegistratieKalenderService
+    AdminReservatiesComponent
   ],
   bootstrap: [AppComponent]
 })
