@@ -17,7 +17,6 @@ export class ZaalService {
   async deleteZaal(zaalId:string){
     try{
       let headers = new HttpHeaders().set('content-type', 'application/json').set("Authorization", localStorage.getItem("authKey"));
-      console.log('delete');
       return await this.http.delete(Config.host + `/zalen/` + zaalId, {headers:headers}).toPromise();
     }catch(err){
       console.log(err);
