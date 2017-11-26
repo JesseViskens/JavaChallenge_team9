@@ -45,8 +45,7 @@ export class AdminReservatieKalenderComponent implements OnInit{
         for (const item of this.reservaties) {
           /*if the id of the reservation equals the id of the room, we add the reservation to the calendar*/
           if(item.zaal.indexOf(this.id) != -1) {
-            console.log("loggen van binnenkomende id");
-            console.log(this.id);
+
             let newAppointment = new Appointment({});
             newAppointment.endDate = item.einduur;
             newAppointment.startDate = item.beginuur;
@@ -56,6 +55,7 @@ export class AdminReservatieKalenderComponent implements OnInit{
             newAppointment.confirmed = item.bevestigd;
             newAppointment.priority = 2;
             appointments.push(newAppointment);
+
           }
         }
         /*send the appointment to the calendar*/
@@ -64,6 +64,22 @@ export class AdminReservatieKalenderComponent implements OnInit{
       }
 
     );
+    /*
+     this.service.reservatiesPerZaal().then
+     (
+     this.reservaties = reservatiesperzaal;
+     for(const item of this.reservaties){
+     if(item.zaal.indexOf(this.id) != -1)
+     {
+     if(item.bevestigd == true){
+     test.text = item.naam;
+
+     }else{}
+     test.text = item.naam;
+     }
+     }
+     this.reservaties = reservatiesperzaal;
+     });*/
 
 
   }
