@@ -18,7 +18,6 @@ export class ReservatieService {
   //Gebruiker// nieuwe reservatie aanvragen
   async reserveer(reservatie:Reservatie){
     console.log("Reserveren...");
-    console.log(reservatie);
     try{
       let headers = new HttpHeaders().set('content-type', 'application/json').set("Authorization", localStorage.getItem("authKey"));
       return await this.http.post(Config.host + "/reservaties", reservatie, {headers}).toPromise();

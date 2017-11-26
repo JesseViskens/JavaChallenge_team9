@@ -42,7 +42,6 @@ export class ZaalService {
     try{
       let result: any = await this.http.get(Config.host + "/zalen/" + zaalId).toPromise();
       this.zaal = result.obj;
-      console.log(result);
       return this.zaal;
     }catch(err){
       console.log(err);
@@ -55,7 +54,6 @@ export class ZaalService {
     try{
       let result: any = await this.http.get(Config.host + "/zalen/" + zaalId + "/deelzalen").toPromise();
       this.deelzalen = result.obj;
-      console.log(result);
       return this.deelzalen;
     }catch(err){
       console.log(err);

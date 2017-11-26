@@ -23,24 +23,27 @@ export class ReservatieComponent implements OnInit {
   myForm: FormGroup;
 
   constructor(private route: ActivatedRoute,private reservatieService: ReservatieService, private zaalService: ZaalService, private authService: AuthService, private router: Router) {
+    //initialize "gebruiker" with dummy name
     this.reservatie = new Reservatie();
     this.reservatie.naam = "Reservatie 1";
+    //get id from url
     this.route.params.subscribe(params => {
       this.id = params['id'];
     });
   }
 
   ngOnInit() {
-    //Gekozen zaal ophalen
+    //get chozen "zaal"
     this.zaalService.getZaal(this.id).then(zaal => {
         this.zaal = new Zaal(zaal);
       }
     );
-    //Ingelogde gebruiker ophalen
+    //get logged in user
     this.authService.getCurrentUser().then(gebruiker => {
         this.gebruiker = new Gebruiker(gebruiker);
       }
     );
+    //initialize form
     this.myForm = new FormGroup({
       beginuur: new FormControl(null),
       einduur: new FormControl(null),
@@ -48,13 +51,14 @@ export class ReservatieComponent implements OnInit {
     })
   }
 
+  //when onSubmit is pressed get everything from the form in a "reservatie" object
+  //then send objest to api and reset form, finally redirect to index page
   async onSubmit() {
     this.reservatie.gebruiker = this.gebruiker.id;
     this.reservatie.zaal = [this.id];
     this.reservatie.beginuur = this.myForm.value.beginuur;
     this.reservatie.einduur = this.myForm.value.einduur;
     this.reservatie.reden = this.myForm.value.reden;
-    console.log(this.reservatie);
     await this.reservatieService.reserveer(this.reservatie);
     this.myForm.reset();
     this.router.navigate(['/']);

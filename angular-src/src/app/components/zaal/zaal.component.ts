@@ -13,6 +13,7 @@ export class ZaalComponent {
   isAdmin:boolean;
 
   constructor(private service: AuthService) {
+    //check if logged in persoon is admin to show right link to making a reservation
     this.isAdmin = service.isAdmin();
     service.onLogin.subscribe(loggedIn => this.isAdmin = service.isAdmin());
     service.onLogout.subscribe(loggedIn => this.isAdmin = service.isAdmin());

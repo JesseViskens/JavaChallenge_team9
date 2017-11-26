@@ -22,19 +22,18 @@ export class AdminReservatiesComponent implements OnInit {
   ngForm: FormGroup;
   reservatie: Reservatie;
   id: string;
-  beginuur:string;
-  einduur:string;
+
 
   constructor(private reservatieService: ReservatieService, private zaalService: ZaalService, private authService: AuthService, private router: Router, private route: ActivatedRoute) {
     this.reservatie = new Reservatie();
+    //get if from url
     this.route.params.subscribe(params => {
       this.id = params['id'];
     });
   }
-
+//get right data from api and initialize forms
   ngOnInit() {
     this.gegevensOphalen();
-
 
     this.ngForm = new FormGroup({
       beginuur: new FormControl(null),
@@ -46,6 +45,8 @@ export class AdminReservatiesComponent implements OnInit {
     })
   }
 
+  //update "reservatie" with data from "ngForm" and send patch to api
+  //redirect to '/adminreservatieKalender'
   async onSubmit() {
     this.reservatie.bevestigd = true;
     this.reservatie.beginuur = this.ngForm.value.beginuur;
@@ -55,6 +56,9 @@ export class AdminReservatiesComponent implements OnInit {
     this.router.navigate(['/adminreservatieKalender']);
   }
 
+  //get reservation from url's ID
+  //get "zaal" from the reservation
+  //get user from reservation
   async gegevensOphalen() {
     await this.reservatieService.getReservatie(this.id).then(
       reservatie => {
@@ -77,6 +81,7 @@ export class AdminReservatiesComponent implements OnInit {
 
   }
 
+  //delete reservation, with reason for deletion from "myForm", reset froms and go to index
   async onWeiger() {
     await this.reservatieService.weigerReservatie(this.id, this.myForm.value.reden);
     this.myForm.reset();

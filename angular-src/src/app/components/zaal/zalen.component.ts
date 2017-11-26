@@ -16,6 +16,7 @@ export class ZalenComponent implements OnInit {
   }
 
   ngOnInit() {
+    //get "zalen" and sort alphabetical
     this.zaalService.getZalen().then(zalen=>this.zalen = zalen).then(function () {
       this.zalen = this.zalen.sort((a, b) => {
         if (a.naam < b.naam) return -1;

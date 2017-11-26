@@ -56,7 +56,6 @@ export class AuthService {
       console.log("Getting user");
       let result: any = await this.http.get(Config.host + "/gebruikers/" + gebruikerId).toPromise();
       this.gebruiker = result.obj;
-      console.log(result);
       return this.gebruiker;
     }catch(err){
       console.log(err);
@@ -70,7 +69,6 @@ export class AuthService {
       let headers = new HttpHeaders().set('content-type', 'application/json');
       let result: any = await this.http.post(Config.host + "/auth/signin", {email, password},{headers:headers}).toPromise();
       this.gebruiker = new Gebruiker(result.user);
-      console.log(this.gebruiker);
       localStorage.setItem("authKey", result.token);
       localStorage.setItem("userId", result.user._id);
       if(this.gebruiker.isAdmin){
