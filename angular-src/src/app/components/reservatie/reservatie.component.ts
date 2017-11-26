@@ -6,12 +6,12 @@ import {FormControl, FormGroup} from "@angular/forms";
 import {ReservatieService} from "../../services/reservatie.service";
 import {ZaalService} from "../../services/zaal.service";
 import {AuthService} from "../../services/auth.service";
-import {Router} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 
 @Component({
   selector: 'app-reservatie',
   templateUrl: './reservatie.component.html',
-  styleUrls:[ './reservatie.component.css']
+  styleUrls: ['./reservatie.component.css']
 })
 
 export class ReservatieComponent implements OnInit {
@@ -19,26 +19,45 @@ export class ReservatieComponent implements OnInit {
   zaal: Zaal;
   gebruiker: Gebruiker;
   reservatie: Reservatie;
+  id:string;
+  myForm: FormGroup;
 
-  constructor(private reservatieService: ReservatieService, private zaalService: ZaalService, private authService: AuthService, private router: Router) {
+  constructor(private route: ActivatedRoute,private reservatieService: ReservatieService, private zaalService: ZaalService, private authService: AuthService, private router: Router) {
     this.reservatie = new Reservatie();
     this.reservatie.naam = "Reservatie 1";
+    this.route.params.subscribe(params => {
+      this.id = params['id'];
+    });
   }
 
   ngOnInit() {
     //Gekozen zaal ophalen
-    this.zaalService.getZaal("5a1986f0f2f49126307a5220").then(
-      zaal=>this.reservatie.zaal = zaal
+    this.zaalService.getZaal(this.id).then(zaal => {
+        this.zaal = zaal;
+      }
     );
     //Ingelogde gebruiker ophalen
-    this.authService.getCurrentUser().then(
-      gebruiker=>this.reservatie.gebruiker = gebruiker
+    this.authService.getCurrentUser().then(gebruiker => {
+        this.gebruiker = gebruiker;
+        console.log(this.gebruiker);
+      }
     );
+    this.myForm = new FormGroup({
+      beginuur: new FormControl(null),
+      einduur: new FormControl(null),
+      reden: new FormControl(null)
+    })
   }
 
-  onSubmit() {
-    this.reservatieService.reserveer(
-      this.reservatie
-    );
+  async onSubmit() {
+    this.reservatie.gebruikerId = this.gebruiker.id;
+    this.reservatie.zaal = this.zaal;
+    this.reservatie.beginuur = this.myForm.value.beginuur;
+    this.reservatie.einduur = this.myForm.value.einduur;
+    this.reservatie.reden = this.myForm.value.reden;
+    console.log(this.reservatie);
+    await this.reservatieService.reserveer(this.reservatie);
+    this.myForm.reset();
+    this.router.navigate(['/']);
   }
 }

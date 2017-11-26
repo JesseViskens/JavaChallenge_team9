@@ -1,37 +1,38 @@
 <article class="panel panel-default" >
     <div class="panel-body row">
-      <form class="col-6 offset-3" #reservatieForm="ngForm" (ngSubmit)="onSubmit()">
+      <form class="col-6 offset-3" [formGroup]="myForm" (ngSubmit)="onSubmit()">
         <h1>Reserveren</h1>
         <div id="zaal">
           <div id="image" class="offset-6"><img width="150px" height="150px" src="http://via.placeholder.com/150x150" /></div>
           <div>
             <label>Naam:</label>
-            <label>{{ reservatie.zaal.naam }}</label>
+            <label>{{ zaal.naam }}</label>
           </div>
           <div>
             <label>Oppervlakte:</label>
-            <label>{{ reservatie.zaal.oppervlakte }}</label>
+            <label>{{ zaal.oppervlakte }}</label>
           </div>
-          <div><label>Beschrijving:</label><label>{{ reservatie.zaal.beschrijving }}</label></div>
+          <div><label>Beschrijving:</label></div><div><label class="col-6">{{ zaal.beschrijving }}</label></div>
         </div>
 
         <div id="reservering">
           <div>
             <label>Begindatum</label> <label class="offset-3">Einddatum</label></div>
           <div>
-            <input id="beginuur" name="beginuur" type="datetime-local" value="{{ reservatie.beginuur}}" [(ngModel)]="reservatie.beginuur"/> tot <input id="einduur" name="einduur" type="datetime-local" value="{{reservatie.einduur}}" [(ngModel)]="reservatie.einduur"/></div>
+            <input id="beginuur" formControlName="beginuur" type="datetime-local" value="{{ reservatie.beginuur}}" /> tot
+            <input id="einduur" formControlName="einduur" type="datetime-local" value="{{reservatie.einduur}}" /></div>
 
           <div>
             <label>Voornaam:</label>
-            <label>{{ reservatie.gebruiker.voornaam}}</label>
+            <label>{{ gebruiker.voornaam}}</label>
           </div>
           <div>
             <label>Familienaam:</label>
-            <label>{{ reservatie.gebruiker.achternaam}}</label>
+            <label>{{ gebruiker.achternaam}}</label>
           </div>
           <div>
             <label>Email:</label>
-            <label>{{ reservatie.gebruiker.email}}</label>
+            <label>{{ gebruiker.email}}</label>
           </div>
           <div>
             <label>Bedrijf:</label>
@@ -40,7 +41,7 @@
           </div>
           <div class="form-group">
             <label class="control-label" for="reden">Reden:</label>
-            <input id="reden" name="reden" class="form-control col-sm-6" type="text" [(ngModel)]="reservatie.reden" required/>
+            <textarea id="reden" formControlName="reden" class="form-control col-sm-6" type="text" cols="40" rows="5" required></textarea>
           </div>
         </div>
         <div>

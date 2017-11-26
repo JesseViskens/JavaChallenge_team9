@@ -45,7 +45,6 @@ export class AuthService {
       this.gebruikerId = localStorage.getItem("userId");
       let result: any = await this.http.get(Config.host + "/gebruikers/" + this.gebruikerId).toPromise();
       this.gebruiker = result.obj;
-      console.log(result);
       return this.gebruiker;
     }catch(err){
       console.log(err);

@@ -21,7 +21,7 @@ if (!/localhost/.test(document.location.host)) {
 
 
 export class KalenderComponent implements OnInit{
-  id: number;
+  id: string;
   reservaties: Reservatie[];
   appointmentsData: Appointment[];
   currentDate: Date = new Date();
@@ -30,7 +30,7 @@ export class KalenderComponent implements OnInit{
               private route: ActivatedRoute,) {
 
     this.route.params.subscribe(params => {
-      this.id = +params['id'];
+      this.id = params['id'];
     });
 
   }
@@ -44,7 +44,7 @@ export class KalenderComponent implements OnInit{
           let newAppointment = new Appointment();
           newAppointment.endDate = item.einduur;
           newAppointment.startDate = item.beginuur;
-          newAppointment.ownerId = item.gebruiker.id;
+          newAppointment.ownerId = [parseInt(item.gebruikerId)];
           newAppointment.text = item.reden;
           appointments.push(newAppointment);
           console.log(newAppointment);
