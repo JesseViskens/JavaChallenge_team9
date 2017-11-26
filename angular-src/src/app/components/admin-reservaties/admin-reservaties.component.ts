@@ -33,25 +33,28 @@ export class AdminReservatiesComponent implements OnInit {
   }
 //get right data from api and initialize forms
   ngOnInit() {
+    this.reservatie = new Reservatie;
+    this.zaal = new Zaal;
+    this.gebruiker = new Gebruiker;
     this.gegevensOphalen();
 
-    this.ngForm = new FormGroup({
+    /*this.ngForm = new FormGroup({
       beginuur: new FormControl(this.ngForm.value.beginuur),
       einduur: new FormControl(this.ngForm.value.einduur),
       reden: new FormControl(this.ngForm.value.reden)
     });
     this.myForm = new FormGroup({
       reden: new FormControl(null)
-    })
+    })*/
   }
 
   //update "reservatie" with data from "ngForm" and send patch to api
   //redirect to '/adminreservatieKalender'
   async onSubmit() {
     this.reservatie.bevestigd = true;
-    this.reservatie.beginuur = this.ngForm.value.beginuur;
+    /*this.reservatie.beginuur = this.ngForm.value.beginuur;
     this.reservatie.einduur = this.ngForm.value.einduur;
-    this.reservatie.reden = this.ngForm.value.reden;
+    this.reservatie.reden = this.ngForm.value.reden;*/
     this.reservatie.naam = "Bevestigd";
     console.log(this.reservatie);
     await this.reservatieService.acceptReservatie(this.reservatie);
@@ -62,23 +65,13 @@ export class AdminReservatiesComponent implements OnInit {
   //get "zaal" from the reservation
   //get user from reservation
   async gegevensOphalen() {
-    await this.reservatieService.getReservatie(this.id).then(
-      reservatie => {
-        this.reservatie = new Reservatie(reservatie);
-      }
-    );
+    this.reservatie = await this.reservatieService.getReservatie(this.id);
+
     //Gereserveerde zaal ophalen
-    await this.zaalService.getZaal(this.reservatie.zaal[0]).then(
-      zaal => {
-        this.zaal = new Zaal(zaal);
-      }
-    );
+    this.zaal = await this.zaalService.getZaal(this.reservatie.zaal[0]);
+
     //Gebruiker ophalen die de reservatie maakte
-    await this.authService.getUser(this.reservatie.gebruiker).then(
-      gebruiker => {
-        this.gebruiker = new Gebruiker(gebruiker);
-      }
-    );
+    this.gebruiker = await this.authService.getUser(this.reservatie.gebruiker);
   }
 
   //delete reservation, with reason for deletion from "myForm", reset froms and go to index
