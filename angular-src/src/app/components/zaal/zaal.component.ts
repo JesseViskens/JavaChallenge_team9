@@ -10,14 +10,10 @@ import {AuthService} from "../../services/auth.service";
 
 export class ZaalComponent {
   @Input() zaal: Zaal;
-  isLoggedIn:boolean;
   isAdmin:boolean;
 
   constructor(private service: AuthService) {
-    this.isLoggedIn = service.isLoggedIn();
     this.isAdmin = service.isAdmin();
-    service.onLogin.subscribe(loggedIn => this.isLoggedIn = service.isLoggedIn());
-    service.onLogout.subscribe(loggedIn => this.isLoggedIn = service.isLoggedIn());
     service.onLogin.subscribe(loggedIn => this.isAdmin = service.isAdmin());
     service.onLogout.subscribe(loggedIn => this.isAdmin = service.isAdmin());
   }

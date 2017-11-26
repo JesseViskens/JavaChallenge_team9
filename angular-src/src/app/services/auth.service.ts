@@ -29,7 +29,7 @@ export class AuthService {
 
   isAdmin(){
     if (localStorage.getItem("isAdmin")){
-      return true;
+      return this.isLoggedIn();
     }
     return false;
   }
