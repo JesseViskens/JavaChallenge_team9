@@ -15,7 +15,7 @@
         <tr *ngFor="let reservatie of reservaties" routerLinkActive="active">
           <td>
               <div class="" routerLinkActive="active">
-                <a [routerLink]="['/adminreservatie/',reservatie.id]">{{reservatie.naam}}</a>
+                <a [routerLink]="['/adminreservatie/',reservatie._id]">{{reservatie.naam}}</a>
                 <hr/>
               </div>
           </td>

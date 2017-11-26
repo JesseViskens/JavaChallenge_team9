@@ -77,8 +77,6 @@ export class AdminReservatiesComponent implements OnInit {
         this.gebruiker = new Gebruiker(gebruiker);
       }
     );
-
-
   }
 
   //delete reservation, with reason for deletion from "myForm", reset froms and go to index
