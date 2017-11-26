@@ -1,7 +1,7 @@
 import {Component, Input, Output, EventEmitter, OnInit} from '@angular/core';
 import {Zaal} from "../../models/zaal.model";
 import {HttpClient} from "@angular/common/http";
-
+import {ZaalService} from "../../services/zaal.service";
 
 @Component({
   selector: 'app-zalen',
@@ -12,19 +12,18 @@ import {HttpClient} from "@angular/common/http";
 export class ZalenComponent implements OnInit {
   zalen: Zaal[];
 
-  constructor(/*private http: HttpClient*/) {
+  constructor(private http: HttpClient, private zaalService: ZaalService) {
   }
 
   ngOnInit() {
-    /*this.http.get('localhost:3000/zalen').subscribe(data=>{
-     this.zalen = data['zalen'];
-     })*/
+    //get "zalen" and sort alphabetical
+    this.zaalService.getZalen().then(zalen=>this.zalen = zalen).then(function () {
+      this.zalen = this.zalen.sort((a, b) => {
+        if (a.naam < b.naam) return -1;
+        else if (a.naam > b.naam) return 1;
+        else return 0;
+      })
+    }.bind(this));
 
-    this.zalen = [
-      new Zaal(1, "CompUzaal 1", "CompUzaal 1 heeft 20 vaste computers en 5 laptops", 40, "http://via.placeholder.com/350x150", "0900", "2100", 20),
-      new Zaal(2, "DansZaal", "balletbar en spiegels", 40, "http://via.placeholder.com/350x150", "0900", "2100", 20),
-      new Zaal(3, "FeestZaal", "tafels en stoelen aanwezig", 40, "http://via.placeholder.com/350x150", "0900", "2100", 20),
-      new Zaal(4, "SuperZaal", "opdeelbaar in 3", 40, "http://via.placeholder.com/350x150.png", "0900", "2100", 20)
-    ];
   }
 }

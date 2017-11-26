@@ -1,5 +1,6 @@
 import {Component, Input, Output, EventEmitter, OnInit} from '@angular/core';
 import {Zaal} from "../../models/zaal.model";
+import {AuthService} from "../../services/auth.service";
 
 @Component({
   selector: 'app-zaal',
@@ -9,8 +10,13 @@ import {Zaal} from "../../models/zaal.model";
 
 export class ZaalComponent {
   @Input() zaal: Zaal;
+  isAdmin:boolean;
 
-  constructor() {
+  constructor(private service: AuthService) {
+    //check if logged in persoon is admin to show right link to making a reservation
+    this.isAdmin = service.isAdmin();
+    service.onLogin.subscribe(loggedIn => this.isAdmin = service.isAdmin());
+    service.onLogout.subscribe(loggedIn => this.isAdmin = service.isAdmin());
   }
 
 }

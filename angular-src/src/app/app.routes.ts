@@ -7,12 +7,22 @@ import {ReservatieComponent} from "./components/reservatie/reservatie.component"
 import {AdminZalenComponent} from "./components/admin-zalen/admin-zalen.component";
 import {AdminZaalwijzigenComponent} from "./components/admin-zaalwijzigen/admin-zaalwijzigen.component";
 import {AdminReservatiesComponent} from "./components/admin-reservaties/admin-reservaties.component";
+import {AdminReservatieKalenderComponent} from "./components/admin-reservatie-kalender/admin-reservatie-kalender.component";
+import {AdminZaaltoevoegenComponent} from "./components/admin-zaaltoevoegen/admin-zaaltoevoegen.component";
+import {AdminDeelzaalwijzigenComponent} from "./components/admin-deelzaalwijzigen/admin-deelzaalwijzigen.component";
+import {ReservatieZonderZaalComponent} from "./components/reservatie-zonderzaal/reservatie-zonderzaal.component";
 
 export const routes: Routes = [
   {path: "", component: ZalenComponent},
   {path: "login", component: LoginComponent},
   {path: "reservatieKalender/:id", component: KalenderComponent},
-  {path: "reservatie", component: ReservatieComponent},
   {path: "adminzalen", component: AdminZalenComponent},
-  {path: "zaalWijzigen/:id", component: AdminZaalwijzigenComponent}
+  {path: "reservatie/:id", component: ReservatieComponent},
+  {path: "reservatie", component: ReservatieZonderZaalComponent},
+  {path: "adminreservatie/:id", component: AdminReservatiesComponent},
+  {path: "adminzalen", component: AdminZalenComponent},
+  {path: "zaalWijzigen/:id", component: AdminZaalwijzigenComponent},
+  {path: "adminreservatieKalender/:id", component:AdminReservatieKalenderComponent},
+  {path: "zaalToevoegen", component: AdminZaaltoevoegenComponent},
+  {path: "adminDeelzalenWijzigen/:id", component: AdminDeelzaalwijzigenComponent}
 ];

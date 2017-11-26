@@ -1,11 +1,11 @@
-.panel{
-  background-color: #F8F8F8;
-}
-
 .header{
     padding-top: 10px;
 }
 .helpText{
+    padding-left: 10px;
     font-style: italic;
     color:gray;
+}
+.panel{
+  background-color: #F8F8F8;
 }

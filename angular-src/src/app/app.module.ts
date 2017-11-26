@@ -16,11 +16,16 @@ import {HttpClient, HttpClientModule} from "@angular/common/http";
 import {HttpModule} from "@angular/http";
 import {ReservatieComponent} from "./components/reservatie/reservatie.component";
 import { AdminZalenComponent } from './components/admin-zalen/admin-zalen.component';
+
 import {KalenderModule} from "./components/reservatieKalender/reservatieKalender.module";
 import {ZaalService} from "./services/zaal.service";
 import {ReservatieService} from "./services/reservatie.service";
 import { AdminZaalwijzigenComponent } from './components/admin-zaalwijzigen/admin-zaalwijzigen.component';
 import {AdminReservatiesComponent} from "./components/admin-reservaties/admin-reservaties.component";
+import {AdminReservatieKalenderModule} from "./components/admin-reservatie-kalender/admin-reservatie-kalender.module";
+import { AdminZaaltoevoegenComponent } from './components/admin-zaaltoevoegen/admin-zaaltoevoegen.component';
+import { AdminDeelzaalwijzigenComponent } from './components/admin-deelzaalwijzigen/admin-deelzaalwijzigen.component';
+import {ReservatieZonderZaalComponent} from "./components/reservatie-zonderzaal/reservatie-zonderzaal.component";
 
 
 @NgModule({
@@ -31,12 +36,17 @@ import {AdminReservatiesComponent} from "./components/admin-reservaties/admin-re
     ZaalComponent,
     ZalenComponent,
     ReservatieComponent,
+    ReservatieZonderZaalComponent,
     AdminZalenComponent,
-    AdminZaalwijzigenComponent
+    AdminZaalwijzigenComponent,
+    AdminReservatiesComponent,
+    AdminZaaltoevoegenComponent,
+    AdminDeelzaalwijzigenComponent
   ],
   imports: [
     BrowserModule,
     KalenderModule,
+    AdminReservatieKalenderModule,
     RouterModule.forRoot(routes),
     FormsModule,
     ReactiveFormsModule,
@@ -46,7 +56,8 @@ import {AdminReservatiesComponent} from "./components/admin-reservaties/admin-re
   providers: [
     AuthService,
     ZaalService,
-    ReservatieService
+    ReservatieService,
+    AdminReservatiesComponent
   ],
   bootstrap: [AppComponent]
 })

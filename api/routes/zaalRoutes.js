@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+const mAuth = require('../middlewares/auth');
 
 const Zaal = require('../models/zaalModel');
 
@@ -35,18 +36,24 @@ router.get('/:id', function (req, res, next) {
     })
 });
 
-//add zaal
-router.post('/', function (req, res, next) {
-    const zaal = new Zaal({
-        naam: req.body.naam,
-        beschrijving: req.body.beschrijving,
-        oppervlakte: req.body.oppervlakte,
-        foto: req.body.foto,
-        aanvang: req.body.aanvang,
-        sluiting: req.body.sluiting,
-        capaciteit: req.body.capaciteit,
-        zalen: [req.body.zaal]
+//get deelzalen van one zaal
+router.get('/:id/deelzalen', function (req, res, next) {
+    Zaal.findById(req.params.id).
+    populate('zalen').
+    exec(function (err, zaal) {
+        if (err) return res.status(500).json({message: 'Something went wrong', err: err});
+        if (zaal == null) return res.status(500).json({message: 'zaal is null'});
+        if (zaal.zalen == null) return res.status(500).json({message: 'Deze zaal heeft geen deelzalen'});
+        res.status(201).json({
+            message: 'alle deelzalen van zaal ' + zaal.naam,
+            obj: zaal.zalen
+        });
     });
+});
+
+//add zaal
+router.post('/', mAuth.authAdmin, function (req, res, next) {
+    const zaal = new Zaal(req.body);
 
     zaal.save(function (err, result) {
         if (err){
@@ -62,7 +69,7 @@ router.post('/', function (req, res, next) {
     });
 });
 //add deelzaal aan zaal
-router.patch('/:id/zaal/:deelzaalId', function (req, res, next) {
+router.patch('/:id/zaal/:deelzaalId', mAuth.authAdmin, function (req, res, next) {
     Zaal.findById(req.params.id, function(err, zaal){
         if(err){
             return res.status(500).json({
@@ -97,8 +104,71 @@ router.patch('/:id/zaal/:deelzaalId', function (req, res, next) {
     });
 });
 
+//remove alle deelzalen van zaal
+router.patch('/:id/deletedeelzalen', mAuth.authAdmin, function (req, res, next) {
+    Zaal.findById(req.params.id, function(err, zaal){
+        if(err){
+            return res.status(500).json({
+                title: 'Er heeft zich een fout voorgedaan',
+                error: err
+            });
+        }
+        if(!zaal){
+            return res.status(500).json({
+                title: 'Zaal niet gevonden',
+                error: {message: 'Zaal niet gevonden'}
+            });
+        }
+        zaal.zalen = [];
+        zaal.save(function(err, result){
+            if (err){
+                return res.status(500).json({
+                    title: 'Er heeft zich een fout voorgedaan',
+                    error: err
+                });
+            }
+            res.status(200).json({
+                message: 'Zaal is aangepast!',
+                obj: result
+            });
+        });
+    });
+});
+
+//remove één deelzaal van zaal
+router.patch('/:id/deletedeelzaal', mAuth.authAdmin, function (req, res, next) {
+    Zaal.findById(req.params.id, function(err, zaal){
+        if(err){
+            return res.status(500).json({
+                title: 'Er heeft zich een fout voorgedaan',
+                error: err
+            });
+        }
+        if(!zaal){
+            return res.status(500).json({
+                title: 'Zaal niet gevonden',
+                error: {message: 'Zaal niet gevonden'}
+            });
+        }
+        zaal.zalen = [];
+        zaal.zalen = req.body.zalen;
+        zaal.save(function(err, result){
+            if (err){
+                return res.status(500).json({
+                    title: 'Er heeft zich een fout voorgedaan',
+                    error: err
+                });
+            }
+            res.status(200).json({
+                message: 'Zaal is aangepast!',
+                obj: result
+            });
+        });
+    });
+});
+
 //update zaal
-router.patch('/:id', function (req, res, next) {
+router.patch('/:id', mAuth.authAdmin, function (req, res, next) {
     Zaal.findById(req.params.id, function(err, zaal){
         if(err){
             return res.status(500).json({
@@ -119,7 +189,7 @@ router.patch('/:id', function (req, res, next) {
         zaal.aanvang = req.body.aanvang;
         zaal.sluiting = req.body.sluiting;
         zaal.capaciteit = req.body.capaciteit;
-        zaal.zalen = [req.body.zalen];
+        zaal.zalen = req.body.zalen;
         zaal.save(function(err, result){
             if (err){
                 return res.status(500).json({
@@ -136,7 +206,7 @@ router.patch('/:id', function (req, res, next) {
 });
 
 //delete zaal
-router.delete('/:id', function(req, res, next){
+router.delete('/:id', mAuth.authAdmin, function(req, res, next){
     Zaal.findById(req.params.id, function(err, zaal){
         if(err){
             return res.status(500).json({

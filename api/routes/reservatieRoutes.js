@@ -1,10 +1,14 @@
 const express = require('express');
 const router = express.Router();
+const mAuth = require('../middlewares/auth');
+var mailer = require('nodemailer');
 
 const Reservatie = require('../models/reservatieModel');
+const Gebruiker = require('../models/gebruikerModel');
 const Zaal = require('../models/zaalModel');
 
 //get all reservaties
+//TODO add mAuth.auth if only user can to this action
 router.get('/', function (req, res, next) {
     Reservatie.find().exec(function(err, reservaties){
         if (err){
@@ -21,6 +25,7 @@ router.get('/', function (req, res, next) {
 });
 
 //get one reservatie
+//TODO add mAuth.auth if only user can to this action
 router.get('/:id', function (req, res, next) {
     Reservatie.findById(req.params.id, function(err, reservatie){
         if (err){
@@ -36,8 +41,82 @@ router.get('/:id', function (req, res, next) {
     })
 });
 
+async function sendMail(receiver, subject, message) {
+    const user = await Gebruiker.findById(receiver);
+    console.log(user.email);
+    const useremail = user.email;
+    const transporter = mailer.createTransport({
+        service: 'gmail',
+        auth: {
+            user: 'javateamnegen@gmail.com',
+            pass: 'javateam9'
+        }
+    });
+    const mailOptions = {
+        from: 'no-reply@gmail.com',
+        to: useremail,
+        subject: subject,
+        text: message
+    };
+    transporter.sendMail(mailOptions, function (error, info) {
+        if (error) {
+            console.log(error);
+            res.json({yo: 'error'});
+        } else {
+            console.log('Message sent: ' + info.response);
+            res.json({yo: info.response});
+        }
+    });
+}
+
+//The room is available, make reservation
+function postAvailable(res, reservatie) {
+    reservatie.save(function (err, result) {
+        if (err) {
+            return res.status(500).json({
+                title: 'An error occurred',
+                error: err
+            });
+        }
+        res.status(201).json({
+            message: 'Reservatie is toegevoegd!',
+            obj: result
+        });
+        sendMail(reservatie.gebruiker,'Uw reservatie is toegevoegd', '...Maar moet nog bevestigd worden.');
+    });
+}
+
+async function checkAvailability(beginuur, einduur, zaal){
+    //find all reservations for this room
+    try{
+        let docs = await Reservatie.find();
+        if (docs.length > 0) {
+            for (var i = 0; i < docs.length; i++) {
+                //check if there's an overlap between the time intervals
+                if (new Date(beginuur) <= new Date(docs[i].einduur) && new Date(einduur) >= new Date(docs[i].beginuur)) {
+                    //check if it's the same room
+                    if (docs[i].zaal.equals(zaal)) {
+                        return false;
+                    }
+                    //check recursive if part of the room is already reserved
+                    let zaal = await Zaal.findById(docs[i].zaal);
+                    if(zaal.zalen.length > 0) {
+                        for (let q in zaal.zalen){
+                            var available = checkAvailability(beginuur, einduur, zaal.zalen[q]);
+                            if (!available) return false;
+                        }
+                    }
+                }
+            }
+        }
+        return true;
+    }catch(err){
+        console.log("Promise Rejected");
+    }
+}
+
 //add reservatie
-router.post('/', async function (req, res, next) {
+router.post('/', mAuth.auth, async function(req, res, next) {
     const reservatie = new Reservatie({
         naam: req.body.naam,
         beginuur: req.body.beginuur,
@@ -58,54 +137,8 @@ router.post('/', async function (req, res, next) {
     }
 });
 
-//The room is available, make reservation
-function postAvailable(res, reservatie) {
-    reservatie.save(function (err, result) {
-        if (err) {
-            return res.status(500).json({
-                title: 'An error occurred',
-                error: err
-            });
-        }
-        res.status(201).json({
-            message: 'Reservatie is toegevoegd!',
-            obj: result
-        });
-    });
-}
-
-async function checkAvailability(beginuur, einduur, zaal) {
-    //find all reservations for this room
-    try{
-        let docs = await Reservatie.find();
-        if (docs.length > 0) {
-            for (var i = 0; i < docs.length; i++) {
-                //check if there's an overlap between the time intervals
-                if (new Date(beginuur) <= new Date(docs[i].einduur) && new Date(einduur) >= new Date(docs[i].beginuur)) {
-                    //check if it's the same room
-                    if (docs[i].zaal.equals(zaal)) {
-                        return false;
-                    }
-                    //check recursive if part of the room is already reserved
-                    Zaal.findById(docs[i].zaal, function(err, zaal) {
-                        if(zaal.zalen.length > 0) {
-                            zaal.zalen.forEach(function (deelZaalId) {
-                                var available = checkAvailability(beginuur, einduur, deelZaalId);
-                                if (!available) return false;
-                            });
-                        }
-                    });
-                }
-            }
-        }
-        return true;
-    }catch(err){
-         console.log("Promise Rejected");
-    }
-}
-
 //update reservatie
-router.patch('/:id', function (req, res, next) {
+router.patch('/:id', mAuth.auth, function (req, res, next) {
     Reservatie.findById(req.params.id, function(err, reservatie){
         if(err){
             return res.status(500).json({
@@ -126,6 +159,14 @@ router.patch('/:id', function (req, res, next) {
         reservatie.gebruiker = req.body.gebruiker;
         reservatie.bevestigd = req.body.bevestigd;
         reservatie.reden = req.body.reden;
+
+        if (reservatie.bevestigd && !req.user.isAdmin){
+            return res.status(401).json({
+                title: 'Ongeldige actie',
+                error: {message: 'Een bevestigde reservatie kan niet bewerkt worden'}
+            });
+        }
+
         reservatie.save(function(err, result){
             if (err){
                 return res.status(500).json({
@@ -142,7 +183,7 @@ router.patch('/:id', function (req, res, next) {
 });
 
 //delete reservatie
-router.delete('/:id', function(req, res, next){
+router.delete('/:id', mAuth.authAdmin, function(req, res, next){
     Reservatie.findById(req.params.id, function(err, reservatie){
         if(err){
             return res.status(500).json({

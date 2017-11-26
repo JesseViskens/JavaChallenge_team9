@@ -5,6 +5,13 @@
         <div id="zaal">
           <div id="image" class="offset-6"><img width="150px" height="150px" src="http://via.placeholder.com/150x150" /></div>
           <div>
+            <select formControlName="zaalid">
+              <option *ngFor="let zaal of zalen" value="{{ zaal._id }}">
+                {{ zaal.naam }}
+              </option>
+            </select>
+          </div>
+          <div>
             <label>Naam:</label>
             <label>{{ zaal.naam }}</label>
           </div>
@@ -24,15 +31,15 @@
 
           <div>
             <label>Voornaam:</label>
-            <label>{{ gebruiker.voornaam}}</label>
+            <label>{{ gebruiker.voornaam }}</label>
           </div>
           <div>
             <label>Familienaam:</label>
-            <label>{{ gebruiker.achternaam}}</label>
+            <label>{{ gebruiker.achternaam }}</label>
           </div>
           <div>
             <label>Email:</label>
-            <label>{{ gebruiker.email}}</label>
+            <label>{{ gebruiker.email }}</label>
           </div>
           <div>
             <label>Bedrijf:</label>

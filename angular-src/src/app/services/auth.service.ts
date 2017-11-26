@@ -14,6 +14,7 @@ export class AuthService {
   onUserFetched: EventEmitter<Gebruiker> = new EventEmitter();
 
   gebruiker:Gebruiker;
+  gebruikerId: string;
 
   constructor(private http: HttpClient) {
     autoBind(this);
@@ -26,18 +27,36 @@ export class AuthService {
     return false;
   }
 
+  isAdmin(){
+    if (localStorage.getItem("isAdmin")){
+      return this.isLoggedIn();
+    }
+    return false;
+  }
+
   logout(){
     localStorage.clear();
     this.onLogout.emit();
   }
 
-  async getUser(){
+  async getCurrentUser(){
     try{
       console.log("Getting user");
-      let headers = new HttpHeaders().set('content-type', 'application/json').set("Authorization", localStorage.getItem("authKey"));
-      let result:any= await this.http.get(Config.host + "/auth", {headers:headers}).toPromise();
-      this.gebruiker = new Gebruiker(result);
-      this.onUserFetched.emit(this.gebruiker);
+      this.gebruikerId = localStorage.getItem("userId");
+      let result: any = await this.http.get(Config.host + "/gebruikers/" + this.gebruikerId).toPromise();
+      this.gebruiker = result.obj;
+      return this.gebruiker;
+    }catch(err){
+      console.log(err);
+    }
+  }
+
+  async getUser(gebruikerId: string){
+    try{
+      console.log("Getting user");
+      let result: any = await this.http.get(Config.host + "/gebruikers/" + gebruikerId).toPromise();
+      this.gebruiker = result.obj;
+      return this.gebruiker;
     }catch(err){
       console.log(err);
     }
@@ -45,16 +64,21 @@ export class AuthService {
 
   async login(email: string, password: string){
     console.log("Logging in");
+    console.log(email);
     try{
       let headers = new HttpHeaders().set('content-type', 'application/json');
-      let result: any = await this.http.post(Config.host + "/auth/login", {email, password},{headers:headers}).toPromise();
+      let result: any = await this.http.post(Config.host + "/auth/signin", {email, password},{headers:headers}).toPromise();
+      this.gebruiker = new Gebruiker(result.user);
       localStorage.setItem("authKey", result.token);
-      localStorage.setItem("userId", result.id);
-      localStorage.setItem("isAdmin", result.isAdmin);
-      this.gebruiker = new Gebruiker(result);
+      localStorage.setItem("userId", result.user._id);
+      if(this.gebruiker.isAdmin){
+        localStorage.setItem("isAdmin", "yes");
+      }
       this.onLogin.emit(this.gebruiker);
+      return true;
     }catch(err){
       console.log(err);
+      return false;
     }
   }
 

@@ -1,3 +1,66 @@
-<p>
-  admin-zaalwijzigen works!
-</p>
+<div class="panel">
+<div class="container">
+  <form class="col-12" #zaalForm="ngForm" (ngSubmit)="onSubmit()">
+    <h1 class="header">Aanpassen van {{zaal.naam}}</h1>
+    <div class="form-group">
+      <label for="inputNaam">Naam van de zaal:</label>
+      <input type="text" class="form-control" id="inputNaam" [(ngModel)]="zaal.naam" name="naam" required>
+    </div>
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <label for="inputOppervlakte">Oppervlakte in m²:</label>
+        <input type="number" class="form-control" id="inputOppervlakte" [(ngModel)]="zaal.oppervlakte" name="oppervlakte" required>
+      </div>
+      <div class="form-group col-md-6">
+        <label for="inputCapaciteit">Aantal personen per zaal:</label>
+        <input type="number" class="form-control" id="inputCapaciteit" [(ngModel)]="zaal.capaciteit" name="capaciteit" required>
+      </div>
+    </div>
+    <!--<div class="form-group">
+      <label for="inputFoto">Foto van de zaal: <span class="helpText">Enkel gehoste links mogelijk</span></label>
+      <input type="text" class="form-control" id="inputFoto" [(ngModel)]="zaal.foto" name="foto" required>
+    </div>-->
+    <!--<div class="form-group">
+      <label for="inputFoto">Foto toevoegen: <span class="helpText">Gelieve enkel .jpg, .jpeg of .png toe te voegen</span></label>
+      <input type="file" class="form-control-file" id="inputFoto" accept=".jpg,.jpeg,.png" [(ngModel)]="zaal.foto" name="foto">
+    </div>-->
+    <div class="form-group">
+      <label for="inputBeschrijving">Beschrijving van de zaal:</label>
+      <textarea class="form-control" rows="5" id="inputBeschrijving" required [(ngModel)]="zaal.beschrijving" name="beschrijving"></textarea>
+    </div>
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <label for="inputAanvang">Startuur van beschikbaarheid: <span class="helpText">Ingeven in uu:mm</span></label>
+        <input type="time" class="form-control" id="inputAanvang" [(ngModel)]="zaal.aanvang" name="aanvang">
+      </div>
+      <div class="form-group col-md-6">
+        <label for="inputSluiting">Einduur van beschikbaarheid: <span class="helpText">Ingeven in uu:mm</span></label>
+        <input type="time" class="form-control" id="inputSluiting" [(ngModel)]="zaal.sluiting" name="sluiting">
+      </div>
+    </div>
+    <!--<div class="form-group">
+      <label for="inputZalen">Zalen die deel uitmaken van deze zaal: <span class="helpText">Om meerdere zalen te selecteren, moet men ctrl of shift indrukken terwijl men selecteerd. <br/>Let op, toegevoegde zalen kunnen niet verwijderd worden.</span></label>
+      <select multiple class="form-control" id="inputZalen" name="deelZalen" #select>
+        <option *ngFor="let zaallijst of zalen" [value]="zaallijst._id">{{zaallijst.naam}}</option>
+      </select>
+    </div>-->
+    <div class="form-group">
+      <label for="inputZalen">Zalen die deel uitmaken van deze zaal:</label>
+      <select multiple class="form-control" id="inputZalen" readonly>
+        <option *ngFor="let dzaal of deelZalen" [value]="dzaal._id">{{dzaal.naam}}</option>
+      </select>
+    </div>
+    <div class="form-row">
+      <div class="form-group col-md-3">
+        <button [routerLink]="['/adminDeelzalenWijzigen/', zaal._id]" type="button" class="col-md-12 btn btn-outline-dark">Deelzalen aanpassen</button>
+      </div>
+      <div class="form-group col-md-3">
+        <button [routerLink]="['/adminzalen']" type="button" class="col-md-12 btn btn-outline-dark">Annuleer</button>
+      </div>
+      <div class="form-group col-md-6">
+        <button type="submit" class="col-md-12 btn btn-outline-dark">Wijzigen</button>
+      </div>
+    </div>
+  </form>
+</div>
+</div>

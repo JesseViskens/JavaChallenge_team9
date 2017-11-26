@@ -1,52 +1,75 @@
-.container-fluid{
-  background-color: #2A2A2A;
-}
-.zaal {
-  margin: 0 auto;
-  padding: 0 0 0 0;
-  background-color: #2A2A2A;
-  border-bottom: solid #2A2A2A 1px;
-}
-
-.info{
-  background-color: #CEB64A;
-  color: #FFFFFF
-}
-
-.foto{
-  max-height: 350px;
-}
-
-.btn-primary{
-  background-color: #2A2A2A;
-  color: #FFFFFF;
-  border-radius: 0;
-  border: hidden;
-  margin: 0;
-}
-
-.btn-primary:hover{
-  background-color: #5a5a5a;
-  color: #FFFFFF;
-  border-radius: 0;
-  margin: 0;
-}
-
 .card{
+  background-color: #2A2A2A;
   border-radius: 0;
   border-color: #2A2A2A;
+  padding:0;
 }
-
-.list li{
-  list-style: none;
+.center{
+  text-align: center;
+}
+.card-text{
+  padding: 1em;
+}
+.info{
+  background-color: #CEB64A;
+  color: #FFFFFF;
+  height: 280px;
+}
+.back{
+  background-color: #2A2A2A;
+}
+.container-fluid{
+  margin: 0;
+  padding: 0;
 }
 .card-img{
   border-radius: 0;
 }
+.dark-button{
+  background-color: #2A2A2A;
+  color: #FFFFFF;
+  border-radius: 0;
+  border-color: #2A2A2A;
+  height: 100%;
+}
+.dark-button:hover{
+  background-color: #5a5a5a;
+}
+.zalenHeader{
+  color: #FFFFFF;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+.light-button{
+  background-color: #F8F8F8;
+  color: #2A2A2A;
+  border-color: #F8F8F8;
+  border-radius: 0;
+}
+.light-button:hover{
+  background-color: #c2c2c2;
+}
+.marginZero{
+  margin: 0;
+  padding: 0;
+}
+@media screen and (min-width:400px)
+{
+  .info{
+    height: 250px;
+  }
+}
 
-/*
-#F8F8F8
-#2A2A2A
-#CEB64A
-#1E1E1E
-*/
+@media screen and (min-width:550px)
+{
+  .info{
+    height: 270px;
+  }
+}
+
+@media screen and (min-width:650px)
+{
+  .info{
+    height: 250px;
+  }
+}

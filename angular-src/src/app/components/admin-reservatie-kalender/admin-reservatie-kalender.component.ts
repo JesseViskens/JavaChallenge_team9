@@ -2,8 +2,8 @@ import {NgModule, Component, enableProdMode, Input, OnInit} from '@angular/core'
 import {BrowserModule} from '@angular/platform-browser';
 import {platformBrowserDynamic} from '@angular/platform-browser-dynamic';
 
+import {Priority, Resource, Appointment, AdminReservatieKalenderService} from '../../services/admin-reservatie-kalender.service';
 import {ActivatedRoute, Router} from "@angular/router";
-import {Priority, Resource, Appointment,reservatieKalenderService} from "../../services/reservatie-kalender.service";
 import {Reservatie} from "../../models/reservatie.model";
 
 
@@ -12,20 +12,21 @@ if (!/localhost/.test(document.location.host)) {
 }
 
 @Component({
-
-  selector: 'app-kalender',
-  templateUrl: './reservatieKalender.component.html',
-  providers: [reservatieKalenderService]
+  selector: 'app-kalender-admin',
+  templateUrl: './admin-reservatie-kalender.component.html',
+  providers: [AdminReservatieKalenderService],
+  styleUrls: ['./admin-reservatie-calender.component.css']
 })
 
 
-export class KalenderComponent implements OnInit{
+export class AdminReservatieKalenderComponent implements OnInit{
+
   id: string;
   reservaties: Reservatie[];
   appointmentsData: Appointment[];
   currentDate: Date = new Date();
 
-  constructor(private service: reservatieKalenderService, private router: Router,
+  constructor(private service: AdminReservatieKalenderService, private router: Router,
               private route: ActivatedRoute,) {
 
     this.route.params.subscribe(params => {
@@ -38,13 +39,14 @@ export class KalenderComponent implements OnInit{
     this.service.getReservaties().then(
       reservaties => {
         this.reservaties = reservaties;
-          /*create a new appointment*/
+        /*create a new appointment*/
         const appointments: Appointment[] = [];
         /*look for every appointment*/
         for (const item of this.reservaties) {
           /*if the id of the reservation equals the id of the room, we add the reservation to the calendar*/
           if(item.zaal.indexOf(this.id) != -1) {
-
+            console.log("loggen van binnenkomende id");
+            console.log(this.id);
             let newAppointment = new Appointment({});
             newAppointment.endDate = item.einduur;
             newAppointment.startDate = item.beginuur;
@@ -62,5 +64,8 @@ export class KalenderComponent implements OnInit{
       }
 
     );
+
+
   }
 }
+

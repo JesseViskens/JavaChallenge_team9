@@ -1,6 +1,5 @@
 const express = require('express');
 const router = express.Router();
-const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 
 const Gebruiker = require('../models/gebruikerModel');
@@ -9,7 +8,7 @@ router.post('/', function (req, res, next) {
     const gebruiker = new Gebruiker({
         voornaam: req.body.voornaam,
         achternaam: req.body.achternaam,
-        password: bcrypt.hashSync(req.body.password,10),
+        password: req.body.password,
         email: req.body.email,
         adres: req.body.adres,
         woonplaats: req.body.woonplaats,
@@ -29,35 +28,6 @@ router.post('/', function (req, res, next) {
     });
 });
 
-router.post('/signin', function (req, res, next) {
-    gebruiker.findOne({email: req.body.email}, function(err, gebruiker){
-        if (err) {
-            return res.status(500).json({
-                title: 'An error occurred',
-                error: err
-            });
-        }
-        if (!gebruiker){
-            return res.status(401).json({
-                title: 'Login mislukt',
-                error: {message: 'Invalid login credentials'}
-            });
-        }
-        if (!bcrypt.compareSync(req.body.password, gebruiker.password)){
-            return res.status(401).json({
-                title: 'Login mislukt',
-                error: {message: 'Invalid login credentials'}
-            });
-        }
-        const token = jwt.sign({user: gebruiker}, 'secret', {expiresIn:7200});
-        res.status(200).json({
-            message: 'Successfully logged in',
-            token: token,
-            user: gebruiker
-        })
-    });
-});
-
 //get all gebruikers
 router.get('/', function (req, res, next) {
     Gebruiker.find().exec(function(err, gebruikers){
@@ -70,6 +40,22 @@ router.get('/', function (req, res, next) {
         res.status(200).json({
             message: 'Gelukt!',
             obj: gebruikers
+        });
+    })
+});
+
+//get one zaal
+router.get('/:id', function (req, res, next) {
+    Gebruiker.findById(req.params.id, function(err, gebruiker){
+        if (err){
+            return res.status(500).json({
+                title: 'Er heeft zich een fout voorgedaan',
+                error: err
+            });
+        }
+        res.status(200).json({
+            message: 'Gelukt!',
+            obj: gebruiker
         });
     })
 });

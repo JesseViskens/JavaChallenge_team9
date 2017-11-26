@@ -1,17 +1,41 @@
-<div class="">
-  <h1 class="zalenHeader text-center">Zalen beheren</h1>
-  <div *ngFor="let zaal of zalen">
-    <div class="card col-4 zaal float-left">
-      <img class="card-img" src="{{zaal.foto}}" alt="Card image cap">
-      <div class="card-block info col-12">
-        <h4 class="card-title">{{zaal.naam}}</h4>
-        <p class="card-text">Grootte {{ zaal.oppervlakte }}m²</p>
-        <p class="card-text">Maximum {{ zaal.capaciteit }} personen</p>
-        <p class="">Beschrijving: {{zaal.beschrijving}}</p>
-      </div>
-      <div routerLinkActive="active">
-        <a [routerLink]="['/zaalWijzigen/', zaal.id]" class="btn btn-primary col-12 align-bottom">Aanpassen</a>
-        <a href="#" (click) = "onDelete(zaal.id)" class="btn btn-primary col-12 align-bottom">Verwijderen</a>
+<div class="panel panel-default">
+  <div class="" *ngIf="!reload">
+    <h1 class="zalenHeader text-center">Zalen beheren</h1>
+    <button [routerLink]="['/zaalToevoegen']" class="btn btn-primary float-right col-12 align-bottom light-button">
+      Een zaal toevoegen
+    </button>
+    <div *ngFor="let zaal of zalen">
+      <div class="card card-block col-lg-4 col-md-6 col-sm-6 col-12 float-left">
+        <div class="container-fluid">
+          <div class="info">
+            <div class="align-content-center">
+              <h4 class="card-title center">{{zaal.naam}}</h4>
+            </div>
+            <div class="card-text">
+              <p>Grootte: {{ zaal.oppervlakte }}m²</p>
+              <p>Maximum: {{ zaal.capaciteit }} personen</p>
+              <p>Beschrijving: {{zaal.beschrijving}}</p>
+            </div>
+          </div>
+
+          <div class="" routerLinkActive="active">
+            <button [routerLink]="['/adminreservatieKalender/', zaal._id]"
+                    class="btn btn-primary dark-button col-12 align-bottom">Kalender
+              bekijken
+            </button>
+            <div class="card-text marginZero">
+              <div class="row">
+                <button [routerLink]="['/zaalWijzigen/', zaal._id]"
+                        class="btn btn-primary dark-button col-6 align-bottom">
+                  Aanpassen
+                </button>
+                <button (click)="onDelete(zaal._id)" class="btn btn-primary dark-button col-6 align-bottom">
+                  Verwijderen
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>

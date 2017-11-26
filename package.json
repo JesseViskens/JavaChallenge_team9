@@ -2,7 +2,7 @@
   "name": "javachallenge",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "nodemon server.js"
@@ -21,6 +21,7 @@
     "jsonwebtoken": "^8.1.0",
     "mongoose": "^4.13.4",
     "mongoose-unique-validator": "^1.0.6",
+    "nodemailer": "^4.4.0",
     "nodemon": "^1.12.1"
   }
 }
