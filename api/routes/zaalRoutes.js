@@ -44,7 +44,6 @@ router.get('/:id/deelzalen', function (req, res, next) {
         if (err) return res.status(500).json({message: 'Something went wrong', err: err});
         if (zaal == null) return res.status(500).json({message: 'zaal is null'});
         if (zaal.zalen == null) return res.status(500).json({message: 'Deze zaal heeft geen deelzalen'});
-        console.log(zaal.zalen);
         res.status(201).json({
             message: 'alle deelzalen van zaal ' + zaal.naam,
             obj: zaal.zalen
