@@ -49,7 +49,10 @@
 .light-button:hover{
   background-color: #c2c2c2;
 }
-
+.marginZero{
+  margin: 0;
+  padding: 0;
+}
 @media screen and (min-width:400px)
 {
   .info{

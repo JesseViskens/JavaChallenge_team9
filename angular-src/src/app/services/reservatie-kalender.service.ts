@@ -101,6 +101,19 @@ export class reservatieKalenderService {
     }
   }
 
+  async getReservatiesPerZaal(id:string){
+    console.log("alle reservaties halen!");
+    try{
+      console.log(Config.host);
+      let result: any = await this.http.get(Config.host + "/reservaties").toPromise();
+      this.reservaties = result.obj;
+      console.log(this.reservaties);
+      return this.reservaties;
+    }catch(err){
+      console.log(err);
+    }
+  }
+
   getAppointments(){
     return appointments;
   }

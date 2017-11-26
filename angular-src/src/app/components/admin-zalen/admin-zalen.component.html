@@ -17,12 +17,23 @@
               <p>Beschrijving: {{zaal.beschrijving}}</p>
             </div>
           </div>
+
           <div class="" routerLinkActive="active">
-            <button [routerLink]="['/zaalWijzigen/', zaal._id]" class="btn btn-primary col-12 align-bottom dark-button">
-              Aanpassen
+            <button [routerLink]="['/adminreservatieKalender/', zaal._id]"
+                    class="btn btn-primary dark-button col-12 align-bottom">Kalender
+              bekijken
             </button>
-            <button (click)="onDelete(zaal._id)" class="btn btn-primary col-12 align-bottom dark-button">Verwijderen
-            </button>
+            <div class="card-text marginZero">
+              <div class="row">
+                <button [routerLink]="['/zaalWijzigen/', zaal._id]"
+                        class="btn btn-primary dark-button col-6 align-bottom">
+                  Aanpassen
+                </button>
+                <button (click)="onDelete(zaal._id)" class="btn btn-primary dark-button col-6 align-bottom">
+                  Verwijderen
+                </button>
+              </div>
+            </div>
           </div>
         </div>
       </div>
