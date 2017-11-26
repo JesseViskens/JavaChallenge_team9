@@ -4,7 +4,7 @@ import {platformBrowserDynamic} from '@angular/platform-browser-dynamic';
 
 import {Priority, Resource, Appointment, AdminReservatieKalenderService} from '../../services/admin-reservatie-kalender.service';
 import {ActivatedRoute, Router} from "@angular/router";
-import {Reservatie} from "../../models/reservatie.model";
+import {Reservatie, Zaalnaam} from "../../models/reservatie.model";
 
 
 if (!/localhost/.test(document.location.host)) {
@@ -23,6 +23,7 @@ export class AdminReservatieKalenderComponent implements OnInit{
 
   id: string;
   reservaties: Reservatie[];
+  zaalNamen: Zaalnaam[];
   appointmentsData: Appointment[];
   currentDate: Date = new Date();
 
@@ -61,6 +62,19 @@ export class AdminReservatieKalenderComponent implements OnInit{
         /*send the appointment to the calendar*/
         this.appointmentsData = appointments;
         console.log(this.appointmentsData);
+      }
+
+    );
+    this.service.getZaalnaam().then(
+      reservaties => {
+        this.zaalNamen = zaalnamen;
+        for(const  item of this.zaalNamen)
+        {
+          if(item.zaal.indexOf(this.id) != -1)
+          {
+
+          }
+        }
       }
 
     );

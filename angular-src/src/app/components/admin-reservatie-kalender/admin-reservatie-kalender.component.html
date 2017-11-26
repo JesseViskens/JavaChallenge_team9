@@ -1,7 +1,7 @@
 <link rel="stylesheet" type="text/css" href="https://cdn3.devexpress.com/jslib/17.2.3/css/dx.spa.css"/>
 <link rel="stylesheet" type="text/css" href="https://cdn3.devexpress.com/jslib/17.2.3/css/dx.common.css"/>
 <link rel="stylesheet" type="text/css" href="https://cdn3.devexpress.com/jslib/17.2.3/css/dx.light.css"/>
-<h1>Reservaties - zaal</h1>
+<h1>Reservaties -  </h1>
 <div class="container-fluid">
   <div class="row">
     <div class="col-2">
@@ -10,9 +10,7 @@
           <div class="" routerLinkActive="active">
             <button class="btn btn-primary" [routerLink]="['/reservatie/',id]">Nieuwe reservatie</button>
             <hr/>
-            <button [routerLink]="['/adminzalen']" type="button" class="col-md-12 btn btn-outline-dark">Terug naar
-              overzicht
-            </button>
+            <button [routerLink]="['/adminzalen']" type="button" class="col-md-12 btn btn-outline-dark">Terug naar overzicht </button>
             <hr/>
           </div>
         </tr>
@@ -35,7 +33,7 @@
         <tr *ngFor="let reservatie of reservaties" routerLinkActive="active">
           <td>
             <div class="" routerLinkActive="active">
-              <a [routerLink]="['/adminreservatie/',reservatie.id]">{{reservatie.naam}}</a>
+              <a [routerLink]="['/adminreservatie/',reservatie._id]">{{reservatie.naam}}</a>
               <hr/>
             </div>
           </td>
@@ -47,6 +45,7 @@
         <div class="demo-container">
           <dx-scheduler
             [dataSource]="appointmentsData"
+            [remoteFiltering]="true"
             [views]="['week']"
             [currentView]="['week']"
             [firstDayOfWeek]="1"
@@ -63,7 +62,10 @@
               label="Owner"
               [useColorAsDefault]="true"
             ></dxi-resource>
-            <dxo-editing [allowAdding]="false"></dxo-editing>
+            <dxo-editing  [allowAdding]="false"
+                          [allowDeleting]="false"
+                          [allowUpdating]="false"
+            ></dxo-editing>
 
           </dx-scheduler>
 
