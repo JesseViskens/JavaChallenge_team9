@@ -11,7 +11,9 @@
       </div>
     </div>
     <div class="" routerLinkActive="active">
-      <a [routerLink]="['/reservatieKalender/', zaal._id]" class="btn btn-primary dark-button col-12 align-bottom">Kalender
+      <a [routerLink]="['/reservatieKalender/', zaal._id]" class="btn btn-primary dark-button col-12 align-bottom" *ngIf="isadmin">Kalender
+        bekijken</a>
+      <a [routerLink]="['/adminreservatieKalender/', zaal._id]" class="btn btn-primary dark-button col-12 align-bottom" *ngIf="!isadmin">aKalender
         bekijken</a>
     </div>
   </div>
