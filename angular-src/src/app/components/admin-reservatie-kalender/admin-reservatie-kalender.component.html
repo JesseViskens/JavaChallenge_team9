@@ -19,7 +19,7 @@
           <hr/>
         </tr>
         <tr *ngFor="let reservatie of reservaties" routerLinkActive="active">
-          <td>
+          <td *ngIf="!reservatie.bevestigd">
             <div class="" routerLinkActive="active">
               <a [routerLink]="['/adminreservatie/',reservatie._id]">{{reservatie.naam}}</a>
               <hr/>
@@ -31,7 +31,7 @@
           <hr/>
         </tr>
         <tr *ngFor="let reservatie of reservaties" routerLinkActive="active">
-          <td>
+          <td *ngIf="reservatie.bevestigd">
             <div class="" routerLinkActive="active">
               <a [routerLink]="['/adminreservatie/',reservatie._id]">{{reservatie.naam}}</a>
               <hr/>
