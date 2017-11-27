@@ -46,7 +46,7 @@
         </div>
         <div>
           <button name="submit" type="submit" class="col-3 btn btn-primary" [disabled]="!myForm.valid">Vraag aan</button>
-          <button name="annuleren" [routerLink]="['/zalen']" type="button" class="col-3 offset-3 btn btn-primary">Annuleer</button>
+          <button name="annuleren" (click)="backClick()" type="button" class="col-3 offset-3 btn btn-primary">Annuleren</button>
         </div>
       </form>
     </div>

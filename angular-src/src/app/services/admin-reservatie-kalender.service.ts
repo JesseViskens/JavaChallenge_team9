@@ -35,6 +35,10 @@ export class Appointment {
     this.confirmed = data.confirmed;
   }
 }
+export class Zaalnaam{
+  naam:string;
+  id: string;
+}
 
 let prioritiesData: Priority[] = [
   {
@@ -63,6 +67,8 @@ let appointments: Appointment[] = [new Appointment({
 @Injectable()
 export class AdminReservatieKalenderService {
   reservaties: Reservatie[];
+  zaalNamen:Zaalnaam[];
+
 
   constructor(private http: HttpClient) {
   }
@@ -78,6 +84,12 @@ export class AdminReservatieKalenderService {
     } catch (err) {
       console.log(err);
     }
+  }
+  async getZaalnaam(){
+    let result: any = await this.http.get(Config.host + "/zalen").toPromise();
+    this.zaalNamen = result.obj;
+    console.log(this.zaalNamen);
+    return this.zaalNamen;
   }
   getAppointments(){
     return appointments;

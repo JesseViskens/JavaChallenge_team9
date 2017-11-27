@@ -45,7 +45,7 @@
       </select>
     </div>-->
     <div class="form-group">
-      <label for="inputZalen">Zalen die deel uitmaken van deze zaal:</label>
+      <label for="inputZalen">Zalen die deel uitmaken van deze zaal: <span class="helpText">Om deze lijst aan te passen, dient men op de knop "Deelzalen aanpassen" te klikken.</span></label>
       <select multiple class="form-control" id="inputZalen" readonly>
         <option *ngFor="let dzaal of deelZalen" [value]="dzaal._id">{{dzaal.naam}}</option>
       </select>

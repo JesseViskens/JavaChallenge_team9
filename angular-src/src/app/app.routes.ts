@@ -10,7 +10,6 @@ import {AdminReservatiesComponent} from "./components/admin-reservaties/admin-re
 import {AdminReservatieKalenderComponent} from "./components/admin-reservatie-kalender/admin-reservatie-kalender.component";
 import {AdminZaaltoevoegenComponent} from "./components/admin-zaaltoevoegen/admin-zaaltoevoegen.component";
 import {AdminDeelzaalwijzigenComponent} from "./components/admin-deelzaalwijzigen/admin-deelzaalwijzigen.component";
-import {ReservatieZonderZaalComponent} from "./components/reservatie-zonderzaal/reservatie-zonderzaal.component";
 
 export const routes: Routes = [
   {path: "", component: ZalenComponent},
@@ -18,7 +17,6 @@ export const routes: Routes = [
   {path: "reservatieKalender/:id", component: KalenderComponent},
   {path: "adminzalen", component: AdminZalenComponent},
   {path: "reservatie/:id", component: ReservatieComponent},
-  {path: "reservatie", component: ReservatieZonderZaalComponent},
   {path: "adminreservatie/:id", component: AdminReservatiesComponent},
   {path: "adminzalen", component: AdminZalenComponent},
   {path: "zaalWijzigen/:id", component: AdminZaalwijzigenComponent},

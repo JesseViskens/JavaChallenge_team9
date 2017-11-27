@@ -1,8 +1,9 @@
 <link rel="stylesheet" type="text/css" href="https://cdn3.devexpress.com/jslib/17.2.3/css/dx.spa.css"/>
 <link rel="stylesheet" type="text/css" href="https://cdn3.devexpress.com/jslib/17.2.3/css/dx.common.css"/>
 <link rel="stylesheet" type="text/css" href="https://cdn3.devexpress.com/jslib/17.2.3/css/dx.light.css"/>
-<h1>Reservaties</h1>
+<h1>Reservaties </h1>
 <div class="container-fluid">
+
   <div class="row">
     <div class="col-2">
       <table border="1">
@@ -10,14 +11,32 @@
           <div class="" routerLinkActive="active">
             <button class="btn btn-primary" [routerLink]="['/reservatie/',id]">Nieuwe reservatie</button>
             <hr/>
+            <button [routerLink]="['/adminzalen']" type="button" class="col-md-12 btn btn-outline-dark">Terug naar overzicht </button>
+            <hr/>
           </div>
         </tr>
+        <tr>
+          <td>Onbevestigde reservaties:</td>
+          <hr/>
+        </tr>
         <tr *ngFor="let reservatie of reservaties" routerLinkActive="active">
-          <td>
-              <div class="" routerLinkActive="active">
-                <a [routerLink]="['/adminreservatie/',reservatie._id]">{{reservatie.naam}}</a>
-                <hr/>
-              </div>
+          <td *ngIf="!reservatie.bevestigd">
+            <div class="" routerLinkActive="active">
+              <a [routerLink]="['/adminreservatie/',reservatie._id]">{{reservatie.naam}}</a>
+              <hr/>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td>Bevestigde reservaties:</td>
+          <hr/>
+        </tr>
+        <tr *ngFor="let reservatie of reservaties" routerLinkActive="active">
+          <td *ngIf="reservatie.bevestigd">
+            <div class="" routerLinkActive="active">
+              <a [routerLink]="['/adminreservatie/',reservatie._id]">{{reservatie.naam}}</a>
+              <hr/>
+            </div>
           </td>
         </tr>
       </table>
@@ -35,22 +54,12 @@
             [cellDuration]="60"
             [groups]="['priority']"
             [currentDate]="currentDate"
-            >
-            <dxi-resource
-              fieldExpr="ownerId"
-              [allowMultiple]="true"
-              [dataSource]="resourcesData"
-              label="Owner"
-              [useColorAsDefault]="true"
-            ></dxi-resource>
-            <dxo-editing [allowAdding]="false"></dxo-editing>
+          >
 
           </dx-scheduler>
-
 
         </div>
       </div>
     </div>
   </div>
 </div>
-

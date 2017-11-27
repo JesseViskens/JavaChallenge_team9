@@ -2,11 +2,15 @@
 <div class="container">
   <form class="col-12" #zaalForm="ngForm" (ngSubmit)="onSubmit()">
     <h1 class="header row col-12">Deelzalen van {{zaal.naam}} wijzigen</h1>
+    <p>
+      Op deze pagina kan u zalen toekennen als onderzaal van {{zaal.naam}}, maar ook zalen verwijderen uit deze lijst.
+    </p>
     <div class="form-row">
       <div class="col-md-6">
-        <h3>Zalen toevoegen</h3>
+        <h3>Deelzalen toevoegen</h3>
         <p>
-          Duid de zalen aan die u wilt toevoegen aan {{zaal.naam}}.
+          Duid de zalen aan die u wilt toevoegen aan {{zaal.naam}} <br/>
+          en klik dan op "Deelzalen Toevoegen".
         </p>
         <div *ngFor="let zaalcheck of zalen">
             <input type="checkbox" [value]="zaalcheck._id"
@@ -16,6 +20,9 @@
       </div>
       <div class="col-md-6">
         <h3>Bestaande deelzalen verwijderen</h3>
+        <p>
+          Klik op een onderstaande zaal om deze te verwijderen. Alle deelzalen in één keer verwijderen kan via de knop "Verwijder alle deelzalen" onderaan.
+        </p>
         <div *ngFor="let deelzaal of deelZalen">
         <button (click)="onDeleteDeelZaal(deelzaal._id)" type="button" class="col-md-12 btn btn-outline-dark deleteKnop">
           {{deelzaal.naam}} verwijderen uit deze lijst
@@ -25,7 +32,7 @@
     </div>
     <div class="form-row knoppen">
       <div class="form-group col-md-4">
-        <button type="submit" class="col-md-12 btn btn-outline-dark">Deelzalen Wijzigen</button>
+        <button type="submit" class="col-md-12 btn btn-outline-dark">Deelzalen Toevoegen</button>
       </div>
       <div class="form-group col-md-4">
         <button (click)="onDelete(zaal._id)" type="button" class="col-md-12 btn btn-outline-dark">Verwijder alle deelzalen</button>
