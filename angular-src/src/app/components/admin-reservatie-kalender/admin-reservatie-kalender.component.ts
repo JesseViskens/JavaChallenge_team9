@@ -32,7 +32,7 @@ export class AdminReservatieKalenderComponent implements OnInit {
   currentDate: Date = new Date();
 
   constructor(private service: AdminReservatieKalenderService, private router: Router,
-              private route: ActivatedRoute,) {
+              private route: ActivatedRoute) {
 
     this.route.params.subscribe(params => {
       this.id = params['id'];
@@ -42,6 +42,8 @@ export class AdminReservatieKalenderComponent implements OnInit {
   }
 
   ngOnInit() {
+
+
     this.service.getReservaties().then(
       reservaties => {
         this.reservaties = reservaties;
@@ -72,23 +74,6 @@ export class AdminReservatieKalenderComponent implements OnInit {
         /*send the appointment to the calendar*/
       }
     );
-
-    /*
-     this.service.reservatiesPerZaal().then
-     (
-     this.reservaties = reservatiesperzaal;
-     for(const item of this.reservaties){
-     if(item.zaal.indexOf(this.id) != -1)
-     {
-     if(item.bevestigd == true){
-     test.text = item.naam;
-
-     }else{}
-     test.text = item.naam;
-     }
-     }
-     this.reservaties = reservatiesperzaal;
-     });*/
 
 
   }
