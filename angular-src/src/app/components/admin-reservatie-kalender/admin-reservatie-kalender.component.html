@@ -45,7 +45,6 @@
         <div class="demo-container">
           <dx-scheduler
             [dataSource]="appointmentsData"
-            [remoteFiltering]="true"
             [views]="['week']"
             [currentView]="['week']"
             [firstDayOfWeek]="1"
@@ -55,16 +54,9 @@
             [groups]="['priority']"
             [currentDate]="currentDate"
           >
-            <dxi-resource
-              fieldExpr="ownerId"
-              [allowMultiple]="true"
-              [dataSource]="resourcesData"
-              label="Owner"
-              [useColorAsDefault]="true"
-            ></dxi-resource>
             <dxo-editing  [allowAdding]="false"
                           [allowDeleting]="false"
-                          [allowUpdating]="false"
+                          [allowUpdating]="true"
             ></dxo-editing>
 
           </dx-scheduler>

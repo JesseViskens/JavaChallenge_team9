@@ -28,7 +28,6 @@
           startdayhour and enddayhour will limit the openinghours of each room.-->
           <dx-scheduler
             [dataSource]="appointmentsData"
-            [remoteFiltering]="true"
             [views]="['week']"
             [currentView]="['week']"
             [firstDayOfWeek]="1"
@@ -36,11 +35,9 @@
             [endDayHour]="24"
             [cellDuration]="60"
             [currentDate]="currentDate">
-            <dxo-editing
-              [allowAdding]="false"
-              [allowDeleting]="false"
-              [allowUpdating]="false"
-            ></dxo-editing>
+
+
+
           </dx-scheduler>
         </div>
       </div>
