@@ -46,7 +46,6 @@
         <div class="demo-container">
           <dx-scheduler
             [dataSource]="appointmentsData"
-            [remoteFiltering]="false"
             [views]="['week']"
             [currentView]="['week']"
             [firstDayOfWeek]="1"
@@ -56,10 +55,6 @@
             [groups]="['priority']"
             [currentDate]="currentDate"
           >
-            <dxo-editing  [allowAdding]="false"
-                          [allowDeleting]="false"
-                          [allowUpdating]="true"
-            ></dxo-editing>
 
           </dx-scheduler>
 
